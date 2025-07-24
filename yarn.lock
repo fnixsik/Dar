@@ -248,6 +248,13 @@
   dependencies:
     "@primeuix/styled" "^0.7.0"
 
+"@primeuix/themes@^1.2.0":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@primeuix/themes/-/themes-1.2.1.tgz#2d078b62dd5ad907f68e11f407908ee7ca62d473"
+  integrity sha512-DVCFDncvag47tpag3TdufDTuvUbfKnkgzmlxAQkwuMS0IlPA3wChrf9VlL2wETg/ZpJm/tHobkJBnB9FmkiqnA==
+  dependencies:
+    "@primeuix/styled" "^0.7.0"
+
 "@primeuix/utils@^0.6.0":
   version "0.6.0"
   resolved "https://registry.npmjs.org/@primeuix/utils/-/utils-0.6.0.tgz"
@@ -268,6 +275,14 @@
   dependencies:
     "@primeuix/utils" "^0.6.0"
     "@primevue/core" "4.3.6"
+
+"@primevue/themes@^4.3.6":
+  version "4.3.6"
+  resolved "https://registry.yarnpkg.com/@primevue/themes/-/themes-4.3.6.tgz#c45fe124ca2401e6a2341c3d187e9d1e3b5f8997"
+  integrity sha512-2yxfBZCuXU10pPfS6lysJpP1RqAwZVD+9tQi0cTieshD7Rq9HTZfInuJzqIfBcxGns2rolARi3+B3RQ53NBz1A==
+  dependencies:
+    "@primeuix/styled" "^0.7.0"
+    "@primeuix/themes" "^1.2.0"
 
 "@rolldown/pluginutils@1.0.0-beta.19":
   version "1.0.0-beta.19"
@@ -1267,7 +1282,7 @@ primeicons@^7.0.0:
 
 primevue@^4.3.6:
   version "4.3.6"
-  resolved "https://registry.npmjs.org/primevue/-/primevue-4.3.6.tgz"
+  resolved "https://registry.yarnpkg.com/primevue/-/primevue-4.3.6.tgz#bcf525d417ad3fe5e89e905bb2abcd31d23ab94f"
   integrity sha512-Wwg2dH6pBmOdkj9L/OnrCQf9AKPHfY5CcfnDyWeh0tNlR+XjYKGl8qvMdJOvGO9jjg6UdsX5MSaU8vDDsSG+sg==
   dependencies:
     "@primeuix/styled" "^0.7.0"

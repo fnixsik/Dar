@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+import Body from './views/Body.vue';
 </script>
 
 <template>
-  <HelloWorld/>
+  <Body/>
 </template>
 
 <style scoped>
