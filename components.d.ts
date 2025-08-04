@@ -8,9 +8,30 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    BackWall: typeof import('./src/components/mainPage/backWall/BackWall.vue')['default']
+    BackWallAbout: typeof import('./src/components/aboutUsPage/backWallAbout/BackWallAbout.vue')['default']
+    BackWallBranch: typeof import('./src/components/branchPage/backWallBranch/BackWallBranch.vue')['default']
+    BackWallNews: typeof import('./src/components/newsPage/backWallNews/BackWallNews.vue')['default']
+    BackWallOutsideWindow: typeof import('./src/components/outsideWindowPage/backWallOutsideWindow/BackWallOutsideWindow.vue')['default']
+    BackWallTeam: typeof import('./src/components/teamPage/backWallTeam/BackWallTeam.vue')['default']
     Button: typeof import('primevue/button')['default']
+    HeadAbout: typeof import('./src/components/aboutUsPage/headAbout/HeadAbout.vue')['default']
+    HeadBranch: typeof import('./src/components/branchPage/headBranch/HeadBranch.vue')['default']
+    HeadNews: typeof import('./src/components/newsPage/headNews/HeadNews.vue')['default']
+    HeadOutsideWindow: typeof import('./src/components/outsideWindowPage/headOutsideWindow/HeadOutsideWindow.vue')['default']
+    HeadPicture: typeof import('./src/components/mainPage/headPicture/HeadPicture.vue')['default']
+    HeadTeam: typeof import('./src/components/teamPage/headTeam/HeadTeam.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
+    MainAbout: typeof import('./src/components/aboutUsPage/mainAbout/MainAbout.vue')['default']
+    MainBlockNews: typeof import('./src/components/newsPage/mainNews/MainBlockNews.vue')['default']
+    MainBlockOutsideWindow: typeof import('./src/components/outsideWindowPage/mainBlockOutsideWindow/MainBlockOutsideWindow.vue')['default']
+    MainBlockTeam: typeof import('./src/components/teamPage/mainTeam/MainBlockTeam.vue')['default']
+    MainBranch: typeof import('./src/components/branchPage/mainBranch/MainBranch.vue')['default']
+    MainNews: typeof import('./src/components/mainPage/mainNews/MainNews.vue')['default']
+    MainObautUs: typeof import('./src/components/mainPage/mainOboutUs/MainObautUs.vue')['default']
+    MainPartners: typeof import('./src/components/mainPage/mainPartners/MainPartners.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Select: typeof import('primevue/select')['default']
   }
 }
