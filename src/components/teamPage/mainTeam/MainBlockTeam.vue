@@ -3,7 +3,5 @@
 </script>
 
 <template>
-    <div class="bg-yellow-400 w-full" style="height: 1400px;">
-
-    </div>
+    <router-view />
 </template>

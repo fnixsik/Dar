@@ -8,8 +8,23 @@ const routes = [
     },
     {
       path: '/teams',
+      redirect: '/teams/fighters',
       name: 'Team',
-      component: () => import('../components/teamPage/backWallTeam/BackWallTeam.vue')
+      component: () => import('../components/teamPage/backWallTeam/BackWallTeam.vue'),
+      children: [
+        {
+          path: 'coaches',
+          component: () => import('../components/teamPage/mainTeam/BlockCoaches.vue'),
+        },
+        {
+          path: 'fighters',
+          component: () => import('../components/teamPage/mainTeam/BlockFighters.vue'),
+        },
+        {
+          path: 'fan',
+          component: () => import('../components/teamPage/mainTeam/BlockFan.vue'),
+        }
+      ]
     },
     {
       path: '/news',
