@@ -10,6 +10,8 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
+    "composite": true,
+    "noEmit":false,
 
     "types": ["vite/client"],
     "module": "ESNext",  // Важно для `import.meta`
