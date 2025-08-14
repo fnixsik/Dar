@@ -18,6 +18,7 @@ declare module 'vue' {
     BlockFan: typeof import('./src/components/teamPage/mainTeam/BlockFan.vue')['default']
     BlockFighters: typeof import('./src/components/teamPage/mainTeam/BlockFighters.vue')['default']
     Button: typeof import('primevue/button')['default']
+    Card: typeof import('primevue/card')['default']
     Fieldset: typeof import('primevue/fieldset')['default']
     HeadAbout: typeof import('./src/components/aboutUsPage/headAbout/HeadAbout.vue')['default']
     HeadBranch: typeof import('./src/components/branchPage/headBranch/HeadBranch.vue')['default']
