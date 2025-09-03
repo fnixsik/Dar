@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import HeadPicture from "../headPicture/HeadPicture.vue"
-import MainObautUs from "../mainOboutUs/MainObautUs.vue"
+import MainAbautUs from "../mainAboutUs/MainAbautUs.vue"
 import MainNews from "../mainNews/MainNews.vue"
 import MainPartners from "../mainPartners/MainPartners.vue"
 </script>
@@ -10,7 +10,7 @@ import MainPartners from "../mainPartners/MainPartners.vue"
   <HeadPicture />
 </div>
 <div class="flex justify-center">
-  <MainObautUs />
+  <MainAbautUs />
 </div>
 <div class="flex justify-center">
   <MainNews />

@@ -4,7 +4,15 @@ import Footer from '../layouts/Footer.vue';
 </script>
 
 <template>
-    <Header/>
+  <Header/>
+  <div class="layout">
     <router-view />
-    <Footer/>
+  </div>
+  <Footer/>
 </template>
+
+<style scoped>
+.layout {
+  min-height: 100vh;
+}
+</style>

@@ -3,7 +3,6 @@
 </script>
 
 <template>
-    <div class="bg-stone-700 w-full" style="height: 600px;">
-
-    </div>
+  <div class="bg-stone-700 w-full" style="height: 600px;">
+  </div>
 </template>
