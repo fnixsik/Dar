@@ -4,11 +4,9 @@
 </script>
 
 <template>
-<div class="flex justify-center">
-    <HeadOutsideWindow/>
-</div>
-<div class="flex justify-center">
-    <MainBlockOutsideWindow/>
+<div class="grid w-full h-screen grid-rows-[70%_30%]">
+  <HeadOutsideWindow />
+  <MainBlockOutsideWindow />
 </div>
 </template>
 

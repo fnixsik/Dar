@@ -1,9 +1,7 @@
 <script setup lang="ts">
-
+    import MainAbautUs from "../../mainPage/mainAboutUs/MainAbautUs.vue"
 </script>
 
 <template>
-    <div class="bg-purple-100 w-full" style="height: 300px;">
-
-    </div>
+    <MainAbautUs />
 </template>

@@ -3,7 +3,94 @@ import { onMounted, ref } from "vue";
 import { getAllNews } from "../../../../services/news-services"
 import { News } from "../../../types/news"
 
-const newscard = ref<News[]>([])
+const newscard = ref<News[]>([
+  {
+      id: 1,
+      title: "DAR TEAM завоевал новые победы",
+      date: "2025-09-01",
+      img: "/src/assets/img/Page1.jpg",
+      content: "Файтеры команды DAR TEAM успешно выступили на международном турнире."
+    },
+    {
+      id: 2,
+      title: "Открытие нового зала в Алматы",
+      date: "2025-08-20",
+      img: "/src/assets/img/Page2.jpg",
+      content: "DAR TEAM открыл новый спортивный зал для молодых спортсменов."
+    },
+    {
+      id: 3,
+      title: "Шавкат Рахмонов готовится к бою",
+      date: "2025-08-15",
+      img: "/src/assets/img/Page3.jpg",
+      content: "Звезда команды проводит тренировочный лагерь перед важным поединком."
+    },
+        {
+      id: 3,
+      title: "Шавкат Рахмонов готовится к бою",
+      date: "2025-08-15",
+      img: "/src/assets/img/Page3.jpg",
+      content: "Звезда команды проводит тренировочный лагерь перед важным поединком."
+    },
+        {
+      id: 3,
+      title: "Шавкат Рахмонов готовится к бою",
+      date: "2025-08-15",
+      img: "/src/assets/img/Page3.jpg",
+      content: "Звезда команды проводит тренировочный лагерь перед важным поединком."
+    },
+        {
+      id: 3,
+      title: "Шавкат Рахмонов готовится к бою",
+      date: "2025-08-15",
+      img: "/src/assets/img/Page3.jpg",
+      content: "Звезда команды проводит тренировочный лагерь перед важным поединком."
+    },
+
+
+      {
+      id: 1,
+      title: "DAR TEAM завоевал новые победы",
+      date: "2025-09-01",
+      img: "/src/assets/img/Page1.jpg",
+      content: "Файтеры команды DAR TEAM успешно выступили на международном турнире."
+    },
+    {
+      id: 2,
+      title: "Открытие нового зала в Алматы",
+      date: "2025-08-20",
+      img: "/src/assets/img/Page2.jpg",
+      content: "DAR TEAM открыл новый спортивный зал для молодых спортсменов."
+    },
+    {
+      id: 3,
+      title: "Шавкат Рахмонов готовится к бою",
+      date: "2025-08-15",
+      img: "/src/assets/img/Page3.jpg",
+      content: "Звезда команды проводит тренировочный лагерь перед важным поединком."
+    },
+        {
+      id: 3,
+      title: "Шавкат Рахмонов готовится к бою",
+      date: "2025-08-15",
+      img: "/src/assets/img/Page3.jpg",
+      content: "Звезда команды проводит тренировочный лагерь перед важным поединком."
+    },
+        {
+      id: 3,
+      title: "Шавкат Рахмонов готовится к бою",
+      date: "2025-08-15",
+      img: "/src/assets/img/Page3.jpg",
+      content: "Звезда команды проводит тренировочный лагерь перед важным поединком."
+    },
+        {
+      id: 3,
+      title: "Шавкат Рахмонов готовится к бою",
+      date: "2025-08-15",
+      img: "/src/assets/img/Page3.jpg",
+      content: "Звезда команды проводит тренировочный лагерь перед важным поединком."
+    }
+])
 
 onMounted(
   async () => {
@@ -15,14 +102,30 @@ onMounted(
 </script>
 
 <template>
-  <div class=" bg-green-300 w-full w-auto">
-    <div class="grid grid-cols-3 gap-7 container mx-auto px-50">
-      <Card style="width: 22.5rem; overflow: hidden" v-for="value in newscard">
+  <div class="container mx-auto main-h-screen px-4 py-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <Card 
+        v-for="value in newscard" 
+        :key="value.id"
+        class="w-full h-full max-w-sm mx-auto flex flex-col"
+      >
         <template #header>
-          <img alt="user header" src="../../../assets/img/Page1.jpg" />
+          <img 
+            alt="user header" 
+            src="../../../assets/img/Page1.jpg" 
+            class="w-full h-48 object-cover"
+          />
         </template>
-        <template #title>{{ value.title }}</template>
-        <template #subtitle>{{ value.date }}</template>
+
+        <template #title>
+          <h3 class="text-lg font-semibold line-clamp-2">
+            {{ value.title }}
+          </h3>
+        </template>
+
+        <template #subtitle>
+          <p class="text-sm text-gray-500">{{ value.date }}</p>
+        </template>
       </Card>
     </div>
   </div>

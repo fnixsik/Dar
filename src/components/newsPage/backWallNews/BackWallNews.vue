@@ -4,11 +4,9 @@
 </script>
 
 <template>
-<div class="flex justify-center">
-    <HeadNews/>
-</div>
-<div class="flex justify-center">
-    <MainBlockNews/>
+<div class="grid w-full main-h-screen grid-rows-[20%_80%]">
+  <HeadNews/>
+  <MainBlockNews/>
 </div>
 </template>
 
