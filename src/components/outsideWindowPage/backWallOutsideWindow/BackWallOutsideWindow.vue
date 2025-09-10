@@ -4,12 +4,14 @@
 </script>
 
 <template>
-<div class="grid w-full h-screen grid-rows-[70%_30%]">
-  <HeadOutsideWindow />
-  <MainBlockOutsideWindow />
+<div class="flex flex-col h-full">
+  <HeadOutsideWindow class="head"/>
+  <MainBlockOutsideWindow class="flex-grow"/>
 </div>
 </template>
 
 <style scoped>
-
+.head {
+  height: 80vh;
+}
 </style>

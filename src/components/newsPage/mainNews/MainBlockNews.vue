@@ -25,72 +25,15 @@ const newscard = ref<News[]>([
       img: "/src/assets/img/Page3.jpg",
       content: "Звезда команды проводит тренировочный лагерь перед важным поединком."
     },
-        {
-      id: 3,
-      title: "Шавкат Рахмонов готовится к бою",
-      date: "2025-08-15",
-      img: "/src/assets/img/Page3.jpg",
-      content: "Звезда команды проводит тренировочный лагерь перед важным поединком."
-    },
-        {
-      id: 3,
-      title: "Шавкат Рахмонов готовится к бою",
-      date: "2025-08-15",
-      img: "/src/assets/img/Page3.jpg",
-      content: "Звезда команды проводит тренировочный лагерь перед важным поединком."
-    },
-        {
-      id: 3,
-      title: "Шавкат Рахмонов готовится к бою",
-      date: "2025-08-15",
-      img: "/src/assets/img/Page3.jpg",
-      content: "Звезда команды проводит тренировочный лагерь перед важным поединком."
-    },
-
-
-      {
-      id: 1,
-      title: "DAR TEAM завоевал новые победы",
-      date: "2025-09-01",
-      img: "/src/assets/img/Page1.jpg",
-      content: "Файтеры команды DAR TEAM успешно выступили на международном турнире."
-    },
-    {
-      id: 2,
-      title: "Открытие нового зала в Алматы",
-      date: "2025-08-20",
-      img: "/src/assets/img/Page2.jpg",
-      content: "DAR TEAM открыл новый спортивный зал для молодых спортсменов."
-    },
-    {
-      id: 3,
-      title: "Шавкат Рахмонов готовится к бою",
-      date: "2025-08-15",
-      img: "/src/assets/img/Page3.jpg",
-      content: "Звезда команды проводит тренировочный лагерь перед важным поединком."
-    },
-        {
-      id: 3,
-      title: "Шавкат Рахмонов готовится к бою",
-      date: "2025-08-15",
-      img: "/src/assets/img/Page3.jpg",
-      content: "Звезда команды проводит тренировочный лагерь перед важным поединком."
-    },
-        {
-      id: 3,
-      title: "Шавкат Рахмонов готовится к бою",
-      date: "2025-08-15",
-      img: "/src/assets/img/Page3.jpg",
-      content: "Звезда команды проводит тренировочный лагерь перед важным поединком."
-    },
-        {
-      id: 3,
-      title: "Шавкат Рахмонов готовится к бою",
-      date: "2025-08-15",
-      img: "/src/assets/img/Page3.jpg",
-      content: "Звезда команды проводит тренировочный лагерь перед важным поединком."
-    }
 ])
+
+const props = defineProps({
+  newLimit: {
+    type: Number,
+    default: 6,
+  },
+});
+
 
 onMounted(
   async () => {
@@ -105,7 +48,7 @@ onMounted(
   <div class="container mx-auto main-h-screen px-4 py-8">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <Card 
-        v-for="value in newscard" 
+        v-for="value in newscard.slice(0, props.newLimit)" 
         :key="value.id"
         class="w-full h-full max-w-sm mx-auto flex flex-col"
       >

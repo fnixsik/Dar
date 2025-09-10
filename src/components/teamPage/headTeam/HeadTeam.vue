@@ -3,14 +3,14 @@
 </script>
 
 <template>
-  <div class="flex flex-col bg-red-300 w-full" style="height: 200px;">
-    <div class="bg-lime-200 w-full justify-items-center pt-15" style="height: 100px;">
-        <p class="text-4xl">
-          НАША КОМАНДА
-        </p>
+  <div class="flex flex-col w-full">
+    <div class="w-full flex justify-center items-center py-8">
+      <p class="text-3xl md:text-4xl font-bold text-center">
+        НАША КОМАНДА
+      </p>
     </div>
-    <div class="bg-lime-300" style="height: 100px;">
-      <div class="mx-[10%]">
+    <div>
+      <div class="mx-[20%]">
         <nav class="">
           <ul class="flex space-x-10">
             <li>

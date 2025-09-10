@@ -15,8 +15,7 @@
     <img 
       src="/src/assets/img/Main_img8.svg" 
       alt="Logo main" 
-      class="absolute inset-0 m-auto"
-      style="max-width: 700px;"
+      class="absolute inset-0 mx-auto my-auto max-w-full h-auto"
     />
   </div>
 </template>

@@ -7,7 +7,7 @@
 <div class="flex justify-center">
     <HeadTeam/>
 </div>
-<div class="flex justify-center">
+<div class="mx-[20%]">
     <MainBlockTeam/>
 </div>
 </template>

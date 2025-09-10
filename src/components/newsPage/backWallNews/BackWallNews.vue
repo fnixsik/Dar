@@ -4,9 +4,9 @@
 </script>
 
 <template>
-<div class="grid w-full main-h-screen grid-rows-[20%_80%]">
+<div class="flex flex-col h-full">
   <HeadNews/>
-  <MainBlockNews/>
+  <MainBlockNews class="flex-grow"/>
 </div>
 </template>
 
