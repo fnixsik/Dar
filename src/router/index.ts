@@ -45,6 +45,11 @@ const routes = [
       path: '/about',
       name: 'About',
       component: () => import('../components/aboutUsPage/backWallAbout/BackWallAbout.vue')
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: () => import('../admin/layouts/adminPanel.vue')
     }
 ]
 
