@@ -50,7 +50,28 @@ const routes = [
       path: '/admin',
       name: 'admin',
       component: () => import('../admin/layouts/adminPanel.vue')
-    }
+    },
+    {
+      path: '/auth',
+      redirect: '/auth/fighter',
+      name: 'auth',
+      component: () => import('../auth/pages/auth.vue'),
+      children: [
+        {
+          path: 'coache',
+          component: () => import('../admin/pages/couch.vue'),
+        },
+        {
+          path: 'amateur',
+          component: () => import('../admin/pages/gtoup.vue'),
+        },
+      ]
+    },
+    {
+      path: '/admin/news',
+      name: 'admin',
+      component: () => import('../admin/pages/new.vue')
+    },
 ]
 
 const router = createRouter({

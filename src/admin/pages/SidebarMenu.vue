@@ -33,7 +33,7 @@
           <ul v-if="open.team" class="mt-1 ml-3 border-l border-white/20 pl-3 space-y-1">
             <li>
               <a
-                href="#fighters"
+                href="/fighters"
                 class="block px-3 py-2 relative font-medium uppercase tracking-wide hover:text-white
                        after:absolute after:left-3 after:bottom-0 after:h-[3px] after:w-[calc(100%-1.5rem)] after:bg-red-600
                        after:scale-x-0 after:origin-left after:transition-transform after:duration-200
@@ -44,7 +44,7 @@
             </li>
             <li>
               <a
-                href="#coaches"
+                href="/coaches"
                 class="block px-3 py-2 relative font-medium uppercase tracking-wide hover:text-white
                        after:absolute after:left-3 after:bottom-0 after:h-[3px] after:w-[calc(100%-1.5rem)] after:bg-red-600
                        after:scale-x-0 after:origin-left after:transition-transform after:duration-200
@@ -55,7 +55,7 @@
             </li>
             <li>
               <a
-                href="#amateur"
+                href="/amateur"
                 class="block px-3 py-2 relative font-medium uppercase tracking-wide hover:text-white
                        after:absolute after:left-3 after:bottom-0 after:h-[3px] after:w-[calc(100%-1.5rem)] after:bg-red-600
                        after:scale-x-0 after:origin-left after:transition-transform after:duration-200
@@ -70,7 +70,7 @@
 
       <!-- Новости -->
       <a
-        href="#news"
+        href="/news"
         class="block px-3 py-2 relative font-semibold uppercase tracking-wide hover:text-white
                after:absolute after:left-3 after:bottom-0 after:h-[3px] after:w-[calc(100%-1.5rem)] after:bg-red-600
                after:scale-x-0 after:origin-left after:transition-transform after:duration-200

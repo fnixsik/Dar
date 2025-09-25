@@ -1,7 +1,6 @@
 <template>
 <SidebarMenu/>
-<p>weriojasdofgiasjdofijsdfoiasdjfiojasdiofjsdfasdfasdfasdfasdfasd</p>
-фывафыва
+<router-view />
 </template>
 
 <script setup lang="ts">
