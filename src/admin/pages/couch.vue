@@ -1,3 +1,9 @@
-<template setup lang="ts">
-    Couch
+<script setup lang="ts">
+
+</script>
+
+<template>
+  <div class="bg-yellow-400 w-full h-full">
+    testCoach
+  </div>
 </template>

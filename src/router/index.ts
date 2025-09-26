@@ -47,30 +47,38 @@ const routes = [
       component: () => import('../components/aboutUsPage/backWallAbout/BackWallAbout.vue')
     },
     {
-      path: '/admin',
-      name: 'admin',
-      component: () => import('../admin/layouts/adminPanel.vue')
+      path: '/auth',
+      name: 'auth',
+      component: () => import('../auth/pages/auth.vue')
     },
     {
-      path: '/auth',
-      redirect: '/auth/fighter',
-      name: 'auth',
-      component: () => import('../auth/pages/auth.vue'),
+      path: '/admin',
+      name: 'Wall',
+      component: () => import('../admin/pages/Wall.vue'),
+      redirect: '/admin/fighters',
       children: [
         {
+          path: 'fighters',
+          component: () => import('../admin/pages/Fighters.vue'),
+        },
+        {
           path: 'coache',
-          component: () => import('../admin/pages/couch.vue'),
+          component: () => import('../admin/pages/Couch.vue'),
         },
         {
           path: 'amateur',
-          component: () => import('../admin/pages/gtoup.vue'),
+          component: () => import('../admin/pages/Gtoup.vue'),
+        },
+        {
+          path: 'news',
+          component: () => import('../admin/pages/New.vue'),
         },
       ]
     },
     {
       path: '/admin/news',
-      name: 'admin',
-      component: () => import('../admin/pages/new.vue')
+      name: 'New',
+      component: () => import('../admin/pages/New.vue')
     },
 ]
 
