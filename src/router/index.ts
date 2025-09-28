@@ -59,29 +59,23 @@ const routes = [
       children: [
         {
           path: 'fighters',
-          component: () => import('../admin/pages/Fighters.vue'),
+          component: () => import('../admin/pages/fighters.vue'),
         },
         {
           path: 'coache',
-          component: () => import('../admin/pages/Couch.vue'),
+          component: () => import('../admin/pages/couch.vue'),
         },
         {
           path: 'amateur',
-          component: () => import('../admin/pages/Gtoup.vue'),
+          component: () => import('../admin/pages/gtoup.vue'),
         },
         {
-          path: 'news',
-          component: () => import('../admin/pages/New.vue'),
+          path: '/admin/news',
+          component: () => import('../admin/pages/new.vue')
         },
       ]
     },
-    {
-      path: '/admin/news',
-      name: 'New',
-      component: () => import('../admin/pages/New.vue')
-    },
 ]
-
 const router = createRouter({
   history: createWebHistory(),
   routes,

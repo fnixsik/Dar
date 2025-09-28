@@ -3,7 +3,6 @@
     <h1 class="text-xl font-semibold mb-4">Меню</h1>
 
     <nav class="space-y-1">
-      <!-- Команда (collapsible) -->
       <div>
         <button
           @click="open.team = !open.team"
@@ -70,8 +69,6 @@
           </ul>
         </transition>
       </div>
-
-      <!-- Новости -->
       <router-link
         to="/admin/news"
         class="block px-3 py-2 relative font-semibold uppercase tracking-wide hover:text-white
