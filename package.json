@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc -b && vite build",
-    "preview": "vite preview"
+    "typecheck": "vue-tsc --noEmit -p tsconfig.app.json && vue-tsc --noEmit -p tsconfig.node.json",
+    "build": "yarn typecheck && vite build",
+    "dev": "vite"
   },
   "dependencies": {
     "@primevue/themes": "^4.3.6",
@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "@primevue/auto-import-resolver": "^4.3.7",
+    "@types/node": "^24.6.1",
     "@vitejs/plugin-vue": "^6.0.0",
     "@vue/tsconfig": "^0.7.0",
     "typescript": "~5.8.3",

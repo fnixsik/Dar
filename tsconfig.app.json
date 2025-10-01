@@ -1,21 +1,22 @@
 {
   "extends": "@vue/tsconfig/tsconfig.dom.json",
   "compilerOptions": {
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "composite": false,
+    "noEmit": true,
 
-    /* Linting */
+    "baseUrl": ".",
+    "paths": { "@/*": ["src/*"] },
+
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
-    "composite": true,
-    "noEmit":false,
 
-    "types": ["vite/client"],
-    "module": "ESNext",  // Важно для `import.meta`
-    "target": "ESNext"   // Рекомендуется для Vite
+    "module": "ESNext",
+    "target": "ESNext",
+    "verbatimModuleSyntax": true
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"]
 }

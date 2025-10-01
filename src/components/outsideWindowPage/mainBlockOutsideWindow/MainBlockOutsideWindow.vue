@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { Project } from '../../../types/project';
+import type { Project } from '../../../types/project';
 
 
 const projeCtcard = ref<Project[]>([

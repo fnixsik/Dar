@@ -59,19 +59,19 @@ const routes = [
       children: [
         {
           path: 'fighters',
-          component: () => import('../admin/pages/fighters.vue'),
+          component: () => import('../admin/pages/Fighters.vue'),
         },
         {
           path: 'coache',
-          component: () => import('../admin/pages/couch.vue'),
+          component: () => import('../admin/pages/Couch.vue'),
         },
         {
           path: 'amateur',
-          component: () => import('../admin/pages/gtoup.vue'),
+          component: () => import('../admin/pages/Gtoup.vue'),
         },
         {
           path: '/admin/news',
-          component: () => import('../admin/pages/new.vue')
+          component: () => import('../admin/pages/New.vue')
         },
       ]
     },

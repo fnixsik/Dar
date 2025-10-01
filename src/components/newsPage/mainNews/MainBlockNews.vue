@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import { getAllNews } from "../../../../services/news-services"
-import { News } from "../../../types/news"
+import { getAllNews } from "../../../services/news-services"
+import type { News } from "../../../types/news"
 
 const newscard = ref<News[]>([
   {
