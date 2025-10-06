@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import Dialog from '@/components/AllDialogs/dialogFigters/Dialog.vue'
 
 
 const fighterCard = ref<any[]>([
@@ -26,6 +27,7 @@ const fighterCard = ref<any[]>([
 </script>
 
 <template>
+  <Dialog/>
   <div class="container mx-auto main-h-screen px-4 py-8">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <Card 

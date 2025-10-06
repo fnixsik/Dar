@@ -21,6 +21,7 @@ declare module 'vue' {
     Card: typeof import('primevue/card')['default']
     Column: typeof import('primevue/column')['default']
     DataTable: typeof import('primevue/datatable')['default']
+    Dialog: typeof import('./src/components/AllDialogs/dialogFigters/Dialog.vue')['default']
     HeadAbout: typeof import('./src/components/aboutUsPage/headAbout/HeadAbout.vue')['default']
     HeadBranch: typeof import('./src/components/branchPage/headBranch/HeadBranch.vue')['default']
     HeadNews: typeof import('./src/components/newsPage/headNews/HeadNews.vue')['default']
