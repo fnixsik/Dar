@@ -2,6 +2,7 @@
 <template>
   <Dialog
     v-model:visible="modelValueLocal"
+    @update:visible="val => emit('update:modelValue', val)"
     modal
     :dismissableMask="true"
     :style="{ width: '920px', maxWidth: '95vw' }"
@@ -29,7 +30,14 @@
         <!-- Четыре кружка-заменителя -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
           <div v-for="n in 4" :key="n" class="bg-zinc-900 rounded-2xl p-4 flex flex-col items-center">
-            <div class="w-28 h-28 rounded-full border-8 border-zinc-800"></div>
+              <CircleProgress
+                :percent="value"
+                :size="100"
+                :border-width="6"
+                :color="getColor(value)"
+                background="#27272a"
+              />
+              <p>{{ value }}%</p>
             <Skeleton width="3rem" height="1rem" class="mt-3 bg-zinc-800" />
             <Skeleton width="5rem" height="0.75rem" class="mt-2 bg-zinc-800" />
           </div>
@@ -37,15 +45,12 @@
 
         <!-- Вкладки -->
         <TabView class="mt-6" :pt="{ nav:{ class:'bg-transparent border-b border-zinc-800' } }">
-          <TabPanel header="БИОГРАФИЯ">
+          <TabPanel header="БИОГРАФИЯ" value="bio">
             <div class="space-y-4 pt-2">
-              <FieldRow label="Место рождения" />
-              <FieldRow label="Вид спорта" />
-              <FieldRow label="Разряд" />
-              <FieldRow label="Инстаграм" />
+
             </div>
           </TabPanel>
-          <TabPanel header="ДОСТИЖЕНИЯ">
+          <TabPanel header="ДОСТИЖЕНИЯ" value="bio">
             <div class="space-y-2 pt-2">
               <Skeleton v-for="i in 4" :key="i" width="80%" height="0.9rem" class="bg-zinc-800" />
             </div>
@@ -69,29 +74,19 @@ import Dialog from 'primevue/dialog'
 import TabView from 'primevue/tabview'
 import TabPanel from 'primevue/tabpanel'
 import Skeleton from 'primevue/skeleton'
+// @ts-ignore
+import { CircleProgress } from 'vue3-circle-progress'
+import 'vue3-circle-progress/dist/circle-progress.css'
 
 const props = defineProps<{ modelValue: boolean }>()
-const emit = defineEmits<{ (e:'update:modelValue', v:boolean): void }>()
+const emit = defineEmits<{ 
+  (e:'update:modelValue', v:boolean): void
+}>()
 const modelValueLocal = ref(props.modelValue)
 watch(() => props.modelValue, v => (modelValueLocal.value = v))
 watch(modelValueLocal, v => emit('update:modelValue', v))
-</script>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-import Skeleton from 'primevue/skeleton'
-export default defineComponent({
-  name: 'FieldRow',
-  props: { label: String },
-  setup(props) {
-    return () => (
-      <div class="flex gap-3 items-start">
-        <div class="w-40 shrink-0 text-xs uppercase tracking-wider text-zinc-400">{props.label}</div>
-        <Skeleton width="60%" height="1rem" class="bg-zinc-800" />
-      </div>
-    )
-  }
-})
+const value = 72
+const getColor = (v: number) => (v < 40 ? '#ef4444' : v < 70 ? '#facc15' : '#4ade80')
 </script>
 
 <style scoped>

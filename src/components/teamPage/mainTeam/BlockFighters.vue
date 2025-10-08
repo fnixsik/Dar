@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import Dialog from '@/components/AllDialogs/dialogFigters/Dialog.vue'
 
-
+const visibleDialog = ref(false)
 const fighterCard = ref<any[]>([
   {
     id: 1,
@@ -24,16 +24,23 @@ const fighterCard = ref<any[]>([
   },
 ])
 
+const openDialog = (value:any) =>{
+  console.log('Открываю диалог для:', value)
+  visibleDialog.value = true
+  console.log('  visibleDialog  ', visibleDialog.value)
+}
+
 </script>
 
 <template>
-  <Dialog/>
+  <Dialog :modelValue="visibleDialog" />
   <div class="container mx-auto main-h-screen px-4 py-8">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <Card 
         v-for="value in fighterCard" 
         :key="value.id"
-        class="w-full h-full max-w-sm mx-auto flex flex-col"
+        class="w-full h-full max-w-sm mx-auto flex flex-col cursor-pointer"
+        @click="openDialog(value)"
       >
         <template #header>
           <img 
