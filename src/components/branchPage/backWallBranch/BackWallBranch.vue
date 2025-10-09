@@ -4,10 +4,8 @@
 </script>
 
 <template>
-<div>
+<div class="flex flex-col h-full">
     <HeadBranch/>
-</div>
-<div>
     <MainBranch/>
 </div>
 </template>

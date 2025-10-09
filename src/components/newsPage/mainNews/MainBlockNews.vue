@@ -2,7 +2,9 @@
 import { onMounted, ref } from "vue";
 import { getAllNews } from "../../../services/news-services"
 import type { News } from "../../../types/news"
+import DialogNews from "@/components/AllDialogs/dialogNews/DialogNews.vue";
 
+const visibleDialog = ref(false)
 const newscard = ref<News[]>([
   {
       id: 1,
@@ -41,16 +43,26 @@ onMounted(
   }
 )
 
+const openDialog = (value:any) =>{
+  if(value){
+    visibleDialog.value = true
+  }else{
+    visibleDialog.value = false
+  }
+}
+
 
 </script>
 
 <template>
+  <DialogNews :modelValue="visibleDialog"/>
   <div class="container mx-auto main-h-screen px-4 py-8">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <Card 
         v-for="value in newscard.slice(0, props.newLimit)" 
         :key="value.id"
-        class="w-full h-full max-w-sm mx-auto flex flex-col"
+        class="w-full h-full max-w-sm mx-auto flex flex-col cursor-pointer"
+        @click="openDialog(value)"
       >
         <template #header>
           <img 

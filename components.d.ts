@@ -24,6 +24,7 @@ declare module 'vue' {
     Dialog: typeof import('primevue/dialog')['default']
     DialogCoache: typeof import('./src/components/AllDialogs/dialogCoache/DialogCoache.vue')['default']
     DialogFighter: typeof import('./src/components/AllDialogs/dialogFighter/DialogFighter.vue')['default']
+    DialogNews: typeof import('./src/components/AllDialogs/dialogNews/DialogNews.vue')['default']
     HeadAbout: typeof import('./src/components/aboutUsPage/headAbout/HeadAbout.vue')['default']
     HeadBranch: typeof import('./src/components/branchPage/headBranch/HeadBranch.vue')['default']
     HeadNews: typeof import('./src/components/newsPage/headNews/HeadNews.vue')['default']
