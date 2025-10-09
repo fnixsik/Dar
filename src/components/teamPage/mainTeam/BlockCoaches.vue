@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import Dialog from '@/components/AllDialogs/dialogCoache/DialogCoache.vue'
 
-
+const visibleDialog = ref(false)
 const coacheCard = ref<any[]>([
   {
     id: 1,
@@ -23,15 +24,25 @@ const coacheCard = ref<any[]>([
   },
 ])
 
+const openDialog = (value:any) =>{
+  if(value){
+    visibleDialog.value = true
+  }else{
+    visibleDialog.value = false
+  }
+}
+
 </script>
 
 <template>
+  <Dialog :modelValue="visibleDialog"/>
   <div class="container mx-auto main-h-screen px-4 py-8">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <Card 
         v-for="value in coacheCard" 
         :key="value.id"
-        class="w-full h-full max-w-sm mx-auto flex flex-col"
+        class="w-full h-full max-w-sm mx-auto flex flex-col cursor-pointer"
+        @click="openDialog(value)"
       >
         <template #header>
           <img 

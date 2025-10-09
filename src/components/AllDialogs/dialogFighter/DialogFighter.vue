@@ -2,6 +2,7 @@
 <template>
   <Dialog
     v-model:visible="modelValueLocal"
+    @update:visible="handleClose"
     modal
     :dismissableMask="true"
     :closeOnEscape="true"
@@ -30,26 +31,23 @@
 
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
           <div
-            v-for="(p, idx) in safeStats"
+            v-for="(p, idx) in nameProcent"
             :key="idx"
             class="bg-zinc-900 rounded-2xl p-4 flex flex-col items-center"
           >
-<CircleProgress
-  :percent="50"
-  :is-percent="true"
-  :size="100"
-  :border-width="10"
-  :color="getColor(72)"
-  background="#27272a"
-  :animation="true"
-  :animation-duration="1200"
-  :show-percent="true"
-/>
-
-
-            <p class="mt-2 text-sm text-zinc-200">{{ p }}%</p>
-            <Skeleton width="3rem" height="1rem" class="mt-3 bg-zinc-800" />
-            <Skeleton width="5rem" height="0.75rem" class="mt-2 bg-zinc-800" />
+            <CircleProgress
+              :percent="p"
+              :size="100"
+              :border-width="13"
+              :is-percent="true"
+              :animation="true"
+              :animation-duration="1200"
+              class="glow-circle"
+            />
+            <div class="mt-3 flex flex-col items-center">
+              <span class="text-lg font-semibold text-white">{{  }}%</span>
+              <span class="text-xs text-zinc-500 uppercase tracking-wider">{{ p }}</span>
+            </div>
           </div>
         </div>
 
@@ -63,7 +61,7 @@
             </div>
           </TabPanel>
           <TabPanel header="ДОСТИЖЕНИЯ" value="achievements">
-            <div class="space-y-2 pt-3">
+            <div class="space-y-3 pt-3">
               <Skeleton v-for="i in 4" :key="i" width="80%" height="0.9rem" class="bg-zinc-800" />
             </div>
           </TabPanel>
@@ -95,24 +93,37 @@ const props = defineProps<{
   stats?: number[]
 }>()
 
-const emit = defineEmits<{ (e:'update:modelValue', v:boolean): void }>()
+const emit = defineEmits<{ 
+  (e:'update:modelValue', v:boolean): void,
+  (e:'dialog', v:boolean): void,
+}>()
 const modelValueLocal = ref(props.modelValue)
+const nameProcent = {
+  kto: "КТО/ТКО",
+  decision: "РЕШЕНИЕ",
+  sabmision: "САБМИШЕН",
+  other: "ОСТАЛЬНОЕ",
+}
 watch(() => props.modelValue, v => (modelValueLocal.value = v))
 watch(modelValueLocal, v => emit('update:modelValue', v))
 
-const safeStats = computed(() => {
-  const base = props.stats && props.stats.length ? props.stats : [72, 72, 72, 72]
-  // гарантируем 4 значения
-  return [...base].slice(0, 4).concat(Array(Math.max(0, 4 - base.length)).fill(72))
-})
+const handleClose = (e: any) => {
+  emit('dialog', e)
+}
 
-const getColor = (v: number) => (v < 40 ? '#ef4444' : v < 70 ? '#facc15' : '#4ade80')
 </script>
 
 <style scoped>
-:deep(.p-tabview-nav li.p-highlight .p-tabview-nav-link){
-  border-bottom:2px solid #ef4444;
-  color:#fff;
+:deep(svg circle:not(.circle-progress__background)) {
+  stroke: #B00D15 !important;
 }
-:deep(.p-dialog-header){ display:flex; flex-direction:column; gap:.25rem; }
+
+:deep(svg .circle-progress__background),
+:deep(svg circle:first-child) {
+  stroke: #3f3f46 !important;
+}
+
+:deep(.p-tabview-ink-bar) {
+  background: #B00D15 !important;
+}
 </style>

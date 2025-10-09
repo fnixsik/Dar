@@ -18,7 +18,13 @@ onMounted(() => {
     ]"
   >
     <div class="container mx-auto flex justify-between items-center px-50">
-      <h1 class="text-2xl font-bold text-white">DAR</h1>
+      <h1 class="text-2xl font-bold text-white">
+      <router-link
+        to="/"
+      >
+        DAR
+      </router-link>
+      </h1>
       
       <nav class="hidden md:block">
         <ul class="flex space-x-10">

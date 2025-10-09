@@ -4,10 +4,10 @@
 </script>
 
 <template>
-<div class="flex justify-center">
+<div>
     <HeadBranch/>
 </div>
-<div class="flex justify-center">
+<div>
     <MainBranch/>
 </div>
 </template>

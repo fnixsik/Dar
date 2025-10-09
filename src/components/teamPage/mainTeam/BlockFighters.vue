@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import Dialog from '@/components/AllDialogs/dialogFigters/Dialog.vue'
+import Dialog from '@/components/AllDialogs/dialogFighter/DialogFighter.vue'
 
 const visibleDialog = ref(false)
 const fighterCard = ref<any[]>([
@@ -25,15 +25,17 @@ const fighterCard = ref<any[]>([
 ])
 
 const openDialog = (value:any) =>{
-  console.log('Открываю диалог для:', value)
-  visibleDialog.value = true
-  console.log('  visibleDialog  ', visibleDialog.value)
+  if(value){
+    visibleDialog.value = true
+  }else{
+    visibleDialog.value = false
+  }
 }
 
 </script>
 
 <template>
-  <Dialog :modelValue="visibleDialog" />
+  <Dialog :modelValue="visibleDialog" @dialog="openDialog"/>
   <div class="container mx-auto main-h-screen px-4 py-8">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <Card 
