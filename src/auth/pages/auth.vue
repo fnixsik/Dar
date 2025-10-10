@@ -24,11 +24,9 @@ const password = ref<string>('')
 const authUser = async () => {
   try {
     const res = await auth(username.value, password.value)
-    console.log(' 1 ', res)
     username.value = '';
     password.value = '';
   } catch(error) {
-    console.log(error)
   }
 }
 </script>

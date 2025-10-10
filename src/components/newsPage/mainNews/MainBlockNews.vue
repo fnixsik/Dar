@@ -2,7 +2,7 @@
 import { onMounted, ref } from "vue";
 import { getAllNews } from "../../../services/news-services"
 import type { News } from "../../../types/news"
-import DialogNews from "@/components/AllDialogs/dialogNews/DialogNews.vue";
+import Dialog from "@/components/AllDialogs/dialogNews/DialogNews.vue";
 
 const visibleDialog = ref(false)
 const newscard = ref<News[]>([
@@ -55,7 +55,7 @@ const openDialog = (value:any) =>{
 </script>
 
 <template>
-  <DialogNews :modelValue="visibleDialog"/>
+  <Dialog :modelValue="visibleDialog" @update:modelValue="openDialog"/>
   <div class="container mx-auto main-h-screen px-4 py-8">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <Card 

@@ -2,6 +2,7 @@
 <template>
   <Dialog
     v-model:visible="modelValueLocal" modal :dismissableMask="true" :closeOnEscape="true"
+    @update:visible="handleClose"
     :style="{ width: '1120px', maxWidth: '96vw' }"
     :breakpoints="{ '1400px':'90vw', '1024px':'96vw' }"
     :pt="{
@@ -49,8 +50,10 @@
 import { ref, watch } from 'vue'
 import Dialog from 'primevue/dialog'
 
-const props = defineProps<{ modelValue: boolean; name: string; image: string; achievements: string[] }>()
-const emit = defineEmits<{ (e:'update:modelValue', v:boolean): void }>()
+const props = defineProps<{ modelValue: boolean; name?: string; image?: string; achievements?: string[] }>()
+const emit = defineEmits<{
+  (e:'update:modelValue', v:boolean): void 
+  }>()
 const modelValueLocal = ref(props.modelValue)
 watch(() => props.modelValue, v => (modelValueLocal.value = v))
 watch(modelValueLocal, v => emit('update:modelValue', v))
@@ -65,4 +68,8 @@ const achievements = [
   '2013 — Чемпионат России — серебро;',
   '2013 — Кубок Рамазана Кадырова на призы Адлана Вараева — бронза;',
 ]
+
+const handleClose = (v: boolean) => {
+  emit('update:modelValue', v)
+}
 </script>

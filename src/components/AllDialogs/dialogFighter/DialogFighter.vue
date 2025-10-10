@@ -95,7 +95,6 @@ const props = defineProps<{
 
 const emit = defineEmits<{ 
   (e:'update:modelValue', v:boolean): void,
-  (e:'dialog', v:boolean): void,
 }>()
 const modelValueLocal = ref(props.modelValue)
 const nameProcent = {
@@ -107,8 +106,8 @@ const nameProcent = {
 watch(() => props.modelValue, v => (modelValueLocal.value = v))
 watch(modelValueLocal, v => emit('update:modelValue', v))
 
-const handleClose = (e: any) => {
-  emit('dialog', e)
+const handleClose = (v: any) => {
+  emit('update:modelValue', v)
 }
 
 </script>

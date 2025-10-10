@@ -35,7 +35,7 @@ const openDialog = (value:any) =>{
 </script>
 
 <template>
-  <Dialog :modelValue="visibleDialog" @dialog="openDialog"/>
+  <Dialog :modelValue="visibleDialog" @update:modelValue="openDialog"/>
   <div class="container mx-auto main-h-screen px-4 py-8">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <Card 
