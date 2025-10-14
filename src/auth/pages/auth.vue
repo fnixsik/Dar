@@ -5,6 +5,14 @@ import { auth } from '../api/authApi'
 const username = ref<string>('')
 const password = ref<string>('')
 
+const props = defineProps<{
+  visableAuthDialog: boolean
+}>()
+
+const emit = defineEmits<{
+  (e:'update:visableAuthDialog', v:boolean) : void
+}>()
+
 // async function login() {
 //   try {
 //     const response = await axios.post('http://localhost:8080/api/auth/login', {
@@ -29,41 +37,59 @@ const authUser = async () => {
   } catch(error) {
   }
 }
+
+const closeDialog = (v:boolean) =>{
+  console.log('close', v)
+  emit('update:visableAuthDialog', v)
+}
 </script>
 
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-slate-800">
-    <Card class="w-96 shadow-2xl rounded-2xl p-6 text-gray-800 bg-white">
-      <template #title>
-        <div class="text-center text-xl font-semibold text-white-900 mb-6">Авторизация</div>
-      </template>
+  <Dialog
+    v-model:visible="props.visableAuthDialog"
+    @update:visible="closeDialog"
+    modal
+    :style="{ width: '25rem', borderRadius: '1rem' }"
+    :pt="{
+      header: { class: 'text-center text-xl font-semibold text-white border-0 pb-0' },
+      content: { class: 'bg-slate-900 text-white' },
+      footer: { class: 'border-0 pt-0' }
+    }"
+  >
+    <template #header>Авторизация</template>
 
-      <template #content>
-        <div class="space-y-6">
-          <span class="p-input-icon-left w-full">
-            <i class="pi pi-user text-gray-500" />
-            <InputText v-model="username"
-                       placeholder="Имя пользователя"
-                       class="w-full" />
-          </span>
+    <!-- Контент -->
+    <div class="flex flex-col gap-5">
+      <span class="p-input-icon-left w-full">
+        <i class="pi pi-user text-gray-400" />
+        <InputText
+          v-model="username"
+          placeholder="Имя пользователя"
+          class="w-full"
+        />
+      </span>
 
-          <span class="p-input-icon-left w-full">
-            <i class="pi pi-lock text-gray-500" />
-            <Password v-model="password"
-                      placeholder="Пароль"
-                      toggleMask
-                      class="w-full"
-                      inputClass="w-full" />
-          </span>
-        </div>
-      </template>
+      <span class="p-input-icon-left w-full">
+        <i class="pi pi-lock text-gray-400" />
+        <Password
+          v-model="password"
+          placeholder="Пароль"
+          toggleMask
+          class="w-full"
+          inputClass="w-full"
+        />
+      </span>
 
-      <template #footer>
-        <Button label="Войти"
-                @click="authUser"
-                class="w-full !bg-emerald-500 hover:!bg-emerald-600 text-white font-medium border-none shadow-md transition-all mt-6" />
-      </template>
-    </Card>
-  </div>
+      <Button
+        label="Войти"
+        @click="authUser"
+        class="w-full !bg-emerald-500 hover:!bg-emerald-600 text-white font-medium border-none shadow-md transition-all"
+      />
+    </div>
+  </Dialog>
 </template>
+
+<style scoped>
+
+</style>
 
