@@ -15,10 +15,23 @@
     </template>
     <div class="mt-2 h-[2px] w-full bg-red-600 rounded-full"></div>
 
-    <div class="mt-6 flex flex-col gap-4 items-center">
-      <div class="bg-red-600 w-40 h-[50vh] "></div>
-      <div class="bg-zinc-700 w-40 h-[50vh] "></div>
+<div class="flex justify-center items-center min-h-screen bg-black">
+  <div class="w-[80%] flex flex-col gap-4 items-center">
+    <!-- Верхний блок (например, изображение или баннер) -->
+    <div class="bg-red-600 w-full md:w-2/3 h-[80vh] flex justify-center items-center text-white text-xl font-semibold">
+      Здесь будет изображение / баннер
     </div>
+
+    <!-- Нижний блок с текстом -->
+    <div class="bg-zinc-700 w-full md:w-2/3 h-auto flex justify-center items-center text-white text-lg md:text-xl font-medium p-6 rounded-lg leading-relaxed text-center">
+      <p>
+        Это пример текстового описания. Здесь можно разместить краткую информацию о проекте,
+        команде, событии или любом другом контенте. Текст адаптируется под ширину экрана,
+        а отступы обеспечивают комфортное чтение на мобильных устройствах.
+      </p>
+    </div>
+  </div>
+</div>
   </Dialog>
 </template>
 

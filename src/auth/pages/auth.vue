@@ -52,7 +52,7 @@ const closeDialog = (v:boolean) =>{
     :style="{ width: '25rem', borderRadius: '1rem' }"
     :pt="{
       header: { class: 'text-center text-xl font-semibold text-white border-0 pb-0' },
-      content: { class: 'bg-slate-900 text-white' },
+      content: { class: 'text-white' },
       footer: { class: 'border-0 pt-0' }
     }"
   >
@@ -81,10 +81,21 @@ const closeDialog = (v:boolean) =>{
       </span>
 
       <Button
-        label="Войти"
-        @click="authUser"
-        class="w-full !bg-emerald-500 hover:!bg-emerald-600 text-white font-medium border-none shadow-md transition-all"
+      unstyled
+      label="Войти"
+      @click="authUser"
+      class="
+        w-full
+        bg-gradient-to-r from-red-600 to-red-700
+        hover:from-red-700 hover:to-red-800
+        text-white font-semibold rounded-xl
+        py-3 transition duration-300 shadow-lg
+      "
       />
+    </div>
+    <div class="mt-3 flex items-center justify-between text-sm">
+      <button class="text-gray-300 hover:text-white" @click="goForgot"></button>
+      <button class="text-gray-300 hover:text-white" @click="goRegister">Регистрация</button>
     </div>
   </Dialog>
 </template>
