@@ -27,11 +27,11 @@ const toggleMenu = () => (mobileMenu.value = !mobileMenu.value)
 // авторизация
 const handleAuthClick = (e : any) => {
   if(e){
-    router.push({ query: { auth: 'login' } })
+    router.push('/login')
     visableAuthDialog.value = true
   }else{
     visableAuthDialog.value = false
-    router.back
+    router.push('/')
   }
 }
 </script>
