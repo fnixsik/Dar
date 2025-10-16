@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { useRouter } from 'vue-router'
 import Auth from '@/auth/pages/auth.vue'
 import 'primeicons/primeicons.css'
 
 const scrolled = ref(false)
 const mobileMenu = ref(false)
 const visableAuthDialog = ref<boolean>(false)
+const router = useRouter()
 
 // обработчик скролла
 const handleScroll = () => {
@@ -25,12 +27,12 @@ const toggleMenu = () => (mobileMenu.value = !mobileMenu.value)
 // авторизация
 const handleAuthClick = (e : any) => {
   if(e){
+    router.push({ query: { auth: 'login' } })
     visableAuthDialog.value = true
   }else{
     visableAuthDialog.value = false
+    router.back
   }
-  
-  console.log( e, 'Открыть окно авторизации')
 }
 </script>
 

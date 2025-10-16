@@ -95,12 +95,17 @@ const closeDialog = (v:boolean) =>{
     </div>
     <div class="mt-3 flex items-center justify-between text-sm">
       <button class="text-gray-300 hover:text-white" @click="goForgot"></button>
-      <button class="text-gray-300 hover:text-white" @click="goRegister">Регистрация</button>
+      <button class="text-gray-500 hover:text-white" @click="goRegister">Регистрация</button>
     </div>
   </Dialog>
 </template>
 
 <style scoped>
+:deep(.p-inputtext:enabled:focus) {
+  border-color: #B00D15 !important;
+  box-shadow: 0 0 0 2px rgba(176, 13, 21, 0.3);
+  outline: none;
+}
 
 </style>
 

@@ -4,7 +4,21 @@ const routes = [
     {
         path: '/',
         name: 'Home',
-        component: () => import('../components/mainPage/backWall/BackWall.vue')
+        component: {
+          default: () => import('../components/mainPage/backWall/BackWall.vue'),
+          modal: null,
+        },
+        children: [
+          { path: 'login', 
+            name: 'login',
+            component: { 
+              modal: () => import('@/auth/pages/auth.vue') 
+            }, 
+              props: { 
+                modal: { mode: 'login' }
+              }
+          },
+        ]
     },
     {
       path: '/teams',
