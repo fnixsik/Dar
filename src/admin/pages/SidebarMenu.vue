@@ -39,7 +39,7 @@
                        hover:after:scale-x-100"
                 active-class="text-blue-400 after:scale-x-100"
               >
-                дочерние бойцы
+                бойцы
               </router-link>
             </li>
             <li>
