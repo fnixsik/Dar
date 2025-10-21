@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { auth } from '../api/authApi'
+import { auth } from '@/services/auth-services'
 
 const username = ref<string>('')
 const password = ref<string>('')
@@ -13,30 +13,27 @@ const emit = defineEmits<{
   (e:'update:visableAuthDialog', v:boolean) : void
 }>()
 
-// async function login() {
-//   try {
-//     const response = await axios.post('http://localhost:8080/api/auth/login', {
-//       username: username.value,
-//       password: password.value,
-//     })
-
-//     const token = response.data.token
-//     console.log('JWT:', token)
-
-//     localStorage.setItem('token', token)
-//     window.location.href = '/dashboard'
-//   } catch (error) {
-//     console.error('Ошибка авторизации:', error)
-//   }
-// }
 const authUser = async () => {
   try {
-    const res = await auth(username.value, password.value)
-    username.value = '';
-    password.value = '';
-  } catch(error) {
+    const response = await auth(username.value,password.value)
+    console.log(' Login ', response)
+    // const token = response.data.token
+    // console.log('JWT:', token)
+
+    // localStorage.setItem('token', token)
+    // window.location.href = '/dashboard'
+  } catch (error) {
+    console.error('Ошибка авторизации:', error)
   }
 }
+// const authUser = async () => {
+//   try {
+//     const res = await auth(username.value, password.value)
+//     username.value = '';
+//     password.value = '';
+//   } catch(error) {
+//   }
+// }
 
 const closeDialog = (v:boolean) =>{
   console.log('close', v)

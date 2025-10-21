@@ -65,6 +65,7 @@ const routes = [
       name: 'Wall',
       component: () => import('../admin/pages/Wall.vue'),
       redirect: '/admin/fighters',
+      meta: { requiresAuth: true, roles: ['ROLE_ADMIN'] },
       children: [
         {
           path: 'fighters',
