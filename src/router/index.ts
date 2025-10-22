@@ -68,20 +68,20 @@ const routes = [
       meta: { requiresAuth: true, roles: ['ROLE_ADMIN'] },
       children: [
         {
-          path: 'fighters',
-          component: () => import('../admin/pages/Fighters.vue'),
+          path: 'fighters',// @ts-ignore
+          component: () => import('@/admin/pages/Fighters.vue'),
         },
         {
-          path: 'coache',
-          component: () => import('../admin/pages/Couch.vue'),
+          path: 'coache',// @ts-ignore
+          component: () => import('@/admin/pages/Couch.vue'),
         },
         {
-          path: 'amateur',
-          component: () => import('../admin/pages/Gtoup.vue'),
+          path: 'amateur',// @ts-ignore
+          component: () => import('@/admin/pages/Gtoup.vue'),
         },
         {
-          path: '/admin/news',
-          component: () => import('../admin/pages/New.vue')
+          path: '/admin/news',// @ts-ignore
+          component: () => import('@/admin/pages/New.vue')
         },
       ]
     },

@@ -4,8 +4,12 @@
 
 <template>
     <section class="bg-black text-white w-full py-16 px-6 flex justify-center items-center relative">
-        <div class="absolute inset-0 bg-cover bg-center" 
-             style="background-image: url('/src/assets/img/OutWindow.jpg');">
+        <div class="absolute inset-0 bg-cover bg-center">
+            <img 
+            src="/src/assets/img/OutWindow.jpg" 
+            alt="Главная картинка" 
+            class="w-full h-full object-cover"
+            />
         </div>
         <div class="max-w-3xl text-center space-y-6 relative z-10">
             <h2 class="text-3xl font-bold">ДАР ТИМ ВНЕ ОКТАГОНА</h2>
