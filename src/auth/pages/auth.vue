@@ -91,7 +91,7 @@ const closeDialog = (v:boolean) =>{
       />
     </div>
     <div class="mt-3 flex items-center justify-between text-sm">
-      <button class="text-gray-300 hover:text-white" @click="goForgot"></button>
+      <button class="text-gray-300 hover:text-white" @click="goForgot"></button> 
       <button class="text-gray-500 hover:text-white" @click="goRegister">Регистрация</button>
     </div>
   </Dialog>

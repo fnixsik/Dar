@@ -69,18 +69,22 @@ const routes = [
       children: [
         {
           path: 'fighters',
+          // @ts-ignore
           component: () => import('../admin/pages/Fighters.vue'),
         },
         {
           path: 'coache',
+          // @ts-ignore
           component: () => import('../admin/pages/Couch.vue'),
         },
         {
           path: 'amateur',
+          // @ts-ignore
           component: () => import('../admin/pages/Gtoup.vue'),
         },
         {
           path: '/admin/news',
+          // @ts-ignore
           component: () => import('../admin/pages/New.vue')
         },
       ]
