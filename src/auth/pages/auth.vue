@@ -10,7 +10,8 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e:'update:visableAuthDialog', v:boolean) : void
+  (e: 'update:visableAuthDialog', v:boolean) : void
+  (e: 'update:visableRegisterDialog', v:boolean) : void
 }>()
 
 const authUser = async () => {
@@ -35,9 +36,12 @@ const authUser = async () => {
 //   }
 // }
 
-const closeDialog = (v:boolean) =>{
-  console.log('close', v)
+const closeDialog = (v:boolean) => {
   emit('update:visableAuthDialog', v)
+}
+
+const goRegister = (v:boolean) => {
+  emit('update:visableRegisterDialog', v)
 }
 </script>
 
@@ -72,6 +76,7 @@ const closeDialog = (v:boolean) =>{
           v-model="password"
           placeholder="Пароль"
           toggleMask
+          :feedback="false"
           class="w-full"
           inputClass="w-full"
         />
@@ -92,7 +97,7 @@ const closeDialog = (v:boolean) =>{
     </div>
     <div class="mt-3 flex items-center justify-between text-sm">
       <!-- <button class="text-gray-300 hover:text-white" @click="goForgot"></button> -->
-      <!-- <button class="text-gray-500 hover:text-white" @click="goRegister">Регистрация</button> -->
+      <button class="text-gray-500 hover:text-white" @click="goRegister(true)">Регистрация</button>
     </div>
   </Dialog>
 </template>

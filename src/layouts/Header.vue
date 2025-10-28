@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { useRouter } from 'vue-router'
-import Auth from '@/auth/pages/auth.vue'
+import Auth from '@/auth/pages/Auth.vue'
+import Register from '@/auth/pages/Register.vue'
 import 'primeicons/primeicons.css'
 
 const scrolled = ref(false)
 const mobileMenu = ref(false)
 const visableAuthDialog = ref<boolean>(false)
+const RegisterDialog = ref<boolean>(false)
 const router = useRouter()
 
 // обработчик скролла
@@ -29,15 +31,29 @@ const handleAuthClick = (e : any) => {
   if(e){
     router.push('/login')
     visableAuthDialog.value = true
+    RegisterDialog.value = false
   }else{
     visableAuthDialog.value = false
     router.push('/')
   }
 }
+
+const registerACtion = (e: any) => {
+  if(e){
+  router.push('/register')
+  visableAuthDialog.value = false
+  RegisterDialog.value = true
+  }else{
+    RegisterDialog.value = false
+    router.push('/')
+  }
+}
+
 </script>
 
 <template>
-  <Auth :visableAuthDialog="visableAuthDialog" @update:visableAuthDialog="handleAuthClick"/>
+  <Auth :visableAuthDialog="visableAuthDialog" @update:visableAuthDialog="handleAuthClick" @update:visableRegisterDialog="registerACtion"/>
+  <Register :visibleRegisterDialog="RegisterDialog" @update:visibleRegisterDialog="handleAuthClick"/>
   <header
     :class="[
       'fixed top-0 left-0 right-0 z-50 transition-all duration-300',

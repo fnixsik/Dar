@@ -11,9 +11,18 @@ const routes = [
       name: 'login',
       components: {
         default: () => import('@/components/mainPage/backWall/BackWall.vue'),
-        modal: () => import('@/auth/pages/auth.vue'),
+        modal: () => import('@/auth/pages/Auth.vue'),
       },
       props: { modal: { mode: 'login' } },
+    },
+    {
+      path: '/register',
+      name: 'register',
+      components: {
+        default: () => import('@/components/mainPage/backWall/BackWall.vue'),
+        modal: () => import('@/auth/pages/Register.vue'),
+      },
+      props: { modal: { mode: 'register' } },
     },
     {
       path: '/teams',
@@ -58,7 +67,7 @@ const routes = [
     {
       path: '/auth',
       name: 'auth',
-      component: () => import('../auth/pages/auth.vue')
+      component: () => import('../auth/pages/Auth.vue')
     },
     {
       path: '/admin',
