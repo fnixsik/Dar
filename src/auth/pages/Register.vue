@@ -129,9 +129,16 @@ const goLogin = (v: boolean) => {
       <span class="text-red-500 text-sm">{{ errors.confirmPassword }}</span>
 
       <Button
-        label="Зарегистрироваться"
-        class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold rounded-xl py-3"
-        @click="handleRegister"
+      unstyled
+      label="Зарегистрироваться"
+      class="
+        w-full
+        bg-gradient-to-r from-red-600 to-red-700
+        hover:from-red-700 hover:to-red-800
+        text-white font-semibold rounded-xl
+        py-3 transition duration-300 shadow-lg
+      "
+      @click="handleRegister"
       />
     </div>
   </Dialog>
@@ -161,5 +168,12 @@ const goLogin = (v: boolean) => {
   align-items: center;
   justify-content: center;
 }
+
+:deep(.p-inputtext:enabled:focus) {
+  border-color: #B00D15 !important;
+  box-shadow: 0 0 0 2px rgba(176, 13, 21, 0.3);
+  outline: none;
+}
+
 
 </style>
