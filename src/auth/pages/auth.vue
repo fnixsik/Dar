@@ -18,15 +18,21 @@ const emit = defineEmits<{
 const authUser = async () => {
   try {
     const response = await auth(username.value,password.value)
-    console.log(' Login ', response)
-    const token = response.token
 
-    sessionStorage.setItem('token', token)
+    let user = {
+      username: response.username,
+      roles: response.roles[0],
+      token: response.token
+    }
+    console.log(' Login ', response, ' || ', user)
+    sessionStorage.setItem('user', JSON.stringify(user))
+    let data = await JSON.parse(sessionStorage.getItem('user') || 'null')
+    console.log('test  ', data)
+
     showSuccess()
     closeDialog(false)
   } catch (error) {
     showError(error)
-    console.log(' showError ', error)
   }
 }
 
