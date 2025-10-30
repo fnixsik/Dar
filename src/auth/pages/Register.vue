@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 const props = defineProps<{
-  visibleRegisterDialog: boolean
+  visibleRegisterDialog: boolean,
 }>()
 
 const emit = defineEmits<{
@@ -66,7 +66,12 @@ const handleRegister = async () => {
   //   console.error('Ошибка регистрации', err)
   //   window.$toast.showError('Ошибка регистрации')
   // }
+    username.value = ''
+    email.value = ''
+    password.value = ''
+    confirmPassword.value = ''
 }
+
 
 // Переход на авторизацию
 const goLogin = (v: boolean) => {

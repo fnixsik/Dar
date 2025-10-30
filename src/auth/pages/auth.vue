@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch  } from 'vue'
 import { auth } from '@/services/auth-services'
+import { showSuccess, showError } from '@/shared/lib/toastService'
 
 const username = ref<string>('')
 const password = ref<string>('')
@@ -18,23 +19,26 @@ const authUser = async () => {
   try {
     const response = await auth(username.value,password.value)
     console.log(' Login ', response)
-    // const token = response.data.token
-    // console.log('JWT:', token)
+    const token = response.token
 
-    // localStorage.setItem('token', token)
-    // window.location.href = '/dashboard'
+    sessionStorage.setItem('token', token)
+    showSuccess()
+    closeDialog(false)
   } catch (error) {
-    console.error('Ошибка авторизации:', error)
+    showError(error)
+    console.log(' showError ', error)
   }
 }
-// const authUser = async () => {
-//   try {
-//     const res = await auth(username.value, password.value)
-//     username.value = '';
-//     password.value = '';
-//   } catch(error) {
-//   }
-// }
+
+watch(
+  () => props.visableAuthDialog,
+  (visible) => {
+    if (visible){
+      username.value = ''
+      password.value = ''
+    }
+  }
+)
 
 const closeDialog = (v:boolean) => {
   emit('update:visableAuthDialog', v)
