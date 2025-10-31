@@ -5,11 +5,13 @@ import Auth from '@/auth/pages/Auth.vue'
 import Register from '@/auth/pages/Register.vue'
 import 'primeicons/primeicons.css'
 
+const router = useRouter()
 const scrolled = ref(false)
 const mobileMenu = ref(false)
 const visableAuthDialog = ref<boolean>(false)
 const RegisterDialog = ref<boolean>(false)
-const router = useRouter()
+const username = ref<string | null>(null)
+const dropdownVisible = ref(false)
 
 // обработчик скролла
 const handleScroll = () => {
@@ -18,6 +20,7 @@ const handleScroll = () => {
 
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
+  takeToken()
 })
 onBeforeUnmount(() => {
   window.removeEventListener('scroll', handleScroll)
@@ -36,6 +39,30 @@ const handleAuthClick = (e : any) => {
     visableAuthDialog.value = false
     router.push('/')
   }
+}
+
+const handleAuthClick12 = () =>{
+  dropdownVisible.value = !dropdownVisible.value;
+}
+
+const takeToken = async () => {
+  try {
+    const userData = sessionStorage.getItem('user');
+    if (userData) {
+      const user = JSON.parse(userData);
+      username.value = user.username || null;
+    }
+  } catch (error) {
+      console.error('Error loading username:', error);
+      username.value = null;
+  }
+}
+
+const logout = () => {
+  sessionStorage.removeItem('user')
+  username.value = null
+  router.push('/')
+  dropdownVisible.value = false
 }
 
 const registerACtion = (e: any) => {
@@ -89,10 +116,46 @@ const registerACtion = (e: any) => {
       <!-- Правая часть -->
       <div class="flex items-center gap-4">
         <!-- Иконка авторизации -->
-        <i
-          class="pi pi-user text-white text-2xl cursor-pointer hover:text-red-500 transition"
-          @click="handleAuthClick"
-        ></i>
+        <div class="relative inline-block">
+          <!-- Если пользователь авторизован -->
+          <div
+            v-if="username"
+            class="flex items-center gap-2 cursor-pointer hover:text-red-500 transition"
+            @click="handleAuthClick12"
+          >
+            <i class="pi pi-user text-2xl"></i>
+            <span class="font-medium">{{ username }}</span>
+          </div>
+
+          <!-- Если не авторизован -->
+          <div
+            v-else
+            class="cursor-pointer hover:text-red-500 transition"
+            @click="handleAuthClick"
+          >
+            <i class="pi pi-user text-2xl"></i>
+          </div>
+
+          <!-- Выпадающее меню -->
+          <div
+            v-if="dropdownVisible"
+            class="absolute left-1/2 -translate-x-1/2 mt-2 w-26 bg-[#1f1f1f] border bg-gray-900/95 rounded-lg shadow-lg z-50"
+          >
+            <ul class="flex flex-col text-white text-sm">
+              <li
+                class="px-4 py-2 hover:bg-red-500 cursor-pointer rounded-t-lg text-center"
+              >
+                Профиль
+              </li>
+              <li
+                class="px-4 py-2 hover:bg-red-500 cursor-pointer rounded-b-lg text-center"
+                @click="logout"
+              >
+                Выйти
+              </li>
+            </ul>
+          </div>
+        </div>
 
         <!-- Бургер -->
         <button class="md:hidden text-white" @click="toggleMenu">

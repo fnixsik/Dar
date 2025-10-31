@@ -18,10 +18,10 @@ axios.interceptors.response.use(
     if(status === 401 && !redirecting){
       redirecting = true
       sessionStorage.removeItem('token')
-      sessionStorage.removeItem('expiresAt')
       router.push('/login')
     }else if (status === 403 && !redirecting){
-      showError('Доступ запрещен')
+      showError('Недостаточно права доступа')
+      router.push('/')
     }
     return Promise.reject(error)
   }

@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { ref, watch  } from 'vue'
+import { useRouter } from 'vue-router'
 import { auth } from '@/services/auth-services'
 import { showSuccess, showError } from '@/shared/lib/toastService'
 
 const username = ref<string>('')
 const password = ref<string>('')
+const router = useRouter()
 
 const props = defineProps<{
   visableAuthDialog: boolean
@@ -26,11 +28,13 @@ const authUser = async () => {
     }
     console.log(' Login ', response, ' || ', user)
     sessionStorage.setItem('user', JSON.stringify(user))
-    let data = await JSON.parse(sessionStorage.getItem('user') || 'null')
-    console.log('test  ', data)
+    let checkRole = await JSON.parse(sessionStorage.getItem('user') || 'null')
+    console.log('test  ', checkRole)
+
 
     showSuccess()
     closeDialog(false)
+    if(checkRole = 'ROLE_ADMIN') router.push('/admin')
   } catch (error) {
     showError(error)
   }
@@ -102,12 +106,13 @@ const goRegister = (v:boolean) => {
         hover:from-red-700 hover:to-red-800
         text-white font-semibold rounded-xl
         py-3 transition duration-300 shadow-lg
+        cursor-pointer
       "
       />
     </div>
     <div class="mt-3 flex items-center justify-between text-sm">
       <!-- <button class="text-gray-300 hover:text-white" @click="goForgot"></button> -->
-      <button class="text-gray-500 hover:text-white" @click="goRegister(true)">Регистрация</button>
+      <button class="text-gray-500 hover:text-white cursor-pointer" @click="goRegister(true)">Регистрация</button>
     </div>
   </Dialog>
 </template>
