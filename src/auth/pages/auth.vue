@@ -34,7 +34,7 @@ const authUser = async () => {
 
     showSuccess()
     closeDialog(false)
-    if(checkRole = 'ROLE_ADMIN') router.push('/admin')
+    if(checkRole.roles === 'ROLE_ADMIN') router.push('/admin')
   } catch (error) {
     showError(error)
   }
