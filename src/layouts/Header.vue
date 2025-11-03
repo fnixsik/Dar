@@ -1,16 +1,18 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { ref, onMounted, onBeforeUnmount, computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { useUserStore } from '@/auth/model/authStore'
 import Auth from '@/auth/pages/Auth.vue'
 import Register from '@/auth/pages/Register.vue'
 import 'primeicons/primeicons.css'
 
+const userStore = useUserStore()
 const router = useRouter()
 const scrolled = ref(false)
 const mobileMenu = ref(false)
 const visableAuthDialog = ref<boolean>(false)
 const RegisterDialog = ref<boolean>(false)
-const username = ref<string | null>(null)
+const username = computed(() => userStore.username)
 const dropdownVisible = ref(false)
 
 // обработчик скролла
@@ -20,7 +22,6 @@ const handleScroll = () => {
 
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
-  takeToken()
 })
 onBeforeUnmount(() => {
   window.removeEventListener('scroll', handleScroll)
@@ -45,22 +46,9 @@ const handleAuthClick12 = () =>{
   dropdownVisible.value = !dropdownVisible.value;
 }
 
-const takeToken = async () => {
-  try {
-    const userData = sessionStorage.getItem('user');
-    if (userData) {
-      const user = JSON.parse(userData);
-      username.value = user.username || null;
-    }
-  } catch (error) {
-      console.error('Error loading username:', error);
-      username.value = null;
-  }
-}
 
 const logout = () => {
-  sessionStorage.removeItem('user')
-  username.value = null
+  userStore.logout()
   router.push('/')
   dropdownVisible.value = false
 }

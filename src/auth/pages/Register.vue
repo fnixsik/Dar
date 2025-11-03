@@ -60,7 +60,6 @@ const handleRegister = async () => {
 
   try {
     const response = await registerUser(username.value, password.value, email.value)
-    console.log('   response  ', response)
     showSuccess()
     goLogin(true)
   } catch (err) {

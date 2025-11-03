@@ -3,10 +3,12 @@ import { ref, watch  } from 'vue'
 import { useRouter } from 'vue-router'
 import { auth } from '@/services/auth-services'
 import { showSuccess, showError } from '@/shared/lib/toastService'
+import { useUserStore } from '@/auth/model/authStore'
 
 const username = ref<string>('')
 const password = ref<string>('')
 const router = useRouter()
+const userStore = useUserStore()
 
 const props = defineProps<{
   visableAuthDialog: boolean
@@ -21,20 +23,11 @@ const authUser = async () => {
   try {
     const response = await auth(username.value,password.value)
 
-    let user = {
-      username: response.username,
-      roles: response.roles[0],
-      token: response.token
-    }
-    console.log(' Login ', response, ' || ', user)
-    sessionStorage.setItem('user', JSON.stringify(user))
-    let checkRole = await JSON.parse(sessionStorage.getItem('user') || 'null')
-    console.log('test  ', checkRole)
-
+    userStore.setUser(response)
 
     showSuccess()
     closeDialog(false)
-    if(checkRole.roles === 'ROLE_ADMIN') router.push('/admin')
+    if(userStore.roles[0] === 'ROLE_ADMIN') router.push('/admin')
   } catch (error) {
     showError(error)
   }
