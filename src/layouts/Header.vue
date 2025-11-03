@@ -130,11 +130,7 @@ const registerACtion = (e: any) => {
             class="absolute left-1/2 -translate-x-1/2 mt-2 w-26 bg-[#1f1f1f] border bg-gray-900/95 rounded-lg shadow-lg z-50"
           >
             <ul class="flex flex-col text-white text-sm">
-              <li
-                class="px-4 py-2 hover:bg-red-500 cursor-pointer rounded-t-lg text-center"
-              >
-                Профиль
-              </li>
+              <!-- <li class="px-4 py-2 hover:bg-red-500 cursor-pointer rounded-t-lg text-center">Профиль</li> -->
               <li
                 class="px-4 py-2 hover:bg-red-500 cursor-pointer rounded-b-lg text-center"
                 @click="logout"
