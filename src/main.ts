@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia';
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import PrimeVue from 'primevue/config';
 import ToastService from 'primevue/toastservice'
 import App from './App.vue';
@@ -8,6 +9,7 @@ import './assets/style/index.css';
 import Aura from '@primeuix/themes/aura';
 
 const pinia = createPinia()
+pinia.use(piniaPluginPersistedstate)
 
 const app = createApp(App);
 app.use(PrimeVue, {
@@ -16,6 +18,6 @@ app.use(PrimeVue, {
     }
 });
 app.use(ToastService)
-app.use(router)
 app.use(pinia)
+app.use(router)
 app.mount("#app");

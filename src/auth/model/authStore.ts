@@ -20,6 +20,10 @@ export const useUserStore = defineStore('user', {
       this.username = ''
       this.roles = []
     }
+  },
+
+  persist: {
+    storage: sessionStorage,
   }
 
 })

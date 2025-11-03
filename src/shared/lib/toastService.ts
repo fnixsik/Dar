@@ -1,5 +1,4 @@
 import { useToast } from 'primevue/usetoast'
-import type { AxiosError } from 'axios'
 
 let toastInstance: ReturnType<typeof useToast> | null = null
 
@@ -19,11 +18,23 @@ export const showSuccess = (summary: string = 'Добро пожаловать!'
 
 export const showError = (err: unknown) => {
   if (!toastInstance) return
-  const error = err as AxiosError
+
+  let summary = "Ошибка"
+  let detail = "Произошла неизвестная ошибка"
+
+  if(typeof err === "string"){
+    detail = err;
+  }
+
+  else if(err instanceof Error){
+    summary = err.name || "Ошибка"
+    detail = err.message || "Неизвестная ошибка"
+  }
+
   toastInstance.add({
     severity: 'error',
-    summary: error.code,
-    detail: error.message,
+    summary,
+    detail,
     life: 3000
   })
 }

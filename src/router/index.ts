@@ -1,4 +1,6 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory, type RouteLocationNormalized } from "vue-router";
+import { useUserStore } from "@/auth/model/authStore";
+import { showSuccess, showError } from '@/shared/lib/toastService'
 
 const routes = [
     {
@@ -74,25 +76,28 @@ const routes = [
       name: 'Wall',
       component: () => import('../admin/pages/Wall.vue'),
       redirect: '/admin/fighters',
-      meta: { requiresAuth: true, roles: ['ROLE_ADMIN'] },
       children: [
         {
           path: 'fighters',
+          meta: { requiresAuth: true, roles: ['ROLE_ADMIN'] },
           // @ts-ignore
           component: () => import('../admin/pages/Fighters.vue'),
         },
         {
           path: 'coache',
+          meta: { requiresAuth: true, roles: ['ROLE_ADMIN'] },
           // @ts-ignore
           component: () => import('../admin/pages/Couch.vue'),
         },
         {
           path: 'amateur',
+          meta: { requiresAuth: true, roles: ['ROLE_ADMIN'] },
           // @ts-ignore
           component: () => import('../admin/pages/Gtoup.vue'),
         },
         {
-          path: '/admin/news',
+          path: 'news',
+          meta: { requiresAuth: true, roles: ['ROLE_ADMIN'] },
           // @ts-ignore
           component: () => import('../admin/pages/New.vue')
         },
@@ -102,6 +107,24 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+})
+
+router.beforeEach((to: any, from: any, next) => {
+const userStore = useUserStore()
+const isAuthenticated = !!userStore.token
+const userRoles = userStore.roles as string[] || []
+
+if(to.meta.requiresAuth && !isAuthenticated){
+  showError("Для доступа нужно войти в систему")
+  return next("/")
+}
+
+if(to.meta.roles && !to.meta.roles.some((role: any) => userRoles.includes(role))){
+  showError("Недостаточно прав для доступа")
+  return next("/")
+}
+
+next()
 })
 
 export default router
