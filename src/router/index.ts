@@ -1,6 +1,6 @@
-import { createRouter, createWebHistory, type RouteLocationNormalized } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 import { useUserStore } from "@/auth/model/authStore";
-import { showSuccess, showError } from '@/shared/lib/toastService'
+import { showError } from '@/shared/lib/toastService'
 
 const routes = [
     {
@@ -109,7 +109,7 @@ const router = createRouter({
   routes,
 })
 
-router.beforeEach((to: any, from: any, next) => {
+router.beforeEach((to: any, _from: any, next) => {
 const userStore = useUserStore()
 const isAuthenticated = !!userStore.token
 const userRoles = userStore.roles as string[] || []

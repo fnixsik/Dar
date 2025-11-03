@@ -14,4 +14,5 @@ export const registerUser = async (name: string, password: string, email: string
     password: password,
     email: email
   })
+  return response.data
 }

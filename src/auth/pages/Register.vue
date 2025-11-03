@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
 import { registerUser } from '@/services/auth-services'
 import { showSuccess, showError } from '@/shared/lib/toastService'
 
@@ -11,8 +10,6 @@ const props = defineProps<{
 const emit = defineEmits<{
   (e:'update:visibleRegisterDialog', v:boolean) : void
 }>()
-
-const router = useRouter()
 
 // Поля формы
 const username = ref('')
@@ -59,7 +56,7 @@ const handleRegister = async () => {
   if (!validate()) return
 
   try {
-    const response = await registerUser(username.value, password.value, email.value)
+    await registerUser(username.value, password.value, email.value)
     showSuccess('', 'Вы успешно Зарегистрировались')
     goLogin(true)
   } catch (err) {
