@@ -85,7 +85,7 @@
 
 <div class="mt-6 flex justify-between">
   <Button label="Отмена" icon="pi pi-times" class="p-button-text" @click="hideDialog" />
-  <Button label="Сохранить" icon="pi pi-check" type="submit" />
+  <Button label="Сохранить" icon="pi pi-check" type="submit" @click="fetchFighters" />
 </div>
 
       </form>
@@ -96,6 +96,8 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
+import { getAllFighters } from '@/services/fighter-services'
+import { showError } from '@/shared/lib/toastService'
 
 const fighters = ref([])
 const dialog = ref(false)
@@ -119,10 +121,10 @@ const fighter = ref({
 
 const fetchFighters = async () => {
   try {
-    const res = await axios.get('/api/fighters')
+    const res = await getAllFighters()
     fighters.value = res.data
-  } catch (e) {
-    console.error('Ошибка загрузки бойцов', e)
+  } catch (err) {
+    showError(err)
   }
 }
 

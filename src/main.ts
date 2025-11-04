@@ -7,6 +7,7 @@ import App from './App.vue';
 import router from './router';
 import './assets/style/index.css';
 import Aura from '@primeuix/themes/aura';
+import '@/shared/api/interceptors/auth-interceptor'
 
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
