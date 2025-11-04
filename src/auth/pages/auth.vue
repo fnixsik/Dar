@@ -25,8 +25,9 @@ const authUser = async () => {
 
     userStore.setUser(response)
 
-    showSuccess()
+    showSuccess(response)
     closeDialog(false)
+    
     if(userStore.roles[0] === 'ROLE_ADMIN') router.push('/admin')
   } catch (error) {
     showError(error)

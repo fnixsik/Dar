@@ -6,12 +6,24 @@ export const setGlobalToast = (toast: ReturnType<typeof useToast>) => {
   toastInstance = toast
 }
 
-export const showSuccess = (summary: string = 'Добро пожаловать!', detail: string = 'Вы успешно вошли') => {
+export const showSuccess = (success: any) => {
   if (!toastInstance) return
+
+  let summary = 'Успешно'
+  let detail = ''
+
+  if(typeof success === "string"){
+    detail = success;
+  }
+
+  else if(typeof success === "object"){
+    detail = success.message
+  }
+
   toastInstance.add({
     severity: 'success',
-    summary: summary,
-    detail: detail,
+    summary,
+    detail,
     life: 3000
   })
 }

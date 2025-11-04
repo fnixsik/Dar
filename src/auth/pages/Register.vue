@@ -56,8 +56,9 @@ const handleRegister = async () => {
   if (!validate()) return
 
   try {
-    await registerUser(username.value, password.value, email.value)
-    showSuccess('', 'Вы успешно Зарегистрировались')
+    const response = await registerUser(username.value, password.value, email.value)
+
+    showSuccess(response)
     goLogin(true)
   } catch (err) {
     showError(err)
