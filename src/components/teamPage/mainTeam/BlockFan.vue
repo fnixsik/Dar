@@ -1,14 +1,24 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import { showError } from '@/shared/lib/toastService'
+import { getAllTableFan } from '@/services/fanTable-services'
+import type { Schedule } from '@/types/scheduleType'
 
 
-const schedule = ref([
-  { day: 'Понедельник', time: '10:00 - 11:00', appointment: 'Тренировка', trainer: 'Иванов И.И.' },
-  { day: 'Вторник', time: '11:00 - 12:00', appointment: 'Семинар', trainer: 'Петров П.П.' },
-  { day: 'Среда', time: '12:00 - 13:00', appointment: 'Тренировка', trainer: 'Сидоров С.С.' },
-  { day: 'Четверг', time: '14:00 - 15:00', appointment: 'Консультация', trainer: 'Кузнецов К.К.' },
-  { day: 'Пятница', time: '15:00 - 16:00', appointment: 'Тренировка', trainer: 'Смирнов С.С.' },
-]);
+const schedule = ref<Schedule[]>([]);
+
+onMounted( async () => {
+  await getTableFan()
+})
+
+const getTableFan = async () => {
+  try{
+    let res = await getAllTableFan()
+    schedule.value = res;
+  }catch(err){
+    showError(err)
+  }
+}
 
 </script>
 
@@ -23,8 +33,8 @@ const schedule = ref([
       <DataTable :value="schedule" class="min-w-full h-[551px]">
         <Column field="day" header="Дни" />
         <Column field="time" header="Время" />
-        <Column field="appointment" header="Назначение" />
-        <Column field="trainer" header="Тренер" />
+        <Column field="activity" header="Назначение" />
+        <Column field="coach" header="Тренер" />
       </DataTable>
     </div>
   </div>

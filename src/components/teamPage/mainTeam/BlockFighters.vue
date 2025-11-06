@@ -1,34 +1,31 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import { showError } from '@/shared/lib/toastService'
+import { getAllFighters } from '@/services/fighter-services'
+import type { Fighters } from '@/types/fightType'
 import Dialog from '@/components/AllDialogs/dialogFighter/DialogFighter.vue'
 
 const visibleDialog = ref(false)
-const fighterCard = ref<any[]>([
-  {
-    id: 1,
-    title: "DAR TEAM завоевал новые победы",
-    date: "2025-09-01",
-    img: "/src/assets/img/Page1.jpg",
-  },
-  {
-    id: 2,
-    title: "Открытие нового зала в Алматы",
-    date: "2025-08-20",
-    img: "/src/assets/img/Page2.jpg",
-  },
-  {
-    id: 3,
-    title: "Шавкат Рахмонов готовится к бою",
-    date: "2025-08-15",
-    img: "/src/assets/img/Page3.jpg",
-  },
-])
+const fighterCard = ref<Fighters[]>([])
 
-const openDialog = (value:any) =>{
+onMounted( async () => {
+  await getDataFight()
+})
+
+const openDialog = (value: boolean) =>{
   if(value){
     visibleDialog.value = true
   }else{
     visibleDialog.value = false
+  }
+}
+
+const getDataFight = async () => {
+  try{
+    let res = await getAllFighters()
+    fighterCard.value = res;
+  }catch(err){
+    showError(err)
   }
 }
 
@@ -42,7 +39,7 @@ const openDialog = (value:any) =>{
         v-for="value in fighterCard" 
         :key="value.id"
         class="w-full h-full max-w-sm mx-auto flex flex-col cursor-pointer"
-        @click="openDialog(value)"
+        @click="openDialog(true)"
       >
         <template #header>
           <img 
@@ -54,12 +51,12 @@ const openDialog = (value:any) =>{
 
         <template #title>
           <h3 class="text-lg font-semibold line-clamp-2">
-            {{ value.title }}
+            {{ value.name }}
           </h3>
         </template>
 
         <template #subtitle>
-          <p class="text-sm text-gray-500">{{ value.date }}</p>
+          <p class="text-sm text-gray-500">{{ value.country }}</p>
         </template>
       </Card>
     </div>

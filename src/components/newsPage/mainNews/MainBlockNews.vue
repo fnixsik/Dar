@@ -1,33 +1,12 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import { getAllNews } from "../../../services/news-services"
+import { getAllNews } from "@/services/news-services"
+import { showError } from '@/shared/lib/toastService'
 import type { News } from "../../../types/news"
 import Dialog from "@/components/AllDialogs/dialogNews/DialogNews.vue";
 
 const visibleDialog = ref(false)
-const newscard = ref<News[]>([
-  {
-      id: 1,
-      title: "DAR TEAM завоевал новые победы",
-      date: "2025-09-01",
-      img: "/src/assets/img/Page1.jpg",
-      content: "Файтеры команды DAR TEAM успешно выступили на международном турнире."
-    },
-    {
-      id: 2,
-      title: "Открытие нового зала в Алматы",
-      date: "2025-08-20",
-      img: "/src/assets/img/Page2.jpg",
-      content: "DAR TEAM открыл новый спортивный зал для молодых спортсменов."
-    },
-    {
-      id: 3,
-      title: "Шавкат Рахмонов готовится к бою",
-      date: "2025-08-15",
-      img: "/src/assets/img/Page3.jpg",
-      content: "Звезда команды проводит тренировочный лагерь перед важным поединком."
-    },
-])
+const newscard = ref<News[]>([])
 
 const props = defineProps({
   newLimit: {
@@ -37,13 +16,19 @@ const props = defineProps({
 });
 
 
-onMounted(
-  async () => {
-    newscard.value = await getAllNews();
-  }
-)
+onMounted(async () => {
+  await allNews();
+})
 
-const openDialog = (value:any) =>{
+const allNews = async () => {
+  try{
+    newscard.value = await getAllNews()
+  }catch(err){
+    showError(err)
+  }
+}
+
+const openDialog = (value: boolean) =>{
   if(value){
     visibleDialog.value = true
   }else{
@@ -62,7 +47,7 @@ const openDialog = (value:any) =>{
         v-for="value in newscard.slice(0, props.newLimit)" 
         :key="value.id"
         class="w-full h-full max-w-sm mx-auto flex flex-col cursor-pointer"
-        @click="openDialog(value)"
+        @click="openDialog(true)"
       >
         <template #header>
           <img 

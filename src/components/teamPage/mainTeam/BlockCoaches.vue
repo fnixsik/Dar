@@ -1,30 +1,27 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import { showError } from '@/shared/lib/toastService'
+import { getAllCoaches } from '@/services/coaches-services'
+import type { Coaches } from '@/types/coachesType'
 import Dialog from '@/components/AllDialogs/dialogCoache/DialogCoache.vue'
 
 const visibleDialog = ref(false)
-const coacheCard = ref<any[]>([
-  {
-    id: 1,
-    title: "DAR TEAM завоевал новые победы",
-    date: "2025-09-01",
-    img: "/src/assets/img/Page1.jpg",
-  },
-  {
-    id: 2,
-    title: "Открытие нового зала в Алматы",
-    date: "2025-08-20",
-    img: "/src/assets/img/Page2.jpg",
-  },
-  {
-    id: 3,
-    title: "Шавкат Рахмонов готовится к бою",
-    date: "2025-08-15",
-    img: "/src/assets/img/Page3.jpg",
-  },
-])
+const coacheCard = ref<Coaches[]>([])
 
-const openDialog = (value:any) =>{
+onMounted( async () => {
+  await getDataFight()
+})
+
+const getDataFight = async () => {
+  try{
+    let res = await getAllCoaches()
+    coacheCard.value = res;
+  }catch(err){
+    showError(err)
+  }
+}
+
+const openDialog = (value: boolean) =>{
   if(value){
     visibleDialog.value = true
   }else{
@@ -42,7 +39,7 @@ const openDialog = (value:any) =>{
         v-for="value in coacheCard" 
         :key="value.id"
         class="w-full h-full max-w-sm mx-auto flex flex-col cursor-pointer"
-        @click="openDialog(value)"
+        @click="openDialog(true)"
       >
         <template #header>
           <img 
@@ -54,12 +51,12 @@ const openDialog = (value:any) =>{
 
         <template #title>
           <h3 class="text-lg font-semibold line-clamp-2">
-            {{ value.title }}
+            {{ value.name }}
           </h3>
         </template>
 
         <template #subtitle>
-          <p class="text-sm text-gray-500">{{ value.date }}</p>
+          <p class="text-sm text-gray-500">{{ value.status }}</p>
         </template>
       </Card>
     </div>
