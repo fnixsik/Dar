@@ -41,6 +41,7 @@ declare module 'vue' {
     MainBranch: typeof import('./src/components/branchPage/mainBranch/MainBranch.vue')['default']
     MainNews: typeof import('./src/components/mainPage/mainNews/MainNews.vue')['default']
     MainPartners: typeof import('./src/components/mainPage/mainPartners/MainPartners.vue')['default']
+    Panel: typeof import('primevue/panel')['default']
     Password: typeof import('primevue/password')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
