@@ -21,7 +21,7 @@
             <Button
               icon="pi pi-trash"
               class="p-button-rounded p-button-text p-button-danger p-button-sm"
-              @click="deleteFighter(data.id)"
+              @click="deleteFighter(data)"
               aria-label="Удалить"
             />
           </div>
@@ -123,8 +123,11 @@ import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import { getAllFighters, senFighters } from '@/services/fighter-services'
 import { showError, showSuccess } from '@/shared/lib/toastService'
-import { resolveFn } from '@/shared/ui/useConfirm.vue'
+import { useConfirmDialog } from '@/shared/lib/useConfirm'
 
+
+
+const { show } = useConfirmDialog()
 const fighters = ref([])
 const dialog = ref(false)
 const fighter = ref({
@@ -221,17 +224,19 @@ const addAchievement = () => {
 
 
 const deleteFighter = async (id) => {
-  let result = resolveFn()
+  console.log(' result ', id)
+  let result = await show({
+    message: 'Вы точно хотите удалить этого бойца?',
+  })
   console.log(' result ', result)
   if(!result) return
   console.log(' result ', id)
-  // if()
-  // try {
-  //   await axios.delete(`/api/fighters/${id}`)
-  //   await fetchFighters()
-  // } catch (e) {
-  //   console.error('Ошибка удаления бойца', e)
-  // }
+  try {
+    await axios.delete(`/api/fighters/${id}`)
+    await fetchFighters()
+  } catch (e) {
+    console.error('Ошибка удаления бойца', e)
+  }
 }
 
 onMounted(() => {
