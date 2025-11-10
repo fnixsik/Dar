@@ -17,7 +17,7 @@
       </Column>
     </DataTable>
 
-    <Dialog header="Тренер" :visible="dialog" modal @hide="hideDialog" style="width: 700px;">
+    <Dialog header="Тренер" v-model:visible="dialog" modal style="width: 700px;">
       <form @submit.prevent="saveCoach">
         <div class="grid grid-cols-2 gap-4">
           <div>
@@ -44,8 +44,8 @@
         </div>
 
         <div class="mt-6 flex justify-between space-x-2">
-          <Button label="Отмена" icon="pi pi-times" class="p-button-text" @click="hideDialog" />
-          <Button label="Сохранить" icon="pi pi-check" type="submit" />
+          <Button label="Отмена" icon="pi pi-times" class="p-button-text" @click="dialog = false" />
+          <Button label="Сохранить" icon="pi pi-check" type="submit"/>
         </div>
       </form>
     </Dialog>
@@ -55,6 +55,9 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
+import { showError, showSuccess } from '@/shared/lib/toastService'
+import { useConfirmDialog } from '@/shared/lib/useConfirm'
+import { getAllCouches, sendCouches } from '@/services/couch-services'
 
 const coaches = ref([])
 const dialog = ref(false)
@@ -67,10 +70,11 @@ const coach = ref({
 
 const fetchCoaches = async () => {
   try {
-    const res = await axios.get('/api/coaches')
+    const res = await getAllCouches()
+    console.log(res)
     coaches.value = res.data
   } catch (err) {
-    console.error('Ошибка при получении тренеров', err)
+    showError(err)
   }
 }
 
@@ -89,21 +93,13 @@ const editCoach = (data) => {
   dialog.value = true
 }
 
-const hideDialog = () => {
-  dialog.value = false
-}
-
 const saveCoach = async () => {
   try {
-    if (coach.value.id) {
-      await axios.put(`/api/coaches/${coach.value.id}`, coach.value)
-    } else {
-      await axios.post('/api/coaches', coach.value)
-    }
+    let res = await sendCouches(coach.value)
     await fetchCoaches()
     dialog.value = false
-  } catch (e) {
-    console.error('Ошибка при сохранении', e)
+  } catch (err) {
+    showSuccess(err)
   }
 }
 
@@ -126,7 +122,7 @@ const removeMerit = (index) => {
 }
 
 onMounted( () => {
-  // fetchCoaches
+  fetchCoaches()
 }
   )
 </script>

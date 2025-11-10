@@ -29,7 +29,7 @@
       </Column>
     </DataTable>
 
-    <Dialog header="Боец" :visible="dialog" modal @hide="hideDialog" style="width: 700px; max-height: 95vh; overflow-y: hidden;">
+    <Dialog header="Боец" v-model:visible="dialog" modal style="width: 700px; max-height: 95vh; overflow-y: hidden;">
       <form @submit.prevent="saveFighter">
         <!-- Основные поля -->
         <div class="grid grid-cols-2 gap-3">
@@ -109,8 +109,8 @@
 
         <!-- Кнопки -->
         <div class="mt-2 flex justify-between">
-          <Button label="Отмена" icon="pi pi-times" class="p-button-text p-button-sm" @click="hideDialog" />
-          <Button label="Сохранить" icon="pi pi-check" class="p-button-sm" type="submit" @click="sendNewFighters" />
+          <Button label="Отмена" icon="pi pi-times" class="p-button-text p-button-sm" @click="dialog = false" />
+          <Button label="Сохранить" icon="pi pi-check" class="p-button-sm" type="submit"/>
         </div>
       </form>
     </Dialog>
@@ -152,17 +152,17 @@ const fetchFighters = async () => {
   try {
     const res = await getAllFighters()
     fighters.value = res.data
-    console.log(' get 1 ', fighters.value)
   } catch (err) {
     showError(err)
   }
 }
 
 const sendNewFighters = async () => {
-  console.log(' Send ', fighter.value)
   try {
     let res = await senFighters(fighter.value)
     showSuccess(res)
+    await fetchFighters()
+    dialog.value = false
   }catch(err){
     showError(err)
   }
@@ -189,23 +189,14 @@ const openNew = () => {
   dialog.value = true
 }
 
-const hideDialog = () => {
-  dialog.value = false
-}
-
 const saveFighter = async () => {
   try {
-    if (fighter.value.id) {
-      // обновление
-      await axios.put(`/api/fighters/${fighter.value.id}`, fighter.value)
-    } else {
-      // создание
-      await axios.post('/api/fighters', fighter.value)
-    }
+    let res = await senFighters(fighter.value)
+    showSuccess(res)
     await fetchFighters()
     dialog.value = false
-  } catch (e) {
-    console.error('Ошибка сохранения бойца', e)
+  }catch(err){
+    showError(err)
   }
 }
 

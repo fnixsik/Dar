@@ -20,7 +20,7 @@
     </DataTable>
 
     <!-- Диалог -->
-    <Dialog header="Редактировать запись" :visible="dialog" modal @hide="hideDialog" style="width: 500px">
+    <Dialog header="Редактировать запись" v-model:visible="dialog" modal style="width: 500px">
       <form @submit.prevent="saveSchedule">
         <div class="flex flex-col gap-4">
           <div>
@@ -42,7 +42,7 @@
         </div>
 
         <div class="flex justify-between mt-6">
-          <Button label="Отмена" class="p-button-text" @click="hideDialog" />
+          <Button label="Отмена" class="p-button-text" @click="dialog = false" />
           <Button label="Сохранить" icon="pi pi-check" type="submit" />
         </div>
       </form>
@@ -53,6 +53,9 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
+import { getAllschedul, sendschedul } from '@/services/gtoup-services'
+import { showError, showSuccess } from '@/shared/lib/toastService'
+import { useConfirmDialog } from '@/shared/lib/useConfirm'
 
 const schedules = ref([])
 const dialog = ref(false)
@@ -66,10 +69,10 @@ const schedule = ref({
 
 const fetchSchedules = async () => {
   try {
-    const res = await axios.get('/api/schedules')
-    schedules.value = res.data
+    const res = await getAllschedul()
+    schedules.value = res
   } catch (err) {
-    console.error('Ошибка загрузки расписания:', err)
+    showError(err)
   }
 }
 
@@ -84,21 +87,13 @@ const openNew = () => {
   dialog.value = true
 }
 
-const hideDialog = () => {
-  dialog.value = false
-}
-
 const saveSchedule = async () => {
   try {
-    if (schedule.value.id) {
-      await axios.put(`/api/schedules/${schedule.value.id}`, schedule.value)
-    } else {
-      await axios.post('/api/schedules', schedule.value)
-    }
+    await sendschedul(schedule.value)
     await fetchSchedules()
-    hideDialog()
+    dialog.value = false
   } catch (err) {
-    console.error('Ошибка сохранения:', err)
+    showError(err)
   }
 }
 
@@ -118,7 +113,7 @@ const deleteSchedule = async (id) => {
 }
 
 onMounted(() => {
-  // fetchSchedules()
+  fetchSchedules()
 })
 </script>
 

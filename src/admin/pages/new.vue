@@ -22,7 +22,7 @@
       </Column>
     </DataTable>
 
-    <Dialog header="Новость" :visible="dialog" modal @hide="hideDialog" style="width: 600px;">
+    <Dialog header="Новость" v-model:visible="dialog" modal style="width: 600px;">
       <form @submit.prevent="saveNews" class="space-y-4">
         <div>
           <label class="block mb-1 font-semibold">Заголовок</label>
@@ -42,7 +42,7 @@
         </div>
 
         <div class="flex justify-between mt-6">
-          <Button label="Отмена" icon="pi pi-times" class="p-button-text" @click="hideDialog" />
+          <Button label="Отмена" icon="pi pi-times" class="p-button-text" @click="dialog = false" />
           <Button label="Сохранить" icon="pi pi-check" type="submit" />
         </div>
       </form>
@@ -53,6 +53,9 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
+import { showError, showSuccess } from '@/shared/lib/toastService'
+import { useConfirmDialog } from '@/shared/lib/useConfirm'
+import { getAllNews, sendNews } from '@/services/news-services'
 
 const newsList = ref([])
 const dialog = ref(false)
@@ -66,14 +69,10 @@ const news = ref({
 
 const fetchNews = async () => {
   try {
-    const res = await axios.get('/api/news')
-    // предположим, что дата приходит как строка, конвертируем в Date
-    newsList.value = res.data.map(n => ({
-      ...n,
-      date: n.date ? new Date(n.date) : null,
-    }))
-  } catch (e) {
-    console.error('Ошибка загрузки новостей', e)
+    let res = await getAllNews()
+    newsList.value = res
+  } catch (err) {
+    showError(err)
   }
 }
 
@@ -88,27 +87,13 @@ const openNew = () => {
   dialog.value = true
 }
 
-const hideDialog = () => {
-  dialog.value = false
-}
-
 const saveNews = async () => {
   try {
-    if (news.value.id) {
-      await axios.put(`/api/news/${news.value.id}`, {
-        ...news.value,
-        date: news.value.date ? news.value.date.toISOString().split('T')[0] : null,
-      })
-    } else {
-      await axios.post('/api/news', {
-        ...news.value,
-        date: news.value.date ? news.value.date.toISOString().split('T')[0] : null,
-      })
-    }
+    await sendNews(news.value)
     await fetchNews()
     dialog.value = false
-  } catch (e) {
-    console.error('Ошибка сохранения новости', e)
+  } catch (err) {
+    showError(err)
   }
 }
 
@@ -129,7 +114,7 @@ const deleteNews = async (id) => {
 }
 
 onMounted(() => {
-  // fetchNews()
+  fetchNews()
 })
 </script>
 

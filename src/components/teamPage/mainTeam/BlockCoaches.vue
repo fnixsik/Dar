@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { showError } from '@/shared/lib/toastService'
-import { getAllCoaches } from '@/services/coaches-services'
+import { getAllCouches } from '@/services/couch-services'
 import type { Coaches } from '@/types/coachesType'
 import Dialog from '@/components/AllDialogs/dialogCoache/DialogCoache.vue'
 
@@ -14,7 +14,7 @@ onMounted( async () => {
 
 const getDataFight = async () => {
   try{
-    let res = await getAllCoaches()
+    let res = await getAllCouches()
     coacheCard.value = res;
   }catch(err){
     showError(err)
