@@ -120,8 +120,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import axios from 'axios'
-import { getAllFighters, senFighters } from '@/services/fighter-services'
+import { getAllFighters, senFighters, deleteFighterId, updateFighterId } from '@/services/fighter-services'
 import { showError, showSuccess } from '@/shared/lib/toastService'
 import { useConfirmDialog } from '@/shared/lib/useConfirm'
 
@@ -147,23 +146,14 @@ const fighter = ref({
   img: '',
   achievements: []
 })
+const isEditing = ref(false)
+const currentFighterId = ref(null)
 
 const fetchFighters = async () => {
   try {
     const res = await getAllFighters()
     fighters.value = res.data
   } catch (err) {
-    showError(err)
-  }
-}
-
-const sendNewFighters = async () => {
-  try {
-    let res = await senFighters(fighter.value)
-    showSuccess(res)
-    await fetchFighters()
-    dialog.value = false
-  }catch(err){
     showError(err)
   }
 }
@@ -186,13 +176,20 @@ const openNew = () => {
     img: '',
     achievements: []
   }
+  isEditing.value = false
   dialog.value = true
 }
 
 const saveFighter = async () => {
   try {
-    let res = await senFighters(fighter.value)
-    showSuccess(res)
+    if (isEditing.value) {
+      await updateFighterId(currentFighterId.value, fighter.value)
+      showSuccess('Боец успешно обновлен')
+    } else {
+      await senFighters(fighter.value)
+      showSuccess('Боец успешно создан')
+    }
+    
     await fetchFighters()
     dialog.value = false
   }catch(err){
@@ -201,6 +198,8 @@ const saveFighter = async () => {
 }
 
 const editFighter = (data) => {
+  isEditing.value = true
+  currentFighterId.value = data.id
   fighter.value = data
   dialog.value = true
 }
@@ -214,19 +213,17 @@ const addAchievement = () => {
 }
 
 
-const deleteFighter = async (id) => {
-  console.log(' result ', id)
+const deleteFighter = async (data) => {
   let result = await show({
-    message: 'Вы точно хотите удалить этого бойца?',
+    message: 'Вы точно хотите удалить этого бойца ?',
   })
-  console.log(' result ', result)
   if(!result) return
-  console.log(' result ', id)
   try {
-    await axios.delete(`/api/fighters/${id}`)
+    await deleteFighterId(data.id)
+    showSuccess('Успешно удалено')
     await fetchFighters()
-  } catch (e) {
-    console.error('Ошибка удаления бойца', e)
+  } catch (err) {
+    showError(err)
   }
 }
 

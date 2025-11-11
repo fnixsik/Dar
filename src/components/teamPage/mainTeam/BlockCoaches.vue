@@ -15,7 +15,7 @@ onMounted( async () => {
 const getDataFight = async () => {
   try{
     let res = await getAllCouches()
-    coacheCard.value = res;
+    coacheCard.value = res.data;
   }catch(err){
     showError(err)
   }

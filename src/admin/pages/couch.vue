@@ -11,7 +11,7 @@
         <template #body="{ data }">
           <div class="flex space-x-2">
             <Button icon="pi pi-pencil" class="p-button-rounded p-button-text" @click="editCoach(data)" />
-            <Button icon="pi pi-trash" class="p-button-rounded p-button-text p-button-danger" @click="deleteCoach(data.id)" />
+            <Button icon="pi pi-trash" class="p-button-rounded p-button-text p-button-danger" @click="deleteCoach(data)" />
           </div>
         </template>
       </Column>
@@ -57,8 +57,9 @@ import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import { showError, showSuccess } from '@/shared/lib/toastService'
 import { useConfirmDialog } from '@/shared/lib/useConfirm'
-import { getAllCouches, sendCouches } from '@/services/couch-services'
+import { getAllCouches, sendCouches, deleteCoucheId, updateCoucheId } from '@/services/couch-services'
 
+const { show } = useConfirmDialog()
 const coaches = ref([])
 const dialog = ref(false)
 const coach = ref({
@@ -67,11 +68,12 @@ const coach = ref({
   img: '',
   merit: []
 })
+const isEditing = ref(false)
+const currentCouchesId = ref(null)
 
 const fetchCoaches = async () => {
   try {
     const res = await getAllCouches()
-    console.log(res)
     coaches.value = res.data
   } catch (err) {
     showError(err)
@@ -85,31 +87,45 @@ const openNew = () => {
     img: '',
     merit: []
   }
+  isEditing.value = false
   dialog.value = true
 }
 
 const editCoach = (data) => {
-  coach.value = JSON.parse(JSON.stringify(data))
+  console.log('data  ',data)
+  isEditing.value = true
+  currentCouchesId.value = data.id
+  coach.value = data
   dialog.value = true
 }
 
 const saveCoach = async () => {
   try {
-    let res = await sendCouches(coach.value)
+    if(isEditing.value){
+      await updateCoucheId(currentCouchesId.value, coach.value)
+      showSuccess('Боец успешно обновлен')
+    }else{
+      await sendCouches(coach.value)
+      showSuccess('Боец успешно создан')
+    }
     await fetchCoaches()
     dialog.value = false
   } catch (err) {
-    showSuccess(err)
+    showError(err)
   }
 }
 
-const deleteCoach = async (id) => {
-  if (!confirm('Удалить тренера?')) return
+const deleteCoach = async (data) => {
+  let result = await show({
+    message: 'Вы точно хотите удалить этого Тренера ?',
+  })
+  if(!result) return
   try {
-    await axios.delete(`/api/coaches/${id}`)
+    await deleteCoucheId(data.id)
+    showSuccess('Успешно удалено')
     await fetchCoaches()
-  } catch (e) {
-    console.error('Ошибка удаления тренера', e)
+  } catch (err) {
+    showError(err)
   }
 }
 

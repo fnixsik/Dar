@@ -23,7 +23,7 @@ const openDialog = (value: boolean) =>{
 const getDataFight = async () => {
   try{
     let res = await getAllFighters()
-    fighterCard.value = res;
+    fighterCard.value = res.data;
   }catch(err){
     showError(err)
   }

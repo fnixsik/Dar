@@ -16,7 +16,7 @@
         <template #body="{ data }">
           <div class="flex space-x-2">
             <Button icon="pi pi-pencil" class="p-button-rounded p-button-text" @click="editNews(data)" aria-label="Редактировать" />
-            <Button icon="pi pi-trash" class="p-button-rounded p-button-text p-button-danger" @click="deleteNews(data.id)" aria-label="Удалить" />
+            <Button icon="pi pi-trash" class="p-button-rounded p-button-text p-button-danger" @click="deleteNews(data)" aria-label="Удалить" />
           </div>
         </template>
       </Column>
@@ -55,8 +55,9 @@ import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import { showError, showSuccess } from '@/shared/lib/toastService'
 import { useConfirmDialog } from '@/shared/lib/useConfirm'
-import { getAllNews, sendNews } from '@/services/news-services'
+import { getAllNews, sendNews, deleteNewsId } from '@/services/news-services'
 
+const { show } = useConfirmDialog()
 const newsList = ref([])
 const dialog = ref(false)
 const news = ref({
@@ -70,7 +71,7 @@ const news = ref({
 const fetchNews = async () => {
   try {
     let res = await getAllNews()
-    newsList.value = res
+    newsList.value = res.data
   } catch (err) {
     showError(err)
   }
@@ -103,13 +104,17 @@ const editNews = (data) => {
   dialog.value = true
 }
 
-const deleteNews = async (id) => {
-  if (!confirm('Удалить новость?')) return
+const deleteNews = async (data) => {
+  let result = await show({
+    message: 'Вы точно хотите удалить этого Новость ?',
+  })
+  if(!result) return
   try {
-    await axios.delete(`/api/news/${id}`)
+    await deleteNewsId(data.id)
+    showSuccess('Успешно удалено')
     await fetchNews()
-  } catch (e) {
-    console.error('Ошибка удаления новости', e)
+  } catch (err) {
+    showError(err)
   }
 }
 

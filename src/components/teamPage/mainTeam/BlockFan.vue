@@ -14,7 +14,7 @@ onMounted( async () => {
 const getTableFan = async () => {
   try{
     let res = await getAllTableFan()
-    schedule.value = res;
+    schedule.value = res.data;
   }catch(err){
     showError(err)
   }
