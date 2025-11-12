@@ -11,7 +11,7 @@ import MainBlockNews from '../../newsPage/mainNews/MainBlockNews.vue';
                 <h1 class="text-4xl">новости</h1>
             </div>
             <div class="flex-grow">
-                <MainBlockNews/>
+                <MainBlockNews :newLimit="3"/>
             </div>
             <div class="flex justify-center mt-4">
                 <router-link to="/news" class="btn">

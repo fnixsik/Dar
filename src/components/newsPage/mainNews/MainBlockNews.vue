@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted, ref, computed } from "vue";
 import { getAllNews, getSoloNewsId } from "@/services/news-services"
 import { showError } from '@/shared/lib/toastService'
 import type { News } from "../../../types/news"
@@ -12,7 +12,7 @@ const selectData = ref<News | undefined>()
 const props = defineProps({
   newLimit: {
     type: Number,
-    default: 3,
+    default: 0,
   },
 });
 
@@ -43,6 +43,14 @@ const getpersonalyDate = async (id: any) => {
   return res.data
 }
 
+const limitedNews = computed(() => {
+  // если newLimit = 0 → показать всё
+  if (props.newLimit > 0) {
+    return newscard.value.slice(0, props.newLimit)
+  }
+  return newscard.value
+})
+
 
 </script>
 
@@ -51,7 +59,7 @@ const getpersonalyDate = async (id: any) => {
   <div class="container mx-auto main-h-screen px-4 py-8">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <Card 
-        v-for="value in newscard.slice(0, props.newLimit)" 
+        v-for="value in limitedNews"
         :key="value.id"
         class="w-full h-full max-w-sm mx-auto flex flex-col cursor-pointer"
         @click="openDialog(true , value)"

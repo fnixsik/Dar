@@ -9,7 +9,7 @@
     <template #header>
       <div class="w-full flex">
         <div class="text-2xl sm:text-3xl font-extrabold uppercase ">
-          {{ props.userData.content }}
+
         </div>
       </div>
     </template>
@@ -28,7 +28,7 @@
     <!-- Нижний блок с текстом -->
     <div class="bg-zinc-700 w-full md:w-2/3 h-auto flex justify-center items-center text-white text-lg md:text-xl font-medium p-6 rounded-lg leading-relaxed text-center">
       <p>
-        {{ props.userData.title }}
+
       </p>
     </div>
   </div>
@@ -40,7 +40,7 @@
 import { ref, watch } from 'vue'
 import Dialog from 'primevue/dialog'
 
-const props = defineProps<{ modelValue: boolean; name?: string; image?: string; achievements?: string[]; userData: any }>()
+const props = defineProps<{ modelValue: boolean; userData: any }>()
 const emit = defineEmits<{ (e:'update:modelValue', v:boolean): void }>()
 const modelValueLocal = ref(props.modelValue)
 watch(() => props.modelValue, v => (modelValueLocal.value = v))
