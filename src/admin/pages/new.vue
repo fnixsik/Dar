@@ -52,10 +52,9 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import axios from 'axios'
 import { showError, showSuccess } from '@/shared/lib/toastService'
 import { useConfirmDialog } from '@/shared/lib/useConfirm'
-import { getAllNews, sendNews, deleteNewsId } from '@/services/news-services'
+import { getAllNews, sendNews, deleteNewsId, updateNewsId } from '@/services/news-services'
 
 const { show } = useConfirmDialog()
 const newsList = ref([])
@@ -67,6 +66,8 @@ const news = ref({
   img: '',
   date: null,
 })
+const isEditing = ref(false)
+const currentFighterId = ref(null)
 
 const fetchNews = async () => {
   try {
@@ -85,22 +86,31 @@ const openNew = () => {
     img: '',
     date: null,
   }
+  isEditing.value = false
   dialog.value = true
 }
 
 const saveNews = async () => {
   try {
-    await sendNews(news.value)
+    if (isEditing.value) {
+      await updateNewsId(currentFighterId.value, news.value)
+      showSuccess('Новость успешно обновлен')
+    } else {
+      await sendNews(news.value)
+      showSuccess('Новость успешно создан')
+    }
+    
     await fetchNews()
     dialog.value = false
-  } catch (err) {
+  }catch(err){
     showError(err)
   }
 }
 
 const editNews = (data) => {
-  news.value = { ...data }
-  if (news.value.date) news.value.date = new Date(news.value.date)
+  isEditing.value = true
+  currentFighterId.value = data.id
+  news.value = data
   dialog.value = true
 }
 

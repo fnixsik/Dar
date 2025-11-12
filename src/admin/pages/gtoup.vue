@@ -13,7 +13,6 @@
         <template #body="{ data }">
           <div class="flex gap-2">
             <Button icon="pi pi-pencil" class="p-button-rounded p-button-text" @click="editSchedule(data)" />
-            <Button icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-text" @click="deleteSchedule(data.id)" />
           </div>
         </template>
       </Column>
@@ -25,7 +24,7 @@
         <div class="flex flex-col gap-4">
           <div>
             <label class="block mb-1 font-semibold">День</label>
-            <InputText v-model="schedule.day" required class="w-full" />
+            <InputText v-model="schedule.day" required class="w-full" disabled="true"/>
           </div>
           <div>
             <label class="block mb-1 font-semibold">Время</label>
@@ -52,10 +51,8 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import axios from 'axios'
-import { getAllschedul, sendschedul } from '@/services/gtoup-services'
+import { getAllschedul, updateScheduleByDay } from '@/services/gtoup-services'
 import { showError, showSuccess } from '@/shared/lib/toastService'
-import { useConfirmDialog } from '@/shared/lib/useConfirm'
 
 const schedules = ref([])
 const dialog = ref(false)
@@ -66,11 +63,12 @@ const schedule = ref({
   activity: '',
   coach: ''
 })
+const selectDay = ref()
 
 const fetchSchedules = async () => {
   try {
     const res = await getAllschedul()
-    schedules.value = res
+    schedules.value = res.data
   } catch (err) {
     showError(err)
   }
@@ -89,7 +87,8 @@ const openNew = () => {
 
 const saveSchedule = async () => {
   try {
-    await sendschedul(schedule.value)
+    await updateScheduleByDay(selectDay.value,schedule.value)
+    showSuccess('Расписание успешно обновлен')
     await fetchSchedules()
     dialog.value = false
   } catch (err) {
@@ -98,18 +97,9 @@ const saveSchedule = async () => {
 }
 
 const editSchedule = (data) => {
-  schedule.value = { ...data }
+  selectDay.value = data.day
+  schedule.value = data
   dialog.value = true
-}
-
-const deleteSchedule = async (id) => {
-  if (!confirm('Удалить запись?')) return
-  try {
-    await axios.delete(`/api/schedules/${id}`)
-    await fetchSchedules()
-  } catch (err) {
-    console.error('Ошибка удаления:', err)
-  }
 }
 
 onMounted(() => {
