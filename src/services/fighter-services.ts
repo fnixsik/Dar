@@ -19,3 +19,8 @@ export const updateFighterId = async (id: any, data: any): Promise<any> => {
   const response = await BaseApi.put(`/admin/v1/fighters/${id}`,data);
   return response;
 }
+
+export const getPersonFightersId = async (id: any): Promise<any> => {
+  const response = await BaseApi.get(`/admin/v1/fighters/${id}`);
+  return response;
+}

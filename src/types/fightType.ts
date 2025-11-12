@@ -1,5 +1,5 @@
 export interface Fighters {
-  achievements: []
+  achievements: Achievement[]
   birthplace: string
   country: string
   id: string
@@ -15,4 +15,9 @@ export interface Fighters {
   submissive: string
   tko: string
   weightClass: string
+}
+
+export interface Achievement {
+  id: string
+  title: string
 }

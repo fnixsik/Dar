@@ -9,7 +9,7 @@
     <template #header>
       <div class="w-full flex">
         <div class="text-2xl sm:text-3xl font-extrabold uppercase ">
-          Новости
+          {{ props.userData.content }}
         </div>
       </div>
     </template>
@@ -18,16 +18,17 @@
 <div class="flex justify-center items-center min-h-screen bg-black">
   <div class="w-[80%] flex flex-col gap-4 items-center">
     <!-- Верхний блок (например, изображение или баннер) -->
-    <div class="bg-red-600 w-full md:w-2/3 h-[80vh] flex justify-center items-center text-white text-xl font-semibold">
-      Здесь будет изображение / баннер
+    <div class="bg-gray-800 w-full md:w-2/3 h-[80vh] flex justify-center items-center text-gray-200 text-xl font-semibold rounded-lg shadow-2xl">
+      <div class="text-center">
+        <div class="text-3xl mb-3 opacity-60">📸</div>
+
+      </div>
     </div>
 
     <!-- Нижний блок с текстом -->
     <div class="bg-zinc-700 w-full md:w-2/3 h-auto flex justify-center items-center text-white text-lg md:text-xl font-medium p-6 rounded-lg leading-relaxed text-center">
       <p>
-        Это пример текстового описания. Здесь можно разместить краткую информацию о проекте,
-        команде, событии или любом другом контенте. Текст адаптируется под ширину экрана,
-        а отступы обеспечивают комфортное чтение на мобильных устройствах.
+        {{ props.userData.title }}
       </p>
     </div>
   </div>
@@ -39,7 +40,7 @@
 import { ref, watch } from 'vue'
 import Dialog from 'primevue/dialog'
 
-const props = defineProps<{ modelValue: boolean; name?: string; image?: string; achievements?: string[] }>()
+const props = defineProps<{ modelValue: boolean; name?: string; image?: string; achievements?: string[]; userData: any }>()
 const emit = defineEmits<{ (e:'update:modelValue', v:boolean): void }>()
 const modelValueLocal = ref(props.modelValue)
 watch(() => props.modelValue, v => (modelValueLocal.value = v))

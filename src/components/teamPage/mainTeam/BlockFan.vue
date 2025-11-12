@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { showError } from '@/shared/lib/toastService'
-import { getAllTableFan } from '@/services/fanTable-services'
+import { getAllschedul } from '@/services/gtoup-services'
 import type { Schedule } from '@/types/scheduleType'
 
 
@@ -13,7 +13,7 @@ onMounted( async () => {
 
 const getTableFan = async () => {
   try{
-    let res = await getAllTableFan()
+    let res = await getAllschedul()
     schedule.value = res.data;
   }catch(err){
     showError(err)

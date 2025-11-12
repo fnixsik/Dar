@@ -1,4 +1,3 @@
-<!-- src/components/CoachDialogHero.vue -->
 <template>
   <Dialog
     v-model:visible="modelValueLocal" modal :dismissableMask="true" :closeOnEscape="true"
@@ -15,7 +14,7 @@
       <div class="flex items-end justify-between">
         <div>
           <div class="text-3xl sm:text-4xl font-extrabold uppercase">{{ name }}</div>
-          <div class="text-zinc-400 text-sm mt-1">Титулы и награды</div>
+          <div class="text-3xl text-1xl mt-1">Титулы и награды</div>
         </div>
       </div>
     </template>
@@ -50,7 +49,7 @@
 import { ref, watch } from 'vue'
 import Dialog from 'primevue/dialog'
 
-const props = defineProps<{ modelValue: boolean; name?: string; image?: string; achievements?: string[] }>()
+const props = defineProps<{ modelValue: boolean; name?: string; image?: string; achievements?: string[]; userData: any }>()
 const emit = defineEmits<{
   (e:'update:modelValue', v:boolean): void 
   }>()

@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { showError } from '@/shared/lib/toastService'
-import { getAllCouches } from '@/services/couch-services'
+import { getAllCouches, getPersonCoucheId } from '@/services/couch-services'
 import type { Coaches } from '@/types/coachesType'
 import Dialog from '@/components/AllDialogs/dialogCoache/DialogCoache.vue'
 
 const visibleDialog = ref(false)
 const coacheCard = ref<Coaches[]>([])
+const selectData = ref<Coaches | undefined>()
 
 onMounted( async () => {
   await getDataFight()
@@ -21,25 +22,31 @@ const getDataFight = async () => {
   }
 }
 
-const openDialog = (value: boolean) =>{
+const openDialog = async (value: boolean , data?: any) =>{
   if(value){
     visibleDialog.value = true
   }else{
     visibleDialog.value = false
   }
+  selectData.value = await getpersonalyDate(data.id)
+}
+
+const getpersonalyDate = async (id: any) => {
+  let res = await getPersonCoucheId(id)
+  return res.data
 }
 
 </script>
 
 <template>
-  <Dialog :modelValue="visibleDialog" @update:modelValue="openDialog"/>
+  <Dialog :modelValue="visibleDialog" @update:modelValue="openDialog" :userData="selectData"/>
   <div class="container mx-auto main-h-screen px-4 py-8">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <Card 
         v-for="value in coacheCard" 
         :key="value.id"
         class="w-full h-full max-w-sm mx-auto flex flex-col cursor-pointer"
-        @click="openDialog(true)"
+        @click="openDialog(true, value)"
       >
         <template #header>
           <img 

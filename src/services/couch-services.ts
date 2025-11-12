@@ -19,3 +19,8 @@ export const updateCoucheId = async (id: any, data: any): Promise<any> => {
   const response = await BaseApi.put(`/admin/v1/coaches/${id}`,data);
   return response;
 }
+
+export const getPersonCoucheId = async (id: any): Promise<any> => {
+  const response = await BaseApi.get(`/admin/v1/coaches/${id}`);
+  return response;
+}

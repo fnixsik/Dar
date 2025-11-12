@@ -1,23 +1,30 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { showError } from '@/shared/lib/toastService'
-import { getAllFighters } from '@/services/fighter-services'
+import { getAllFighters, getPersonFightersId } from '@/services/fighter-services'
 import type { Fighters } from '@/types/fightType'
 import Dialog from '@/components/AllDialogs/dialogFighter/DialogFighter.vue'
 
 const visibleDialog = ref(false)
 const fighterCard = ref<Fighters[]>([])
+const selectData = ref<Fighters | undefined>()
 
 onMounted( async () => {
   await getDataFight()
 })
 
-const openDialog = (value: boolean) =>{
+const openDialog = async (value: boolean, data?: any) =>{
   if(value){
     visibleDialog.value = true
   }else{
     visibleDialog.value = false
   }
+  selectData.value = await getpersonalyDate(data.id)
+}
+
+const getpersonalyDate = async (id: any) => {
+  let res = await getPersonFightersId(id)
+  return res.data
 }
 
 const getDataFight = async () => {
@@ -32,14 +39,14 @@ const getDataFight = async () => {
 </script>
 
 <template>
-  <Dialog :modelValue="visibleDialog" @update:modelValue="openDialog"/>
+  <Dialog :modelValue="visibleDialog" @update:modelValue="openDialog" :userData="selectData"/>
   <div class="container mx-auto main-h-screen px-4 py-8">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <Card 
         v-for="value in fighterCard" 
         :key="value.id"
         class="w-full h-full max-w-sm mx-auto flex flex-col cursor-pointer"
-        @click="openDialog(true)"
+        @click="openDialog(true, value)"
       >
         <template #header>
           <img 

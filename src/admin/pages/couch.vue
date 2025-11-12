@@ -92,7 +92,6 @@ const openNew = () => {
 }
 
 const editCoach = (data) => {
-  console.log('data  ',data)
   isEditing.value = true
   currentCouchesId.value = data.id
   coach.value = data

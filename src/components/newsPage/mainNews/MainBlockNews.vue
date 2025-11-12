@@ -1,17 +1,18 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import { getAllNews } from "@/services/news-services"
+import { getAllNews, getSoloNewsId } from "@/services/news-services"
 import { showError } from '@/shared/lib/toastService'
 import type { News } from "../../../types/news"
 import Dialog from "@/components/AllDialogs/dialogNews/DialogNews.vue";
 
 const visibleDialog = ref(false)
 const newscard = ref<News[]>([])
+const selectData = ref<News | undefined>()
 
 const props = defineProps({
   newLimit: {
     type: Number,
-    default: 6,
+    default: 3,
   },
 });
 
@@ -28,26 +29,32 @@ const allNews = async () => {
   }
 }
 
-const openDialog = (value: boolean) =>{
+const openDialog = async (value: boolean, data?: any) =>{
   if(value){
     visibleDialog.value = true
   }else{
     visibleDialog.value = false
   }
+  selectData.value = await getpersonalyDate(data.id)
+}
+
+const getpersonalyDate = async (id: any) => {
+  let res = await getSoloNewsId(id)
+  return res.data
 }
 
 
 </script>
 
 <template>
-  <Dialog :modelValue="visibleDialog" @update:modelValue="openDialog"/>
+  <Dialog :modelValue="visibleDialog" @update:modelValue="openDialog" :userData="selectData"/>
   <div class="container mx-auto main-h-screen px-4 py-8">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <Card 
         v-for="value in newscard.slice(0, props.newLimit)" 
         :key="value.id"
         class="w-full h-full max-w-sm mx-auto flex flex-col cursor-pointer"
-        @click="openDialog(true)"
+        @click="openDialog(true , value)"
       >
         <template #header>
           <img 
