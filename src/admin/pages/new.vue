@@ -115,7 +115,7 @@ const editNews = (data) => {
 
 const deleteNews = async (data) => {
   let result = await show({
-    message: 'Вы точно хотите удалить этого Новость ?',
+    message: 'Вы точно хотите удалить Новость ?',
   })
   if(!result) return
   try {

@@ -36,7 +36,7 @@
           <div class="col-span-2">
             <label class="block mb-1 font-semibold">Заслуги</label>
             <div v-for="(m, index) in coach.merit" :key="index" class="flex items-center mb-2 space-x-2">
-              <InputText v-model="m.description" placeholder="Описание" class="flex-grow" />
+              <InputText v-model="m.list" placeholder="Описание" class="flex-grow" />
               <Button icon="pi pi-times" class="p-button-danger p-button-rounded" @click.prevent="removeMerit(index)" />
             </div>
             <Button label="Добавить заслугу" icon="pi pi-plus" class="mt-2" @click.prevent="addMerit" />
@@ -54,7 +54,6 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import axios from 'axios'
 import { showError, showSuccess } from '@/shared/lib/toastService'
 import { useConfirmDialog } from '@/shared/lib/useConfirm'
 import { getAllCouches, sendCouches, deleteCoucheId, updateCoucheId } from '@/services/couch-services'
@@ -102,10 +101,10 @@ const saveCoach = async () => {
   try {
     if(isEditing.value){
       await updateCoucheId(currentCouchesId.value, coach.value)
-      showSuccess('Боец успешно обновлен')
+      showSuccess('Тренер успешно обновлен')
     }else{
       await sendCouches(coach.value)
-      showSuccess('Боец успешно создан')
+      showSuccess('Тренер успешно создан')
     }
     await fetchCoaches()
     dialog.value = false
@@ -129,7 +128,7 @@ const deleteCoach = async (data) => {
 }
 
 const addMerit = () => {
-  coach.value.merit.push({ description: '' })
+  coach.value.merit.push({ list: '' })
 }
 
 const removeMerit = (index) => {
