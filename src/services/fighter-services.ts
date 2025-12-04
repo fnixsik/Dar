@@ -15,6 +15,11 @@ export const deleteFighterId = async (id: any): Promise<any> => {
   return response;
 }
 
+export const deleteAchievementId = async (fighterId: string, achievementsId: string): Promise<any> => {
+  const response = await BaseApi.delete(`/admin/v1/fighters/${fighterId}/achievements/${achievementsId}`);
+  return response;
+}
+
 export const updateFighterId = async (id: any, data: any): Promise<any> => {
   const response = await BaseApi.put(`/admin/v1/fighters/${id}`,data);
   return response;

@@ -101,8 +101,8 @@
         <div class="mt-3">
           <label class="block text-sm font-medium mb-1">Достижения</label>
           <div v-for="(ach, index) in fighter.achievements" :key="index" class="flex items-center gap-2 mb-2">
-            <InputText v-model="ach.description" placeholder="Описание" class="flex-grow" />
-            <Button icon="pi pi-times" class="p-button-danger p-button-rounded" @click.prevent="removeAchievement(index)" />
+            <InputText v-model="ach.title" placeholder="Описание" class="flex-grow" />
+            <Button icon="pi pi-times" class="p-button-danger p-button-rounded" @click.prevent="removeAchievement(ach.id)" />
           </div>
           <Button label="Добавить достижение" icon="pi pi-plus" class="p-button-sm" @click.prevent="addAchievement" />
         </div>
@@ -120,7 +120,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { getAllFighters, senFighters, deleteFighterId, updateFighterId } from '@/services/fighter-services'
+import { getAllFighters, senFighters, deleteFighterId, updateFighterId, deleteAchievementId } from '@/services/fighter-services'
 import { showError, showSuccess } from '@/shared/lib/toastService'
 import { useConfirmDialog } from '@/shared/lib/useConfirm'
 
@@ -200,12 +200,21 @@ const saveFighter = async () => {
 const editFighter = (data) => {
   isEditing.value = true
   currentFighterId.value = data.id
-  fighter.value = data
+    fighter.value = {
+    ...data,
+    achievements: data.achievements ? [...data.achievements] : []
+  }
   dialog.value = true
 }
 
-const removeAchievement = (index) => {
-  fighter.value.achievements.splice(index, 1)
+const removeAchievement = async (index) => {
+  try{
+    await deleteAchievementId(currentFighterId.value, index)
+    showSuccess('Успешно удалено')
+    await fetchFighters()
+  }catch(err){
+    showError(err)
+  }
 }
 
 const addAchievement = () => {
