@@ -15,6 +15,11 @@ export const deleteCoucheId = async (id: any): Promise<any> => {
   return response;
 }
 
+export const deleteMeritId = async (coachId: string, meritId: string): Promise<any> => {
+  const response = await BaseApi.delete(`/admin/v1/coaches/${coachId}/merit/${meritId}`);
+  return response;
+}
+
 export const updateCoucheId = async (id: any, data: any): Promise<any> => {
   const response = await BaseApi.put(`/admin/v1/coaches/${id}`,data);
   return response;

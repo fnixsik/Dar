@@ -37,7 +37,7 @@
             <label class="block mb-1 font-semibold">Заслуги</label>
             <div v-for="(m, index) in coach.merit" :key="index" class="flex items-center mb-2 space-x-2">
               <InputText v-model="m.list" placeholder="Описание" class="flex-grow" />
-              <Button icon="pi pi-times" class="p-button-danger p-button-rounded" @click.prevent="removeMerit(index)" />
+              <Button icon="pi pi-times" class="p-button-danger p-button-rounded" @click.prevent="removeMerit(m.id)" />
             </div>
             <Button label="Добавить заслугу" icon="pi pi-plus" class="mt-2" @click.prevent="addMerit" />
           </div>
@@ -56,7 +56,8 @@
 import { ref, onMounted } from 'vue'
 import { showError, showSuccess } from '@/shared/lib/toastService'
 import { useConfirmDialog } from '@/shared/lib/useConfirm'
-import { getAllCouches, sendCouches, deleteCoucheId, updateCoucheId } from '@/services/couch-services'
+import { getAllCouches, sendCouches, deleteCoucheId, updateCoucheId, deleteMeritId } from '@/services/couch-services'
+
 
 const { show } = useConfirmDialog()
 const coaches = ref([])
@@ -93,7 +94,10 @@ const openNew = () => {
 const editCoach = (data) => {
   isEditing.value = true
   currentCouchesId.value = data.id
-  coach.value = data
+  coach.value = {
+    ...data,
+    merit: data.merit ? [...data.merit] : []
+  }
   dialog.value = true
 }
 
@@ -131,8 +135,13 @@ const addMerit = () => {
   coach.value.merit.push({ list: '' })
 }
 
-const removeMerit = (index) => {
-  coach.value.merit.splice(index, 1)
+const removeMerit = async (index) => {
+  try{
+    await deleteMeritId(currentCouchesId.value, index)
+    await fetchCoaches()
+  }catch(err){
+    showError(err)
+  }
 }
 
 onMounted( () => {
