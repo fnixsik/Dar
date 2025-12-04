@@ -24,7 +24,7 @@
       <div class="col-span-12 lg:col-span-7">
         <div class="rounded-2xl bg-zinc-900/60 p-6">
           <ul class="space-y-3">
-            <li v-for="(a, i) in achievements" :key="i" class="flex gap-3">
+            <li v-for="(a, i) in props.userData?.merit" :key="i" class="flex gap-3">
               <span class="mt-[7px] w-2.5 h-2.5 rounded-full bg-red-600 shrink-0"></span>
               <span class="text-zinc-100">{{ a }}</span>
             </li>
@@ -56,17 +56,6 @@ const emit = defineEmits<{
 const modelValueLocal = ref(props.modelValue)
 watch(() => props.modelValue, v => (modelValueLocal.value = v))
 watch(modelValueLocal, v => emit('update:modelValue', v))
-const achievements = [
-  '2005 — Турнир на призы Сослана Андиева — бронза;',
-  '2008 — Турнир на призы Сослана Андиева — бронза;',
-  '2011 — Чемпионат России — бронза;',
-  '2011 — Международный турнир на призы главы Нефтеюганского района ХМАО Владимира Семёнова — золото;',
-  '2011 — Кубок Рамазана Кадырова на призы Адлана Вараева — бронза;',
-  '2012 — Чемпионат России — бронза;',
-  '2012 — Мемориал Дейва Шульца — бронза;',
-  '2013 — Чемпионат России — серебро;',
-  '2013 — Кубок Рамазана Кадырова на призы Адлана Вараева — бронза;',
-]
 
 const handleClose = (v: boolean) => {
   emit('update:modelValue', v)

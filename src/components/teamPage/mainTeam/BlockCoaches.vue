@@ -7,7 +7,7 @@ import Dialog from '@/components/AllDialogs/dialogCoache/DialogCoache.vue'
 
 const visibleDialog = ref(false)
 const coacheCard = ref<Coaches[]>([])
-const selectData = ref<Coaches | undefined>()
+const selectData = ref<Coaches | null>()
 
 onMounted( async () => {
   await getDataFight()
@@ -28,7 +28,11 @@ const openDialog = async (value: boolean , data?: any) =>{
   }else{
     visibleDialog.value = false
   }
-  selectData.value = await getpersonalyDate(data.id)
+  if (data && data.id) {
+    selectData.value = await getpersonalyDate(data.id)
+  }else{
+    selectData.value = null
+  }
 }
 
 const getpersonalyDate = async (id: any) => {
