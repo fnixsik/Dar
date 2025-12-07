@@ -32,9 +32,21 @@
           <label class="block mb-1 font-semibold">Содержание</label>
           <Textarea v-model="news.content" rows="4" class="w-full" />
         </div>
-        <div>
-          <label class="block mb-1 font-semibold">Изображение (URL)</label>
-          <InputText v-model="news.img" class="w-full" />
+        <div class="col-span-2">
+          <label class="block text-sm font-medium mb-1">Фото бойца</label>
+          <FileUpload
+            mode="basic"
+            name="file"
+            accept="image/*"
+            chooseLabel="Загрузить фото"
+            :auto="true"
+            customUpload
+            @uploader="uploadImage"
+        />
+
+          <div v-if="news.img" class="mt-2">
+            <img :src="news.img" alt="preview" class="h-32 rounded border" />
+          </div>
         </div>
         <div>
           <label class="block mb-1 font-semibold">Дата</label>
@@ -54,7 +66,7 @@
 import { ref, onMounted } from 'vue'
 import { showError, showSuccess } from '@/shared/lib/toastService'
 import { useConfirmDialog } from '@/shared/lib/useConfirm'
-import { getAllNews, sendNews, deleteNewsId, updateNewsId } from '@/services/news-services'
+import { getAllNews, sendNews, deleteNewsId, updateNewsId, sendImgMinio } from '@/services/news-services'
 
 const { show } = useConfirmDialog()
 const newsList = ref([])
@@ -126,6 +138,19 @@ const deleteNews = async (data) => {
     showError(err)
   }
 }
+
+const uploadImage = async (event) => {
+  const file = event.files?.[0];
+  if (!file) return;
+
+  try {
+    const res = await sendImgMinio(file);
+    news.value.img = res.data;
+    showSuccess("Фото загружено!");
+  } catch (err) {
+    showError(err);
+  }
+};
 
 onMounted(() => {
   fetchNews()

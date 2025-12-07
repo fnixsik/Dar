@@ -26,7 +26,7 @@
           <ul class="space-y-3">
             <li v-for="(a, i) in props.userData?.merit" :key="i" class="flex gap-3">
               <span class="mt-[7px] w-2.5 h-2.5 rounded-full bg-red-600 shrink-0"></span>
-              <span class="text-zinc-100">{{ a }}</span>
+              <span class="text-zinc-100">{{ a.list }}</span>
             </li>
           </ul>
         </div>
@@ -37,7 +37,10 @@
         <div class="relative">
           <div class="absolute inset-0 rounded-3xl bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-60 blur-xl"></div>
           <div class="relative bg-zinc-900 rounded-3xl p-4 flex items-center justify-center min-h-[420px]">
-            <img :src="image" alt="photo" class="max-h-[420px] object-contain" />
+            <img
+             :src="props.userData?.img" 
+             alt="photo" 
+             class="object-cover object-center w-full h-full rounded-xl" />
           </div>
         </div>
       </div>

@@ -85,7 +85,7 @@
             v-if="props.userData?.img"
             :src="props.userData.img"
             :alt="props.userData.name"
-            class="object-cover w-full h-full"
+            class="object-cover object-center w-full h-full rounded-xl"
           />
           <Skeleton v-else width="80%" height="70%" class="bg-zinc-800" />
         </div>
@@ -102,7 +102,6 @@ import TabPanel from 'primevue/tabpanel'
 import Skeleton from 'primevue/skeleton'
 // @ts-ignore
 import CircleProgress from 'vue3-circle-progress'
-import type { Fighters } from '@/types/fightType'
 
 const props = defineProps<{
   modelValue: boolean
@@ -140,12 +139,7 @@ const numericData = computed(() => {
 // ------- end -------------
 
 const modelValueLocal = ref(props.modelValue)
-const nameProcent = {
-  kto: "КТО/ТКО",
-  decision: "РЕШЕНИЕ",
-  sabmision: "САБМИШЕН",
-  other: "ОСТАЛЬНОЕ",
-}
+
 watch(() => props.modelValue, v => (modelValueLocal.value = v))
 watch(modelValueLocal, v => emit('update:modelValue', v))
 

@@ -55,7 +55,7 @@ const getpersonalyDate = async (id: any) => {
         <template #header>
           <img 
             alt="user header" 
-            src="../../../assets/img/Page1.jpg" 
+            :src="value.img"
             class="w-full h-48 object-cover"
           />
         </template>

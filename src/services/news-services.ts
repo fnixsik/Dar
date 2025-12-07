@@ -24,3 +24,16 @@ export const getSoloNewsId = async (id: any): Promise<any> => {
   const response = await BaseApi.get(`/admin/v1/news/${id}`);
   return response;
 }
+
+export const sendImgMinio = async (file: File) => {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const response = await BaseApi.post('/admin/v1/upload/image', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    }
+  });
+
+  return response;
+}

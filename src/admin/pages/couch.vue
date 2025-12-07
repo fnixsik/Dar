@@ -29,8 +29,20 @@
             <InputText v-model="coach.status" class="w-full" />
           </div>
           <div class="col-span-2">
-            <label class="block mb-1 font-semibold">Фото (URL)</label>
-            <InputText v-model="coach.img" class="w-full" />
+            <label class="block text-sm font-medium mb-1">Фото бойца</label>
+            <FileUpload
+              mode="basic"
+              name="file"
+              accept="image/*"
+              chooseLabel="Загрузить фото"
+              :auto="true"
+              customUpload
+              @uploader="uploadImage"
+          />
+
+            <div v-if="coach.img" class="mt-2">
+              <img :src="coach.img" alt="preview" class="h-32 rounded border" />
+            </div>
           </div>
 
           <div class="col-span-2">
@@ -56,7 +68,7 @@
 import { ref, onMounted } from 'vue'
 import { showError, showSuccess } from '@/shared/lib/toastService'
 import { useConfirmDialog } from '@/shared/lib/useConfirm'
-import { getAllCouches, sendCouches, deleteCoucheId, updateCoucheId, deleteMeritId } from '@/services/couch-services'
+import { getAllCouches, sendCouches, deleteCoucheId, updateCoucheId, deleteMeritId, sendImgMinio } from '@/services/couch-services'
 
 
 const { show } = useConfirmDialog()
@@ -143,6 +155,19 @@ const removeMerit = async (index) => {
     showError(err)
   }
 }
+
+const uploadImage = async (event) => {
+  const file = event.files?.[0];
+  if (!file) return;
+
+  try {
+    const res = await sendImgMinio(file);
+    coach.value.img = res.data;
+    showSuccess("Фото загружено!");
+  } catch (err) {
+    showError(err);
+  }
+};
 
 onMounted( () => {
   fetchCoaches()

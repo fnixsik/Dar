@@ -66,8 +66,20 @@
             <InputText v-model="fighter.instagram" class="w-full" />
           </div>
           <div class="col-span-2">
-            <label class="block text-sm font-medium mb-1">Фото (URL)</label>
-            <InputText v-model="fighter.img" class="w-full" />
+            <label class="block text-sm font-medium mb-1">Фото бойца</label>
+            <FileUpload
+              mode="basic"
+              name="file"
+              accept="image/*"
+              chooseLabel="Загрузить фото"
+              :auto="true"
+              customUpload
+              @uploader="uploadImage"
+          />
+
+            <div v-if="fighter.img" class="mt-2">
+              <img :src="fighter.img" alt="preview" class="h-32 rounded border" />
+            </div>
           </div>
           <div class="col-span-2">
             <label class="block text-sm font-medium mb-1">Рекорд</label>
@@ -120,7 +132,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { getAllFighters, senFighters, deleteFighterId, updateFighterId, deleteAchievementId } from '@/services/fighter-services'
+import { getAllFighters, senFighters, deleteFighterId, updateFighterId, deleteAchievementId, sendImgMinio} from '@/services/fighter-services'
 import { showError, showSuccess } from '@/shared/lib/toastService'
 import { useConfirmDialog } from '@/shared/lib/useConfirm'
 
@@ -235,6 +247,20 @@ const deleteFighter = async (data) => {
     showError(err)
   }
 }
+
+const uploadImage = async (event) => {
+  const file = event.files?.[0];
+  if (!file) return;
+
+  try {
+    const res = await sendImgMinio(file);
+    fighter.value.img = res.data;
+    showSuccess("Фото загружено!");
+  } catch (err) {
+    showError(err);
+  }
+};
+
 
 onMounted(() => {
   fetchFighters()
