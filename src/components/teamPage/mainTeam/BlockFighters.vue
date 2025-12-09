@@ -49,11 +49,20 @@ const getDataFight = async () => {
         @click="openDialog(true, value)"
       >
         <template #header>
-          <img 
-            alt="user header" 
-            :src="value.img"
-            class="w-full h-48 object-cover"
-          />
+          <div class="relative w-full h-64 rounded-md overflow-hidden">
+
+            <!-- Размытие фона (подложка) -->
+            <img 
+              :src="value.img"
+              class="absolute inset-0 w-full h-full object-cover blur-xl opacity-30"
+            />
+
+            <img 
+              :src="value.img"
+              class="absolute inset-0 m-auto max-h-full max-w-full object-contain"
+            />
+
+          </div>
         </template>
 
         <template #title>

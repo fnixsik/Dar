@@ -79,7 +79,11 @@ const registerACtion = (e: any) => {
   >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
       <router-link to="/" class="text-2xl font-bold text-white tracking-wider">
-        DAR
+        <img 
+          src="../assets/img/logoMain.png"
+          alt="logo" 
+          class="w-20 h-auto"
+        />
       </router-link>
 
       <nav class="hidden md:flex space-x-8">

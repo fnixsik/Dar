@@ -35,7 +35,7 @@ const openDialog = async (value: boolean, data?: any) =>{
   }else{
     visibleDialog.value = false
   }
-  selectData.value = await getpersonalyDate(data.id)
+  selectData.value = await getpersonalyDate(data?.id)
 }
 
 const getpersonalyDate = async (id: any) => {
@@ -56,32 +56,45 @@ const limitedNews = computed(() => {
 
 <template>
   <Dialog :modelValue="visibleDialog" @update:modelValue="openDialog" :userData="selectData"/>
-  <div class="container mx-auto main-h-screen px-4 py-8">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <Card 
-        v-for="value in limitedNews"
-        :key="value.id"
-        class="w-full h-full max-w-sm mx-auto flex flex-col cursor-pointer"
-        @click="openDialog(true , value)"
-      >
-        <template #header>
+<div class="container mx-auto main-h-screen px-4 py-8">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+    <Card 
+      v-for="value in limitedNews"
+      :key="value.id"
+      class="w-full h-full max-w-sm mx-auto flex flex-col cursor-pointer"
+      @click="openDialog(true , value)"
+    >
+      <template #header>
+        <div class="relative w-full h-64 rounded-md overflow-hidden">
+
+          <!-- Размытие фона (подложка) -->
           <img 
-            alt="user header" 
             :src="value.img"
-            class="w-full h-48 object-cover"
+            class="absolute inset-0 w-full h-full object-cover blur-xl opacity-30"
           />
-        </template>
 
-        <template #title>
-          <h3 class="text-lg font-semibold line-clamp-2">
-            {{ value.title }}
-          </h3>
-        </template>
+          <img 
+            :src="value.img"
+            class="absolute inset-0 m-auto max-h-full max-w-full object-contain"
+          />
 
-        <template #subtitle>
-          <p class="text-sm text-gray-500">{{ value.date }}</p>
-        </template>
-      </Card>
-    </div>
+        </div>
+      </template>
+
+      <template #title>
+        <h3 class="text-lg font-semibold line-clamp-2">
+          {{ value.title }}
+        </h3>
+      </template>
+
+      <template #subtitle>
+        <p class="text-sm text-gray-500">{{ value.date }}</p>
+      </template>
+
+    </Card>
+
   </div>
+</div>
+
 </template>
