@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount, computed } from 'vue'
+import { ref, onMounted, onBeforeUnmount, computed, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/auth/model/authStore'
 import Auth from '@/auth/pages/Auth.vue'
@@ -14,6 +14,7 @@ const visableAuthDialog = ref<boolean>(false)
 const RegisterDialog = ref<boolean>(false)
 const username = computed(() => userStore.username)
 const dropdownVisible = ref(false)
+const isAdmin = ref()
 
 // обработчик скролла
 const handleScroll = () => {
@@ -46,10 +47,21 @@ const handleAuthClick12 = () =>{
   dropdownVisible.value = !dropdownVisible.value;
 }
 
+watch(
+  () => userStore.roles[0],
+  () => {isAdmin.value = userStore.roles[0], console.log('userStore ', userStore.roles[0])}
+)
 
-const logout = () => {
-  userStore.logout()
-  router.push('/')
+const logoutElse = (key: string) => {
+  switch(key){
+    case 'out':
+      userStore.logout()
+      router.push('/')
+      break;
+    case 'admin':
+      router.push('/admin')
+      break;
+  }
   dropdownVisible.value = false
 }
 
@@ -136,8 +148,15 @@ const registerACtion = (e: any) => {
             <ul class="flex flex-col text-white text-sm">
               <!-- <li class="px-4 py-2 hover:bg-red-500 cursor-pointer rounded-t-lg text-center">Профиль</li> -->
               <li
+                v-if="isAdmin === 'ROLE_ADMIN'"
+                class="px-4 py-2 hover:bg-red-500 cursor-pointer rounded-t-lg text-center"
+                @click="logoutElse('admin')"
+                >
+                Профиль
+              </li>
+              <li
                 class="px-4 py-2 hover:bg-red-500 cursor-pointer rounded-b-lg text-center"
-                @click="logout"
+                @click="logoutElse('out')"
               >
                 Выйти
               </li>

@@ -4,10 +4,10 @@
 
 <template>
   <div class="flex flex-col w-full">
-    <div class="w-full flex justify-center items-center py-8">
-      <p class="text-3xl md:text-4xl font-bold text-center">
+    <div class="text-white flex justify-center items-center py-12 px-4 sm:px-6 lg:px-12">
+      <h2 class="text-3xl font-extrabold mb-10 text-center tracking-wider">
         НАША КОМАНДА
-      </p>
+      </h2>
     </div>
     <div>
       <div class="mx-[20%]">
