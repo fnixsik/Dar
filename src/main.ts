@@ -8,6 +8,7 @@ import router from './router';
 import './assets/style/index.css';
 import Aura from '@primeuix/themes/aura';
 import '@/shared/api/interceptors/auth-interceptor'
+import '@/assets/style/cards.css'
 
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)

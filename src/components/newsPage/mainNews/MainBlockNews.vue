@@ -3,7 +3,6 @@ import { onMounted, ref, computed } from "vue";
 import { getAllNews, getSoloNewsId } from "@/services/news-services"
 import { showError } from '@/shared/lib/toastService'
 import type { News } from "../../../types/news"
-import '@/assets/style/cards.css'
 import Dialog from "@/components/AllDialogs/dialogNews/DialogNews.vue";
 
 const visibleDialog = ref(false)
