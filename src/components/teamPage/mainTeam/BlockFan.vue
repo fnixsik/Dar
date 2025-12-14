@@ -25,7 +25,7 @@ const getTableFan = async () => {
 <template>
   <div>
     <div class="w-full flex py-8">
-      <p class="text-xl md:text-xl font-bold">
+      <p class="text-xl md:text-2xl font-bold text-gray-100 tracking-wide">
         РАСПИСАНИЕ ТРЕНИРОВОК ЛЮБИТЕЛЬСКОЙ ГРУППЫ
       </p>
     </div>
