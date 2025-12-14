@@ -4,7 +4,7 @@
     v-model:visible="modelValueLocal" modal maximizable
     @update:visible="handleClose"
     :pt="{ root:{ class:'bg-black text-white' }, header:{ class:'bg-black text-white border-0' }, content:{ class:'bg-black text-white' } }"
-    :style="{ width: '95vw' }"
+    :style="{ width: '95vw', '--p-dialog-border-color': '#3f3f46' }"
   >
     <template #header>
       <div class="w-full flex">

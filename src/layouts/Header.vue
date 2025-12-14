@@ -85,8 +85,8 @@ const registerACtion = (e: any) => {
     :class="[
       'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
       scrolled
-        ? 'bg-gray-900/95 shadow-lg py-3'
-        : 'bg-gray-900/80 backdrop-blur-md py-4'
+        ? 'bg-[#111724]/95 shadow-lg py-3'
+        : 'bg-[#111724]/80 backdrop-blur-md py-4'
     ]"
   >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">

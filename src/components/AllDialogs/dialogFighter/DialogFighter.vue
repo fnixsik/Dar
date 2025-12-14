@@ -6,7 +6,7 @@
     :dismissableMask="true"
     :closeOnEscape="true"
     :breakpoints="{ '1280px':'70vw', '960px':'90vw', '640px':'95vw' }"
-    :style="{ width: '920px', maxWidth: '95vw' }"
+    :style="{ width: '920px', maxWidth: '95vw', '--p-dialog-border-color': '#3f3f46'}"
     :pt="{
       root:{ class:'bg-black text-white rounded-2xl overflow-hidden' },
       header:{ class:'bg-black text-white border-0 pb-0' },
@@ -80,7 +80,7 @@
 
       <!-- Фото бойца -->
       <div class="col-span-12 lg:col-span-5">
-        <div class="bg-zinc-900 rounded-2xl overflow-hidden h-[420px] flex items-center justify-center">
+        <div class="bg-zinc-900 rounded-2xl overflow-hidden h-[460px] flex items-center justify-center">
           <img
             v-if="props.userData?.img"
             :src="props.userData.img"
@@ -117,9 +117,9 @@ const emit = defineEmits<{
 // ------- start -----------
 
 const nameProcentInt = {
-  other: 'Other',
-  solution: 'Solution', 
-  submissive: 'Submissive',
+  other: 'Другое',
+  solution: 'Решение', 
+  submissive: 'Покорный',
   tko: 'TKO'
 }
 
@@ -160,5 +160,47 @@ const handleClose = (v: boolean) => {
 
 :deep(.p-tabview-ink-bar) {
   background: #B00D15 !important;
+}
+
+/* Контейнер вкладок (верхняя полоса) */
+:deep(.p-tabview-tablist-container) {
+  background-color: #3F3F46 !important;
+  border-bottom: 1px solid #52525B;
+}
+
+/* Список вкладок */
+:deep(.p-tabview-tablist) {
+  background-color: #3F3F46 !important;
+}
+
+/* Кнопка вкладки */
+:deep(.p-tabview-tablist .p-tabview-tab) {
+  background-color: transparent !important;
+  color: #D4D4D8;
+  border: none;
+}
+
+/* Активная вкладка */
+:deep(.p-tabview-tablist .p-tabview-tab.p-highlight) {
+  color: #FFFFFF;
+}
+
+/* Контент вкладок */
+:deep(.p-tabview-panels) {
+  background-color: #3F3F46 !important;
+  padding: 16px;
+  border: 1px solid #52525B;
+}
+
+/* Убираем стандартные бордеры PrimeVue */
+:deep(.p-tabview) {
+  border: none;
+}
+
+/* текст вкладок */
+:deep(.p-tabview-tab-title) {
+  color: #d4d4d8;
+  font-weight: 500;
+  letter-spacing: 0.05em;
 }
 </style>

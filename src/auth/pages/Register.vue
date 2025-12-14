@@ -82,7 +82,19 @@ const goLogin = (v: boolean) => {
     modal
     :draggable="false"
     :closable="false"
-    :style="{ width: '25rem', borderRadius: '1rem' }"
+    :dismissableMask="true"
+    :style="{
+      width: '25rem',
+      background: '#18181B',
+      borderRadius: '18px',
+      boxShadow: '0 20px 60px rgba(0,0,0,.75)',
+      '--p-dialog-border-color': '#3f3f46'
+    }"
+    :pt="{
+      root: { class: 'bg-[#18181B] text-white' },
+      header: { class: 'bg-[#18181B] text-white border-0' },
+      content: { class: 'bg-[#18181B] text-white' }
+    }"
     class="register-dialog"
   >
     <!-- Заголовок с кнопкой "Назад" -->
@@ -177,5 +189,15 @@ const goLogin = (v: boolean) => {
   outline: none;
 }
 
+:deep(
+  .p-inputtext,
+  .p-password input
+) {
+  background-color: #09090B !important;
+  color: #E5E7EB !important;
+  border: 1px solid #3F3F46 !important;
+  border-radius: 0.75rem;
+  box-shadow: none !important;
+}
 
 </style>

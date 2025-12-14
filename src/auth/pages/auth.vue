@@ -54,18 +54,32 @@ const goRegister = (v:boolean) => {
 </script>
 
 <template>
-  <Dialog
-    v-model:visible="props.visableAuthDialog"
-    @update:visible="closeDialog"
-    modal
-    :style="{ width: '25rem', borderRadius: '1rem' }"
-    :pt="{
-      header: { class: 'text-center text-xl font-semibold text-white border-0 pb-0' },
-      content: { class: 'text-white' },
-      footer: { class: 'border-0 pt-0' }
-    }"
-  >
-    <template #header>Авторизация</template>
+<Dialog
+  v-model:visible="props.visableAuthDialog"
+  @update:visible="closeDialog"
+  modal
+  :dismissableMask="true"
+  :closeOnEscape="true"
+  :style="{ 
+    width: '25rem',
+    background: '#18181B',
+    borderRadius: '18px',
+    boxShadow: '0 20px 60px rgba(0,0,0,.75)',
+    '--p-dialog-border-color': '#3f3f46'
+  }"
+  :pt="{
+    root: { class: 'auth-dialog' },
+    header: { class: 'border-0 pb-0 bg-transparent' },
+    content: { class: 'bg-transparent text-white' },
+    footer: { class: 'border-0 pt-0 bg-transparent' }
+  }"
+>
+
+    <template #header>
+      <div class="text-white text-lg font-semibold">
+        Авторизация
+      </div>
+    </template>
 
     <!-- Контент -->
     <div class="flex flex-col gap-5">
@@ -118,5 +132,21 @@ const goRegister = (v:boolean) => {
   outline: none;
 }
 
+:deep(
+  .p-inputtext,
+  .p-password input
+) {
+  background-color: #09090B !important;
+  color: #E5E7EB !important;
+  border: 1px solid #3F3F46 !important;
+  border-radius: 0.75rem;
+  box-shadow: none !important;
+}
+
+
+:deep(.p-inputtext:enabled:focus) {
+  border-color: #B00D15;
+  box-shadow: 0 0 0 2px rgba(176, 13, 21, 0.3);
+}
 </style>
 
