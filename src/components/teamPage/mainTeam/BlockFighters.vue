@@ -45,7 +45,7 @@ const getDataFight = async () => {
       <Card 
         v-for="value in fighterCard" 
         :key="value.id"
-        class="w-full h-full max-w-sm mx-auto flex flex-col cursor-pointer"
+        class="dark-card w-full h-full max-w-sm mx-auto flex flex-col cursor-pointer"
         @click="openDialog(true, value)"
       >
         <template #header>

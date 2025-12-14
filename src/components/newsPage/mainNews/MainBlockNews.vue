@@ -3,6 +3,7 @@ import { onMounted, ref, computed } from "vue";
 import { getAllNews, getSoloNewsId } from "@/services/news-services"
 import { showError } from '@/shared/lib/toastService'
 import type { News } from "../../../types/news"
+import '@/assets/style/cards.css'
 import Dialog from "@/components/AllDialogs/dialogNews/DialogNews.vue";
 
 const visibleDialog = ref(false)
@@ -62,7 +63,7 @@ const limitedNews = computed(() => {
     <Card 
       v-for="value in limitedNews"
       :key="value.id"
-      class="w-full h-full max-w-sm mx-auto flex flex-col cursor-pointer"
+      class="dark-card w-full h-full max-w-sm mx-auto flex flex-col cursor-pointer"
       @click="openDialog(true , value)"
     >
       <template #header>
