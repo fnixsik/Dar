@@ -91,9 +91,12 @@ const goLogin = (v: boolean) => {
       '--p-dialog-border-color': '#3f3f46'
     }"
     :pt="{
-      root: { class: 'bg-[#18181B] text-white' },
-      header: { class: 'bg-[#18181B] text-white border-0' },
-      content: { class: 'bg-[#18181B] text-white' }
+      root: 
+      { 
+        class: 'bg-[#18181B] text-white rounded-2xl shadow-2xl overflow-hidden' 
+      },
+      header: { class: 'bg-[#18181B] text-white border-0 p-4' },
+      content: { class: 'bg-[#18181B] text-white pt-0 pb-4 px-4' }
     }"
     class="register-dialog"
   >

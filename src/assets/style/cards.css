@@ -16,11 +16,14 @@
 .p-card.dark-card .p-card-header {
   padding: 0;
   background-color: #000;
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
 }
 
 /* body */
 .p-card.dark-card .p-card-body {
   background-color: #18181B;
+  border-radius: 14px;
 }
 
 /* title */

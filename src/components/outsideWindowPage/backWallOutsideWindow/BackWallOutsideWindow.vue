@@ -6,7 +6,7 @@
 <template>
 <div class="flex flex-col h-full">
   <HeadOutsideWindow class="head"/>
-  <MainBlockOutsideWindow class="flex-grow"/>
+  <!-- <MainBlockOutsideWindow class="flex-grow"/> -->
 </div>
 </template>
 

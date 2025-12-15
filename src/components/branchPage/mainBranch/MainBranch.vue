@@ -1,6 +1,5 @@
 <template>
   <div class="rounded-3xl p-8 text-zinc-200">
-    <!-- Список городов -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
       <Button
         v-for="c in cities"
@@ -17,7 +16,6 @@
     </div>
 
     <div class="grid grid-cols-12 gap-8">
-      <!-- Карта -->
       <div class="col-span-12 md:col-span-5">
         <div class="rounded-xl overflow-hidden border border-zinc-700 h-[280px] md:h-[320px]">
           <iframe
@@ -28,7 +26,6 @@
           ></iframe>
         </div>
 
-        <!-- Список адресов -->
         <div v-if="cityAddresses.length" class="mt-4 space-y-2">
           <div class="text-sm text-zinc-500 uppercase">Адреса в городе {{ selectedCity }}:</div>
           <div class="flex flex-col gap-2">
@@ -50,46 +47,52 @@
         </div>
       </div>
 
-      <!-- Инфо -->
-      <div class="col-span-12 md:col-span-7 grid grid-cols-[24px_1fr] gap-x-3 items-start">
-        <i class="pi pi-map-marker text-red-500 text-lg leading-6"></i>
-        <div>
-          <div class="text-red-400 font-semibold">Мекенжай</div>
-          <div class="text-zinc-200">
-            <span v-if="cityAddresses.length">{{ current.address }}</span>
-            <span v-else class="text-zinc-500">Адресов пока нет</span>
+      <div class="col-span-12 md:col-span-7 flex flex-col **space-y-6**">         
+        <div class="grid grid-cols-[24px_1fr] gap-x-3 items-start">
+          <i class="pi pi-map-marker text-red-500 text-lg leading-6"></i>
+          <div>
+            <div class="text-red-400 font-semibold">Мекенжай</div>
+            <div class="text-zinc-200">
+              <span v-if="cityAddresses.length">{{ current.address }}</span>
+              <span v-else class="text-zinc-500">Адресов пока нет</span>
+            </div>
           </div>
         </div>
 
-        <i class="pi pi-phone text-red-500 text-lg leading-6"></i>
-        <div>
-          <div class="text-red-400 font-semibold">Телефон</div>
-          <div class="text-zinc-200">
-            <template v-if="current.phones?.length">
-              <a
-                v-for="(p, i) in current.phones"
-                :key="p"
-                :href="'tel:'+p.replace(/\\s|\\+/g,'')"
-                class="hover:underline"
-              >
-                {{ p }}<span v-if="i < current.phones.length - 1">, </span>
-              </a>
-            </template>
-            <span v-else class="text-zinc-500">—</span>
+        <div class="grid grid-cols-[24px_1fr] gap-x-3 items-start">
+          <i class="pi pi-phone text-red-500 text-lg leading-6"></i>
+          <div>
+            <div class="text-red-400 font-semibold">Телефон</div>
+            <div class="text-zinc-200">
+              <template v-if="current.phones?.length">
+                <a
+                  v-for="(p, i) in current.phones"
+                  :key="p"
+                  :href="'tel:'+p.replace(/\\s|\\+/g,'')"
+                  class="hover:underline"
+                >
+                  {{ p }}<span v-if="i < current.phones.length - 1">, </span>
+                </a>
+              </template>
+              <span v-else class="text-zinc-500">—</span>
+          </div>
           </div>
         </div>
 
-        <i class="pi pi-envelope text-red-500 text-lg leading-6"></i>
-        <div>
-          <div class="text-red-400 font-semibold">Email</div>
-          <a href="mailto:almaty.center@utemuratovfund.org" class="text-zinc-200 hover:underline">
-            almaty.center@utemuratovfund.org
-          </a>
+        <div class="grid grid-cols-[24px_1fr] gap-x-3 items-start">
+          <i class="pi pi-envelope text-red-500 text-lg leading-6"></i>
+          <div>
+            <div class="text-red-400 font-semibold">Email</div>
+            <a href="mailto:almaty.center@utemuratovfund.org" class="text-zinc-200 hover:underline">
+              almaty.center@utemuratovfund.org
+            </a>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
+
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
