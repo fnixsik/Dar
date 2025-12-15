@@ -84,7 +84,7 @@
           <div>
             <div class="text-red-400 font-semibold">Email</div>
             <a href="mailto:almaty.center@utemuratovfund.org" class="text-zinc-200 hover:underline">
-              almaty.center@utemuratovfund.org
+              darteam@dar.io
             </a>
           </div>
         </div>
@@ -98,21 +98,53 @@
 import { ref, computed } from 'vue'
 import Button from 'primevue/button'
 
-type Address = { address: string; phones?: string[] }
+// lat и lon теперь необязательны (что позволяет поддерживать старые записи без координат)
+type Address = { address: string; phones?: string[], lat?: number; lon?: number;}
 type Directory = Record<string, Address[]>
 
 const cities = [
-  'Алматы','Астана','Караганда','Актау','Атырау','Актобе',
-  'Кокшетау','Туркестан','Кызылорда','Конаев','Кордай','Талгар','Темиртау'
+  'Алматы','Актау','Актобе','Хромтау'
 ]
 
 const directory: Directory = {
-  'Алматы': [
-    { address: 'Тажибаева 155', phones: ['+7 705 626 6969', '+7 747 722 0786'] },
-    { address: 'Жандосова 87',  phones: ['+7 705 626 6969'] }
-  ],
-  'Астана': [{ address: 'пр. Туран 45', phones: ['+7 705 222 1234'] }],
-  'Караганда': [{ address: 'ул. Абая 13', phones: ['+7 777 333 1212'] }]
+ 'Алматы': [
+ {
+  address: 'улица Патшаим Тажибаевой, 155', 
+  phones: ['+7 (727) 321‒04‒63', '+7 (727) 321‒04‒62'], 
+  lat: 43.211185, 
+  lon: 76.891845 // Координаты для маркера
+ },
+ { 
+  address: 'Ораза Жандосова улица, 87', 
+  phones: ['+7‒708‒205‒06‒16', '+7‒776‒333‒54‒54'],
+  lat: 43.206670,
+  lon: 76.857041 // Координаты для маркера
+ }
+ ],
+ 'Актау': [
+  { 
+    address: '19-й микрорайон, 26', 
+    phones: ['+7‒702‒000‒53‒52'],
+    lat: 43.678784,
+    lon: 51.155507 // Координаты для маркера
+  }
+],
+ 'Актобе': [
+  { 
+    address: 'мкр.Есет батыра, 2-й микрорайон, 28', 
+    phones: ['+7‒777‒560‒09‒61'],
+    lat: 50.318671,
+    lon: 57.338961 // Координаты для маркера
+  }
+],
+ 'Хромтау': [
+  { 
+    address: 'ул. Алиби Жангельдина, 9', 
+    phones: ['+7‒705‒918‒11‒12'],
+    lat: 50.251196,
+    lon: 58.444150 // Координаты для маркера
+  }
+]
 }
 
 const selectedCity = ref('Алматы')
@@ -122,16 +154,29 @@ const cityAddresses = computed(() => directory[selectedCity.value] ?? [])
 const current = computed(() => cityAddresses.value[selectedIndex.value] ?? { address: '' })
 
 function selectCity(c: string) {
-  selectedCity.value = c
-  selectedIndex.value = 0
+ selectedCity.value = c
+ selectedIndex.value = 0
 }
 function selectAddress(i: number) {
-  selectedIndex.value = i
+ selectedIndex.value = i
 }
 
+// 🔑 ОБНОВЛЕННЫЙ mapUrl ДЛЯ ОТОБРАЖЕНИЯ МАРКЕРА
 const mapUrl = computed(() => {
-  const addr = current.value?.address ? `${selectedCity.value}, ${current.value.address}` : selectedCity.value
-  return `https://yandex.ru/map-widget/v1/?text=${encodeURIComponent(addr)}&z=16`
+    const currentAddress = current.value;
+
+    // Проверяем, есть ли координаты (lat и lon) у выбранного адреса
+    if (currentAddress.lat && currentAddress.lon) {
+        const { lat, lon } = currentAddress;
+        
+        // Используем параметры ll (центр карты) и pt (точка маркера)
+        // pm2rdl - это тип маркера: стандартный, красный, с точкой.
+        return `https://yandex.ru/map-widget/v1/?ll=${lon},${lat}&z=16&pt=${lon},${lat},pm2rdl`;
+    }
+
+    // РЕЗЕРВНЫЙ ВАРИАНТ: Если координат нет, используем старый метод — поиск по тексту
+    const addr = currentAddress?.address ? `${selectedCity.value}, ${currentAddress.address}` : selectedCity.value
+    return `https://yandex.ru/map-widget/v1/?text=${encodeURIComponent(addr)}&z=16`
 })
 </script>
 

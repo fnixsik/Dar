@@ -5,17 +5,22 @@ import useConfirm from '@/shared/ui/useConfirm.vue'
 </script>
 
 <template>
-  <Header/>
-  <div class="layout">
-    <router-view />
-    <useConfirm/>
+  <div class="body">    
+    <Header/>
+    <div class="layout">
+      <router-view />
+      <useConfirm/>
+    </div>
+    <Footer/>
   </div>
-  <Footer/>
 </template>
 
 <style scoped>
 .layout {
   min-height: 100vh;
+  background-color: #121212;
+}
+.body {
   background-color: #121212;
 }
 </style>
