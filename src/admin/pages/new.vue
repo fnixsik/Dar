@@ -101,13 +101,27 @@ const openNew = () => {
   dialog.value = true
 }
 
+// потом можно его вывести в глобально чтобы использовать несколько раз LocalData
+const formatDateLocal = (date) => {
+  const y = date.getFullYear()
+  const m = String(date.getMonth() + 1).padStart(2, '0')
+  const d = String(date.getDate()).padStart(2, '0')
+  return `${y}-${m}-${d}`
+}
+
 const saveNews = async () => {
+  const payload = {
+  ...news.value,
+  date: news.value.date
+    ? formatDateLocal(news.value.date)
+    : null
+  }
   try {
     if (isEditing.value) {
-      await updateNewsId(currentFighterId.value, news.value)
+      await updateNewsId(currentFighterId.value, payload)
       showSuccess('Новость успешно обновлен')
     } else {
-      await sendNews(news.value)
+      await sendNews(payload)
       showSuccess('Новость успешно создан')
     }
     

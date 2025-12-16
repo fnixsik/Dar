@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import HeadOutsideWindow from '../headOutsideWindow/HeadOutsideWindow.vue';
-    import MainBlockOutsideWindow from '../mainBlockOutsideWindow/MainBlockOutsideWindow.vue';
+    // import MainBlockOutsideWindow from '../mainBlockOutsideWindow/MainBlockOutsideWindow.vue';
 </script>
 
 <template>
