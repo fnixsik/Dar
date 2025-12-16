@@ -103,6 +103,9 @@ const openNew = () => {
 
 // потом можно его вывести в глобально чтобы использовать несколько раз LocalData
 const formatDateLocal = (date) => {
+  if (typeof date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(date)) {
+    return date
+  }
   const y = date.getFullYear()
   const m = String(date.getMonth() + 1).padStart(2, '0')
   const d = String(date.getDate()).padStart(2, '0')
