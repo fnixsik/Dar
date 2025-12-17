@@ -6,6 +6,7 @@ import ToastService from 'primevue/toastservice'
 import App from './App.vue';
 import router from './router';
 import './assets/style/index.css';
+import './assets/style/table.css'
 import Aura from '@primeuix/themes/aura';
 import '@/shared/api/interceptors/auth-interceptor'
 import '@/assets/style/cards.css'

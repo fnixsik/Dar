@@ -124,7 +124,7 @@ const registerACtion = (e: any) => {
           <!-- Если пользователь авторизован -->
           <div
             v-if="username"
-            class="flex items-center gap-2 cursor-pointer hover:text-red-500 transition"
+            class="flex items-center gap-2 cursor-pointer hover:text-red-500 transition text-white"
             @click="handleAuthClick12"
           >
             <i class="pi pi-user text-2xl"></i>

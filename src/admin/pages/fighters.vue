@@ -1,10 +1,10 @@
 <template>
   <div class="p-6 max-w-7xl mx-auto">
-    <h1 class="text-3xl mb-6 font-bold">Управление бойцами</h1>
+    <h1 class="text-3xl mb-6 font-bold text-white">Управление бойцами</h1>
 
     <Button label="Добавить бойца" icon="pi pi-plus" class="mb-4" @click="openNew" />
 
-    <DataTable :value="fighters" dataKey="id" :rows="10">
+    <DataTable :value="fighters" dataKey="id" :rows="10" class="schedule-table">
       <Column field="name" header="Имя" sortable />
       <Column field="nickname" header="Никнейм" sortable />
       <Column field="country" header="Страна" sortable />

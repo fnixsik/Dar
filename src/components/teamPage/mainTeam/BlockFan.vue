@@ -40,36 +40,4 @@ const getTableFan = async () => {
   </div>
 </template>
 
-<style scoped>
-:deep(.schedule-table .p-datatable-table-container) {
-  background-color: #18181B;
-}
 
-:deep(.schedule-table .p-datatable-table) {
-  background-color: #18181B;
-}
-
-/* header */
-:deep(.schedule-table .p-datatable-thead > tr > th) {
-  background-color: #18181B;
-  color: #E5E7EB;
-  border-color: #3F3F46;
-}
-
-/* rows */
-:deep(.schedule-table .p-datatable-tbody > tr) {
-  background-color: #18181B;
-  color: #E5E7EB;
-}
-
-/* cells */
-:deep(.schedule-table .p-datatable-tbody > tr > td) {
-  background-color: #18181B;
-  border-color: #3F3F46;
-}
-
-/* hover */
-:deep(.schedule-table .p-datatable-tbody > tr:hover) {
-  background-color: #27272A;
-}
-</style>

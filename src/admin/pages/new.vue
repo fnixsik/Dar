@@ -1,26 +1,27 @@
 <template>
   <div class="p-6 max-w-7xl mx-auto">
-    <h1 class="text-3xl mb-6 font-bold">Управление новостями</h1>
+    <h1 class="text-3xl mb-6 font-bold text-white">Управление новостями</h1>
 
     <Button label="Добавить новость" icon="pi pi-plus" class="mb-4" @click="openNew" />
-
-    <DataTable :value="newsList" dataKey="id" :rows="10" responsiveLayout="scroll">
-      <Column field="title" header="Заголовок" sortable />
-      <Column field="date" header="Дата" sortable />
-      <Column header="Изображение" style="width: 120px">
-        <template #body="{ data }">
-          <img :src="data.img" alt="news image" class="w-20 h-12 object-cover rounded" />
-        </template>
-      </Column>
-      <Column header="Действия" style="width: 140px">
-        <template #body="{ data }">
-          <div class="flex space-x-2">
-            <Button icon="pi pi-pencil" class="p-button-rounded p-button-text" @click="editNews(data)" aria-label="Редактировать" />
-            <Button icon="pi pi-trash" class="p-button-rounded p-button-text p-button-danger" @click="deleteNews(data)" aria-label="Удалить" />
-          </div>
-        </template>
-      </Column>
-    </DataTable>
+    <div class="schedule-table">
+      <DataTable :value="newsList" dataKey="id" :rows="10" responsiveLayout="scroll">
+        <Column field="title" header="Заголовок" sortable />
+        <Column field="date" header="Дата" sortable />
+        <Column header="Изображение" style="width: 120px">
+          <template #body="{ data }">
+            <img :src="data.img" alt="news image" class="w-20 h-12 object-cover rounded" />
+          </template>
+        </Column>
+        <Column header="Действия" style="width: 140px">
+          <template #body="{ data }">
+            <div class="flex space-x-2">
+              <Button icon="pi pi-pencil" class="p-button-rounded p-button-text" @click="editNews(data)" aria-label="Редактировать" />
+              <Button icon="pi pi-trash" class="p-button-rounded p-button-text p-button-danger" @click="deleteNews(data)" aria-label="Удалить" />
+            </div>
+          </template>
+        </Column>
+      </DataTable>
+    </div>
 
     <Dialog header="Новость" v-model:visible="dialog" modal style="width: 600px;">
       <form @submit.prevent="saveNews" class="space-y-4">

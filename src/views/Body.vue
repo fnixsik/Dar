@@ -5,12 +5,12 @@ import useConfirm from '@/shared/ui/useConfirm.vue'
 </script>
 
 <template>
-  <div class="body">    
+  <div class="app-layout">    
     <Header/>
-    <div class="layout">
+    <main class="app-content">
       <router-view />
       <useConfirm/>
-    </div>
+    </main>
     <Footer/>
   </div>
 </template>

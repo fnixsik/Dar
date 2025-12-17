@@ -1,10 +1,10 @@
 <template>
   <div class="p-6 max-w-7xl mx-auto">
-    <h1 class="text-3xl mb-6 font-bold">Управление тренерами</h1>
+    <h1 class="text-3xl mb-6 font-bold text-white">Управление тренерами</h1>
 
     <Button label="Добавить тренера" icon="pi pi-plus" class="mb-4" @click="openNew" />
 
-    <DataTable :value="coaches" dataKey="id" responsiveLayout="scroll">
+    <DataTable :value="coaches" dataKey="id" responsiveLayout="scroll" class="schedule-table">
       <Column field="name" header="Имя" sortable />
       <Column field="status" header="Статус" sortable />
       <Column header="Действия" style="width: 150px">
