@@ -1,1 +1,16 @@
 @import "tailwindcss";
+
+/* Применяем ко всему окну браузера */
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #121212 !important; /* Ваш основной цвет */
+  /* Отключаем белый отскок (bounce effect) */
+  overscroll-behavior-y: none; 
+}
+
+/* Убеждаемся, что корневой контейнер Vue тоже черный */
+#app {
+  background-color: #121212;
+  min-height: 100vh;
+}

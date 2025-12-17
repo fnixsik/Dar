@@ -134,7 +134,7 @@ const registerACtion = (e: any) => {
           <!-- Если не авторизован -->
           <div
             v-else
-            class="cursor-pointer hover:text-red-500 transition"
+            class="cursor-pointer hover:text-red-500 transition text-white"
             @click="handleAuthClick"
           >
             <i class="pi pi-user text-2xl"></i>

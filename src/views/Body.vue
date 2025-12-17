@@ -14,13 +14,3 @@ import useConfirm from '@/shared/ui/useConfirm.vue'
     <Footer/>
   </div>
 </template>
-
-<style scoped>
-.layout {
-  min-height: 100vh;
-  background-color: #121212;
-}
-.body {
-  background-color: #121212;
-}
-</style>
