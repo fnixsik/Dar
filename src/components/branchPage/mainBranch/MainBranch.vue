@@ -103,7 +103,7 @@ type Address = { address: string; phones?: string[], lat?: number; lon?: number;
 type Directory = Record<string, Address[]>
 
 const cities = [
-  'Алматы','Актау','Актобе','Хромтау'
+  'Алматы','Актау','Актобе'
 ]
 
 const directory: Directory = {
@@ -135,14 +135,6 @@ const directory: Directory = {
     phones: ['+7‒777‒560‒09‒61'],
     lat: 50.318671,
     lon: 57.338961 // Координаты для маркера
-  }
-],
- 'Хромтау': [
-  { 
-    address: 'ул. Алиби Жангельдина, 9', 
-    phones: ['+7‒705‒918‒11‒12'],
-    lat: 50.251196,
-    lon: 58.444150 // Координаты для маркера
   }
 ]
 }
