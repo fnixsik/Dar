@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div class="relative bg-red-300 w-full" style="height: 80vh; min-height: 720px;">
+  <div class="relative w-full" style="height: 80vh; min-height: 720px;">
     <!-- Главная картинка (фоновая) -->
     <img 
       src="/src/assets/img/dar_team_10_years.png" 
