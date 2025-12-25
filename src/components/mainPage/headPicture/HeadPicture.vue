@@ -6,7 +6,7 @@
   <div class="relative bg-red-300 w-full" style="height: 80vh; min-height: 720px;">
     <!-- Главная картинка (фоновая) -->
     <img 
-      src="/src/assets/img/Main_img2.jpg" 
+      src="/src/assets/img/dar_team_10_years.png" 
       alt="Главная картинка" 
       class="w-full h-full object-cover"
     />
