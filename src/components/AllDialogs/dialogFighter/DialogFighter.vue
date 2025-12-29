@@ -62,6 +62,9 @@
               <p class="text-sm leading-relaxed text-zinc-300">
                 Вид спорта: <strong>{{ props.userData?.sport }}</strong>
               </p>
+              <p class="text-sm leading-relaxed text-zinc-300">
+                Инстаграм: <strong>{{ props.userData?.instagram }}</strong>
+              </p>
             </div>
           </TabPanel>
 
@@ -80,12 +83,12 @@
 
       <!-- Фото бойца -->
       <div class="col-span-12 lg:col-span-5">
-        <div class="bg-zinc-900 rounded-2xl overflow-hidden h-[460px] flex items-center justify-center">
+        <div class="bg-zinc-900 rounded-2xl overflow-hidden h-[490px] flex items-center justify-center">
           <img
             v-if="props.userData?.img"
             :src="props.userData.img"
             :alt="props.userData.name"
-            class="object-cover object-center w-full h-full rounded-xl"
+            class="object-contain w-full h-full rounded-xl"
           />
           <Skeleton v-else width="80%" height="70%" class="bg-zinc-800" />
         </div>

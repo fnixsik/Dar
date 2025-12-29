@@ -108,6 +108,7 @@ const goRegister = (v:boolean) => {
       unstyled
       label="Войти"
       @click="authUser"
+      @keydown.enter="authUser"
       class="
         w-full
         bg-gradient-to-r from-red-600 to-red-700
