@@ -6,7 +6,7 @@
     
     <div class="absolute inset-0 z-0">
       <img 
-        src="/src/assets/img/dar_team_10_years.png" 
+        src="/src/assets/img/dar_team_10_years.webp" 
         alt="Главная картинка" 
         class="w-full h-full object-cover filter grayscale-[50%] brightness-[0.4]"
       />
