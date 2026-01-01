@@ -181,7 +181,7 @@ const deleteImg = async (id) => {
   try {
     await deleteCoucheImgId(id)
     showSuccess('Успешно удалено фото')
-    await fetchFighters()
+    await fetchCoaches()
   } catch (err) {
     showError(err)
   }

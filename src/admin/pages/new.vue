@@ -182,7 +182,7 @@ const deleteImg = async (id) => {
   try {
     await deleteNewsImgId(id)
     showSuccess('Успешно удалено фото')
-    await fetchFighters()
+    await fetchNews()
   } catch (err) {
     showError(err)
   }
