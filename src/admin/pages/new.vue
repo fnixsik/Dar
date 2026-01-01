@@ -159,10 +159,11 @@ const deleteNews = async (data) => {
 
 const uploadImage = async (event) => {
   const file = event.files?.[0];
+  let nameFolder = 'news'
   if (!file) return;
 
   try {
-    const res = await sendImgMinio(file);
+    const res = await sendImgMinio(file, nameFolder);
     news.value.img = res.data;
     showSuccess("Фото загружено!");
   } catch (err) {

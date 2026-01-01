@@ -30,11 +30,11 @@ export const getPersonCoucheId = async (id: any): Promise<any> => {
   return response;
 }
 
-export const sendImgMinio = async (file: File) => {
+export const sendImgMinio = async (file: File, nameFolder: string) => {
   const formData = new FormData();
   formData.append("file", file);
 
-  const response = await BaseApi.post('/admin/v1/upload/image', formData, {
+  const response = await BaseApi.post(`/admin/v1/upload/${nameFolder}`, formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     }

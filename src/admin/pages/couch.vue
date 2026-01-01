@@ -158,10 +158,11 @@ const removeMerit = async (index) => {
 
 const uploadImage = async (event) => {
   const file = event.files?.[0];
+  let nameFolder = 'coache'
   if (!file) return;
 
   try {
-    const res = await sendImgMinio(file);
+    const res = await sendImgMinio(file, nameFolder);
     coach.value.img = res.data;
     showSuccess("Фото загружено!");
   } catch (err) {
