@@ -12,11 +12,11 @@
             <img :src="data.img" alt="news image" class="w-20 h-12 object-cover rounded" />
           </template>
         </Column>
-        <Column header="Действия" style="width: 140px">
+        <Column header="Действия" style="width: 160px">
           <template #body="{ data }">
-            <div class="flex space-x-2">
-              <Button icon="pi pi-pencil" class="p-button-rounded p-button-text" @click="editNews(data)" aria-label="Редактировать" />
-              <Button icon="pi pi-trash" class="p-button-rounded p-button-text p-button-danger" @click="deleteNews(data)" aria-label="Удалить" />
+            <div class="flex gap-3 space-x-2">
+              <Button icon="pi pi-pencil" class="p-button-text" @click="editNews(data)" aria-label="Редактировать" />
+              <Button icon="pi pi-trash" class="p-button-text" @click="deleteNews(data)" aria-label="Удалить" />
             </div>
           </template>
         </Column>
@@ -35,15 +35,22 @@
         </div>
         <div class="col-span-2">
           <label class="block text-sm font-medium mb-1">Фото бойца</label>
-          <FileUpload
-            mode="basic"
-            name="file"
-            accept="image/*"
-            chooseLabel="Загрузить фото"
-            :auto="true"
-            customUpload
-            @uploader="uploadImage"
-        />
+          <div class="flex items-center gap-4">
+            <FileUpload
+              mode="basic"
+              name="file"
+              accept="image/*"
+              chooseLabel="Загрузить фото"
+              :auto="true"
+              customUpload
+              @uploader="uploadImage"
+            />
+            <Button 
+              label="Удалить фото" 
+              icon="pi pi-minus" 
+              @click.prevent="deleteImg(news.id)" 
+            />
+          </div>
 
           <div v-if="news.img" class="mt-2">
             <img :src="news.img" alt="preview" class="h-32 rounded border" />
@@ -67,7 +74,7 @@
 import { ref, onMounted } from 'vue'
 import { showError, showSuccess } from '@/shared/lib/toastService'
 import { useConfirmDialog } from '@/shared/lib/useConfirm'
-import { getAllNews, sendNews, deleteNewsId, updateNewsId, sendImgMinio } from '@/services/news-services'
+import { getAllNews, sendNews, deleteNewsId, updateNewsId, deleteNewsImgId, sendImgMinio } from '@/services/news-services'
 
 const { show } = useConfirmDialog()
 const newsList = ref([])
@@ -170,6 +177,16 @@ const uploadImage = async (event) => {
     showError(err);
   }
 };
+
+const deleteImg = async (id) => {
+  try {
+    await deleteNewsImgId(id)
+    showSuccess('Успешно удалено фото')
+    await fetchFighters()
+  } catch (err) {
+    showError(err)
+  }
+}
 
 onMounted(() => {
   fetchNews()

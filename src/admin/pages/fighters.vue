@@ -14,13 +14,13 @@
           <div class="flex gap-3 items-center justify-center">
             <Button
               icon="pi pi-pencil"
-              class="p-button-rounded p-button-text p-button-sm"
+              class="p-button-rounded p-button-text"
               @click="editFighter(data)"
               aria-label="Редактировать"
             />
             <Button
               icon="pi pi-trash"
-              class="p-button-rounded p-button-text p-button-danger p-button-sm"
+              class="p-button-rounded p-button-text p-button-danger"
               @click="deleteFighter(data)"
               aria-label="Удалить"
             />
@@ -67,15 +67,23 @@
           </div>
           <div class="col-span-2">
             <label class="block text-sm font-medium mb-1">Фото бойца</label>
-            <FileUpload
-              mode="basic"
-              name="file"
-              accept="image/*"
-              chooseLabel="Загрузить фото"
-              :auto="true"
-              customUpload
-              @uploader="uploadImage"
-          />
+
+            <div class="flex items-center gap-4">
+              <FileUpload
+                mode="basic"
+                name="file"
+                accept="image/*"
+                chooseLabel="Загрузить фото"
+                :auto="true"
+                customUpload
+                @uploader="uploadImage"
+              />
+              <Button 
+                label="Удалить фото" 
+                icon="pi pi-minus" 
+                @click.prevent="deleteImg(fighter.id)" 
+              />
+            </div>
 
             <div v-if="fighter.img" class="mt-2">
               <img :src="fighter.img" alt="preview" class="h-32 rounded border" />
@@ -116,13 +124,13 @@
             <InputText v-model="ach.title" placeholder="Описание" class="flex-grow" />
             <Button icon="pi pi-times" class="p-button-danger p-button-rounded" @click.prevent="removeAchievement(ach.id)" />
           </div>
-          <Button label="Добавить достижение" icon="pi pi-plus" class="p-button-sm" @click.prevent="addAchievement" />
+          <Button label="Добавить достижение" icon="pi pi-plus" @click.prevent="addAchievement" />
         </div>
 
         <!-- Кнопки -->
         <div class="mt-2 flex justify-between">
-          <Button label="Отмена" icon="pi pi-times" class="p-button-text p-button-sm" @click="dialog = false" />
-          <Button label="Сохранить" icon="pi pi-check" class="p-button-sm" type="submit"/>
+          <Button label="Отмена" icon="pi pi-times" class="p-button-text " @click="dialog = false" />
+          <Button label="Сохранить" icon="pi pi-check" type="submit"/>
         </div>
       </form>
     </Dialog>
@@ -132,7 +140,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { getAllFighters, senFighters, deleteFighterId, updateFighterId, deleteAchievementId, sendImgMinio} from '@/services/fighter-services'
+import { getAllFighters, senFighters, deleteFighterId, updateFighterId, deleteAchievementId, deleteFighterImgId, sendImgMinio} from '@/services/fighter-services'
 import { showError, showSuccess } from '@/shared/lib/toastService'
 import { useConfirmDialog } from '@/shared/lib/useConfirm'
 
@@ -262,6 +270,15 @@ const uploadImage = async (event) => {
   }
 };
 
+const deleteImg = async (id) => {
+  try {
+    await deleteFighterImgId(id)
+    showSuccess('Успешно удалено фото')
+    await fetchFighters()
+  } catch (err) {
+    showError(err)
+  }
+}
 
 onMounted(() => {
   fetchFighters()

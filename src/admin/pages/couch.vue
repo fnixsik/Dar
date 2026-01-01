@@ -9,9 +9,9 @@
       <Column field="status" header="Статус" sortable />
       <Column header="Действия" style="width: 150px">
         <template #body="{ data }">
-          <div class="flex space-x-2">
+          <div class="flex gap-3 space-x-2">
             <Button icon="pi pi-pencil" class="p-button-rounded p-button-text" @click="editCoach(data)" />
-            <Button icon="pi pi-trash" class="p-button-rounded p-button-text p-button-danger" @click="deleteCoach(data)" />
+            <Button icon="pi pi-trash" class="p-button-rounded p-button-text" @click="deleteCoach(data)" />
           </div>
         </template>
       </Column>
@@ -30,15 +30,22 @@
           </div>
           <div class="col-span-2">
             <label class="block text-sm font-medium mb-1">Фото бойца</label>
-            <FileUpload
-              mode="basic"
-              name="file"
-              accept="image/*"
-              chooseLabel="Загрузить фото"
-              :auto="true"
-              customUpload
-              @uploader="uploadImage"
-          />
+              <div class="flex items-center gap-4">
+                <FileUpload
+                  mode="basic"
+                  name="file"
+                  accept="image/*"
+                  chooseLabel="Загрузить фото"
+                  :auto="true"
+                  customUpload
+                  @uploader="uploadImage"
+                />
+                <Button
+                  label="Удалить фото" 
+                  icon="pi pi-minus" 
+                  @click.prevent="deleteImg(coach.id)" 
+                />
+              </div>
 
             <div v-if="coach.img" class="mt-2">
               <img :src="coach.img" alt="preview" class="h-32 rounded border" />
@@ -49,7 +56,7 @@
             <label class="block mb-1 font-semibold">Заслуги</label>
             <div v-for="(m, index) in coach.merit" :key="index" class="flex items-center mb-2 space-x-2">
               <InputText v-model="m.list" placeholder="Описание" class="flex-grow" />
-              <Button icon="pi pi-times" class="p-button-danger p-button-rounded" @click.prevent="removeMerit(m.id)" />
+              <Button icon="pi pi-times" class="p-button-rounded" @click.prevent="removeMerit(m.id)" />
             </div>
             <Button label="Добавить заслугу" icon="pi pi-plus" class="mt-2" @click.prevent="addMerit" />
           </div>
@@ -68,7 +75,7 @@
 import { ref, onMounted } from 'vue'
 import { showError, showSuccess } from '@/shared/lib/toastService'
 import { useConfirmDialog } from '@/shared/lib/useConfirm'
-import { getAllCouches, sendCouches, deleteCoucheId, updateCoucheId, deleteMeritId, sendImgMinio } from '@/services/couch-services'
+import { getAllCouches, sendCouches, deleteCoucheId, updateCoucheId, deleteMeritId, deleteCoucheImgId, sendImgMinio } from '@/services/couch-services'
 
 
 const { show } = useConfirmDialog()
@@ -169,6 +176,16 @@ const uploadImage = async (event) => {
     showError(err);
   }
 };
+
+const deleteImg = async (id) => {
+  try {
+    await deleteCoucheImgId(id)
+    showSuccess('Успешно удалено фото')
+    await fetchFighters()
+  } catch (err) {
+    showError(err)
+  }
+}
 
 onMounted( () => {
   fetchCoaches()

@@ -15,6 +15,11 @@ export const deleteFighterId = async (id: any): Promise<any> => {
   return response;
 }
 
+export const deleteFighterImgId = async (id: any): Promise<any> => {
+  const response = await BaseApi.delete(`/admin/v1/fighters/${id}/image`);
+  return response;
+}
+
 export const deleteAchievementId = async (fighterId: string, achievementsId: string): Promise<any> => {
   const response = await BaseApi.delete(`/admin/v1/fighters/${fighterId}/achievements/${achievementsId}`);
   return response;
