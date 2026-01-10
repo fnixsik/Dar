@@ -5,6 +5,11 @@ export const getAllFighters = async (): Promise<any> => {
   return response;
 }
 
+export const postUpdateTableAllFighters = async (ids: number[]): Promise<any> => {
+  const response = await BaseApi.post('/admin/v1/fighters/reorder', ids);
+  return response;
+}
+
 export const senFighters = async (data: any): Promise<any> => {
   const response = await BaseApi.post('/admin/v1/fighters', data);
   return response;

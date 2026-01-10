@@ -4,7 +4,15 @@
 
     <Button label="Добавить бойца" icon="pi pi-plus" class="mb-4" @click="openNew" />
 
-    <DataTable :value="fighters" dataKey="id" :rows="10" class="schedule-table">
+    <DataTable 
+      :value="fighters" 
+      dataKey="id" 
+      :rows="10" 
+      class="schedule-table"
+      :reorderableRows="true"
+      @row-reorder="onRowReorder"
+    >
+      <Column rowReorder headerStyle="width: 3rem" :reorderableColumn="false" />
       <Column field="name" header="Имя" sortable />
       <Column field="nickname" header="Никнейм" sortable />
       <Column field="country" header="Страна" sortable />
@@ -140,7 +148,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { getAllFighters, senFighters, deleteFighterId, updateFighterId, deleteAchievementId, deleteFighterImgId, sendImgMinio} from '@/services/fighter-services'
+import { getAllFighters, senFighters, deleteFighterId, updateFighterId, deleteAchievementId, deleteFighterImgId, postUpdateTableAllFighters, sendImgMinio} from '@/services/fighter-services'
 import { showError, showSuccess } from '@/shared/lib/toastService'
 import { useConfirmDialog } from '@/shared/lib/useConfirm'
 
@@ -274,6 +282,17 @@ const deleteImg = async (id) => {
   try {
     await deleteFighterImgId(id)
     showSuccess('Успешно удалено фото')
+    await fetchFighters()
+  } catch (err) {
+    showError(err)
+  }
+}
+
+const onRowReorder = async (event) => {
+  const reorderedIds = event.value.map(item => item.id);
+  try {
+    await postUpdateTableAllFighters(reorderedIds)
+    showSuccess('Успешно обновлен')
     await fetchFighters()
   } catch (err) {
     showError(err)
