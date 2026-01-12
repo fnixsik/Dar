@@ -36,11 +36,11 @@
       <div class="col-span-12 lg:col-span-5">
         <div class="relative">
           <div class="absolute inset-0 rounded-3xl bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-60 blur-xl"></div>
-          <div class="relative bg-zinc-900 rounded-3xl p-4 flex items-center justify-center min-h-[420px]">
+          <div class="relative bg-zinc-900 rounded-3xl p-4 flex items-end justify-center min-h-[420px]">
             <img
              :src="props.userData?.img" 
              alt="photo" 
-             class="object-cover object-center w-full h-full rounded-xl" />
+             class="object-cover object-center max-h-full w-auto rounded-xl" />
           </div>
         </div>
       </div>

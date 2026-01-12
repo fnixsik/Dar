@@ -83,12 +83,12 @@
 
       <!-- Фото бойца -->
       <div class="col-span-12 lg:col-span-5">
-        <div class="bg-zinc-900 rounded-2xl overflow-hidden h-[490px] flex items-center justify-center">
+        <div class="bg-zinc-900 rounded-2xl overflow-hidden h-[490px] flex items-end justify-center">
           <img
             v-if="props.userData?.img"
             :src="props.userData.img"
             :alt="props.userData.name"
-            class="object-contain w-full h-full rounded-xl"
+            class="object-contain max-h-full w-auto rounded-xl"
           />
           <Skeleton v-else width="80%" height="70%" class="bg-zinc-800" />
         </div>
