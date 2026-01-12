@@ -1,15 +1,25 @@
 <template>
-  <Dialog
-    v-model:visible="modelValueLocal" modal :dismissableMask="true" :closeOnEscape="true"
-    @update:visible="handleClose"
-    :style="{ width: '1120px', maxWidth: '96vw', '--p-dialog-border-color': '#3f3f46'}"
-    :breakpoints="{ '1400px':'90vw', '1024px':'96vw' }"
-    :pt="{
-      root:{ class:'bg-black text-white rounded-2xl overflow-hidden' },
-      header:{ class:'bg-black text-white border-0 pb-2' },
-      content:{ class:'bg-black text-white' }
-    }"
-  >
+<Dialog
+  v-model:visible="modelValueLocal" 
+  modal 
+  :dismissableMask="true" 
+  :closeOnEscape="true"
+  @update:visible="handleClose"
+  :style="{ 
+    width: '1120px', 
+    maxWidth: '96vw', 
+    'min-height': '655px', 
+    display: 'flex', 
+    'flex-direction': 'column',
+    '--p-dialog-border-color': '#3f3f46'
+  }"
+  :breakpoints="{ '1400px':'90vw', '1024px':'96vw' }"
+  :pt="{
+    root:{ class:'bg-black text-white rounded-2xl overflow-hidden' },
+    header:{ class:'bg-black text-white border-0 pb-2' },
+    content:{ class:'bg-black text-white flex-grow-1' } 
+  }"
+>
     <template #header>
       <div class="flex items-end justify-between">
         <div>
@@ -36,11 +46,15 @@
       <div class="col-span-12 lg:col-span-5">
         <div class="relative">
           <div class="absolute inset-0 rounded-3xl bg-gradient-to-br from-zinc-800 to-zinc-900 opacity-60 blur-xl"></div>
-          <div class="relative bg-zinc-900 rounded-3xl p-4 flex items-end justify-center min-h-[420px]">
+          
+          <div class="relative bg-zinc-900 rounded-3xl pt-4 px-4 flex items-end justify-center h-[420px] overflow-hidden">
             <img
-             :src="props.userData?.img" 
-             alt="photo" 
-             class="object-cover object-center max-h-full w-auto rounded-xl" />
+              v-if="props.userData?.img"
+              :src="props.userData.img" 
+              alt="photo" 
+              class="object-contain object-bottom max-h-full w-auto block" 
+            />
+            <Skeleton v-else width="80%" height="90%" class="bg-zinc-800" />
           </div>
         </div>
       </div>
