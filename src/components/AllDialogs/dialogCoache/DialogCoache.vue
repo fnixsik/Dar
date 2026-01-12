@@ -1,25 +1,25 @@
 <template>
-<Dialog
-  v-model:visible="modelValueLocal" 
-  modal 
-  :dismissableMask="true" 
-  :closeOnEscape="true"
-  @update:visible="handleClose"
-  :style="{ 
-    width: '1120px', 
-    maxWidth: '96vw', 
-    'min-height': '655px', 
-    display: 'flex', 
-    'flex-direction': 'column',
-    '--p-dialog-border-color': '#3f3f46'
-  }"
-  :breakpoints="{ '1400px':'90vw', '1024px':'96vw' }"
-  :pt="{
-    root:{ class:'bg-black text-white rounded-2xl overflow-hidden' },
-    header:{ class:'bg-black text-white border-0 pb-2' },
-    content:{ class:'bg-black text-white flex-grow-1' } 
-  }"
->
+  <Dialog
+    v-model:visible="modelValueLocal" 
+    modal 
+    :dismissableMask="true" 
+    :closeOnEscape="true"
+    @update:visible="handleClose"
+    :style="{ 
+      width: '1120px', 
+      maxWidth: '96vw', 
+      'min-height': '655px', 
+      display: 'flex', 
+      'flex-direction': 'column',
+      '--p-dialog-border-color': '#3f3f46'
+    }"
+    :breakpoints="{ '1400px':'90vw', '1024px':'96vw' }"
+    :pt="{
+      root:{ class:'bg-black text-white rounded-2xl overflow-hidden' },
+      header:{ class:'bg-black text-white border-0 pb-2' },
+      content:{ class:'bg-black text-white flex-grow-1' } 
+    }"
+  >
     <template #header>
       <div class="flex items-end justify-between">
         <div>
