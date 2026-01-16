@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 import { useUserStore } from '@/auth/model/authStore'
 import Auth from '@/auth/pages/Auth.vue'
 import Register from '@/auth/pages/Register.vue'
+import LanguageSwitcher from '@/features/language-switcher/LanguageSwitcher.vue'
 import 'primeicons/primeicons.css'
 
 const userStore = useUserStore()
@@ -116,7 +117,7 @@ const registerACtion = (e: any) => {
           {{ item.label }}
         </router-link>
       </nav>
-
+      <LanguageSwitcher />
       <!-- Правая часть -->
       <div class="flex items-center gap-4">
         <!-- Иконка авторизации -->
