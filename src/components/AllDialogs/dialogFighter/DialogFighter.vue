@@ -27,7 +27,7 @@
     <div class="grid grid-cols-12 gap-6">
       <!-- Левая часть -->
       <div class="col-span-12 lg:col-span-7">
-        <div class="text-sm tracking-wider text-zinc-300 mb-3">СТАТИСТИКА ПОБЕД</div>
+        <div class="text-sm tracking-wider text-zinc-300 mb-3">{{ $t('lable.victoryStatistics') }}</div>
 
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
           <div v-for="(label, key) in nameProcentInt" :key="key" class="bg-zinc-900 rounded-2xl p-4 flex flex-col items-center">
@@ -42,7 +42,7 @@
             />
             <div class="mt-3 flex flex-col items-center">
               <span class="text-lg font-semibold text-white">{{ numericData?.[key] || 0 }}%</span>
-              <span class="text-xs text-zinc-500 uppercase tracking-wider">{{ label }}</span>
+              <span class="text-xs text-zinc-500 uppercase tracking-wider">{{ $t(label) }}</span>
             </div>
           </div>
         </div>
@@ -51,19 +51,19 @@
           <TabPanel header="БИОГРАФИЯ" value="bio">
             <div class="space-y-2 pt-3">
               <p class="text-sm leading-relaxed text-zinc-300">
-                Родился: <strong>{{ props.userData?.birthplace }}</strong>
+                {{ $t('lable.born') }}: <strong>{{ props.userData?.birthplace }}</strong>
               </p>
               <p class="text-sm leading-relaxed text-zinc-300">
-                Весовая категория: <strong>{{ props.userData?.weightClass }}</strong>
+                {{ $t('lable.weightCategory') }}: <strong>{{ props.userData?.weightClass }}</strong>
               </p>
               <p class="text-sm leading-relaxed text-zinc-300">
-                Рекорд: <strong>{{ props.userData?.record }}</strong>
+                {{ $t('lable.record') }}: <strong>{{ props.userData?.record }}</strong>
               </p>
               <p class="text-sm leading-relaxed text-zinc-300">
-                Вид спорта: <strong>{{ props.userData?.sport }}</strong>
+                {{ $t('lable.TypeSport') }}: <strong>{{ props.userData?.sport }}</strong>
               </p>
               <p class="text-sm leading-relaxed text-zinc-300">
-                Инстаграм: <strong>{{ props.userData?.instagram }}</strong>
+                {{ $t('lable.instagram') }}: <strong>{{ props.userData?.instagram }}</strong>
               </p>
             </div>
           </TabPanel>
@@ -120,10 +120,10 @@ const emit = defineEmits<{
 // ------- start -----------
 
 const nameProcentInt = {
-  other: 'Другое',
-  solution: 'Решение', 
-  submissive: 'Покорный',
-  tko: 'TKO'
+  other: 'lable.other',
+  solution: 'lable.decision', 
+  submissive: 'lable.submissive',
+  tko: 'lable.tkd'
 }
 
 // Фильтруем userData, оставляя только числовые поля из nameProcentInt

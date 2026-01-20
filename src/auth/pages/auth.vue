@@ -77,7 +77,7 @@ const goRegister = (v:boolean) => {
 
     <template #header>
       <div class="text-white text-lg font-semibold">
-        Авторизация
+        {{ $t('auth.authorization') }}
       </div>
     </template>
 
@@ -87,7 +87,7 @@ const goRegister = (v:boolean) => {
         <i class="pi pi-user text-gray-400" />
         <InputText
           v-model="username"
-          placeholder="Имя пользователя"
+          :placeholder="$t('auth.username')"
           class="w-full"
         />
       </span>
@@ -96,7 +96,7 @@ const goRegister = (v:boolean) => {
         <i class="pi pi-lock text-gray-400" />
         <Password
           v-model="password"
-          placeholder="Пароль"
+          :placeholder="$t('auth.password')"
           toggleMask
           :feedback="false"
           class="w-full"
@@ -106,7 +106,7 @@ const goRegister = (v:boolean) => {
 
       <Button
       unstyled
-      label="Войти"
+      :label="$t('auth.enter')"
       @click="authUser"
       @keydown.enter="authUser"
       class="
@@ -121,7 +121,7 @@ const goRegister = (v:boolean) => {
     </div>
     <div class="mt-3 flex items-center justify-between text-sm">
       <!-- <button class="text-gray-300 hover:text-white" @click="goForgot"></button> -->
-      <button class="text-gray-500 hover:text-white cursor-pointer" @click="goRegister(true)">Регистрация</button>
+      <button class="text-gray-500 hover:text-white cursor-pointer" @click="goRegister(true)">{{ $t('auth.registration') }}</button>
     </div>
   </Dialog>
 </template>

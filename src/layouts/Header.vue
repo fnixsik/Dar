@@ -29,6 +29,15 @@ onBeforeUnmount(() => {
   window.removeEventListener('scroll', handleScroll)
 })
 
+const menuItems = [
+  { to: '/', label: 'menu.main' },
+  { to: '/teams', label: 'menu.team' },
+  { to: '/news', label: 'menu.news' },
+  { to: '/branch', label: 'menu.branches' },
+  { to: '/outside', label: 'menu.outsideTheOctagon' },
+  { to: '/about', label: 'menu.aboutUs' }
+]
+
 // переключение меню
 const toggleMenu = () => (mobileMenu.value = !mobileMenu.value)
 
@@ -101,20 +110,13 @@ const registerACtion = (e: any) => {
 
       <nav class="hidden md:flex space-x-8">
         <router-link
-          v-for="item in [
-            {to:'/', label:'ГЛАВНАЯ'},
-            {to:'/teams', label:'КОМАНДА'},
-            {to:'/news', label:'НОВОСТИ'},
-            {to:'/branch', label:'ФИЛИАЛЫ'},
-            {to:'/outside', label:'ВНЕ ОКТАГОНА'},
-            {to:'/about', label:'О НАС'}
-          ]"
+          v-for="item in menuItems"
           :key="item.to"
           :to="item.to"
-          class="text-white hover:text-gray-300 transition-colors font-medium pb-1 border-b-2 border-transparent hover:border-red-600"
+          class="text-white hover:text-gray-300 transition-colors font-medium pb-1 border-b-2 border-transparent hover:border-red-600 uppercase"
           active-class="border-red-600 text-red-500"
         >
-          {{ item.label }}
+          {{ $t(item.label) }}
         </router-link>
       </nav>
       <LanguageSwitcher />
@@ -211,14 +213,7 @@ const registerACtion = (e: any) => {
       >
         <ul class="flex flex-col items-center py-4 space-y-4">
           <li
-            v-for="item in [
-              {to:'/', label:'ГЛАВНАЯ'},
-              {to:'/teams', label:'КОМАНДА'},
-              {to:'/news', label:'НОВОСТИ'},
-              {to:'/branch', label:'ФИЛИАЛЫ'},
-              {to:'/outside', label:'ВНЕ ОКТАГОНА'},
-              {to:'/about', label:'О НАС'}
-            ]"
+            v-for="item in menuItems"
             :key="item.to"
           >
             <router-link
@@ -227,7 +222,7 @@ const registerACtion = (e: any) => {
               active-class="text-red-500"
               @click="toggleMenu"
             >
-              {{ item.label }}
+              {{ $t(item.label) }}
             </router-link>
           </li>
         </ul>

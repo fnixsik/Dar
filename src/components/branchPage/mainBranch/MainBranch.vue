@@ -27,7 +27,7 @@
         </div>
 
         <div v-if="cityAddresses.length" class="mt-4 space-y-2">
-          <div class="text-sm text-zinc-500 uppercase">Адреса в городе {{ selectedCity }}:</div>
+          <div class="text-sm text-zinc-500 uppercase">{{ $t('lable.addressesInAlmaty') }} {{ selectedCity }}:</div>
           <div class="flex flex-col gap-2">
             <button
               v-for="(addr, i) in cityAddresses"
@@ -51,7 +51,7 @@
         <div class="grid grid-cols-[24px_1fr] gap-x-3 items-start">
           <i class="pi pi-map-marker text-red-500 text-lg leading-6"></i>
           <div>
-            <div class="text-red-400 font-semibold">Мекенжай</div>
+            <div class="text-red-400 font-semibold">{{ $t('lable.addressesPoint') }}</div>
             <div class="text-zinc-200">
               <span v-if="cityAddresses.length">{{ current.address }}</span>
               <span v-else class="text-zinc-500">Адресов пока нет</span>

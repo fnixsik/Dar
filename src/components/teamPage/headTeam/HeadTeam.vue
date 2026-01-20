@@ -5,8 +5,8 @@
 <template>
   <div class="flex flex-col w-full">
     <div class="text-white flex justify-center items-center py-12 px-4 sm:px-6 lg:px-12">
-      <h2 class="text-3xl font-extrabold mb-10 text-center tracking-wider">
-        НАША КОМАНДА
+      <h2 class="text-3xl font-extrabold uppercase mb-10 text-center tracking-wider">
+        {{ $t('lable.ourTeam') }}
       </h2>
     </div>
     <div>
@@ -18,10 +18,10 @@
                 to="/teams/fighters" 
                 class="
                 text-white hover:text-gray-300 transition-colors 
-                  font-medium pb-2 cursor-pointer"
+                  font-medium pb-2 cursor-pointer uppercase"
                 active-class="text-blue-600 border-b-2 border-red-600"
               >
-                БОЙЦЫ
+                {{ $t('lable.fighters') }}
               </router-link>
             </li>
             <li>
@@ -29,10 +29,10 @@
                 to="/teams/coaches" 
                 class="
                 text-white hover:text-gray-300 transition-colors 
-                  font-medium pb-2 cursor-pointer"
+                  font-medium pb-2 cursor-pointer uppercase"
                 active-class="text-blue-600 border-b-2 border-red-600"
               >
-                ТРЕНЕРЫ
+                {{ $t('lable.coaches') }}
               </router-link>
             </li>
             <li>
@@ -40,10 +40,10 @@
                 to="/teams/fan" 
                 class="
                 text-white hover:text-gray-300 transition-colors 
-                  font-medium pb-2 cursor-pointer"
+                  font-medium pb-2 cursor-pointer uppercase"
                 active-class="text-blue-600 border-b-2 border-red-600"
               >
-                ЛЮБИТЕЛЬСКАЯ ГРУППА
+                {{ $t('lable.amateurGroup') }}
               </router-link>
             </li>
           </ul>

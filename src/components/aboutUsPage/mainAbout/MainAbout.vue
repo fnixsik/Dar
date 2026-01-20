@@ -5,8 +5,8 @@
 <template>
   <section class="bg-[#0D0D0D] text-white w-full py-20 px-6 shadow-2xl">
     
-    <h2 class="text-2xl sm:text-3xl font-extrabold mb-16 text-center tracking-tight uppercase border-b-2 border-red-700/50 pb-2">
-      Руководитель
+    <h2 class="text-2xl sm:text-3xl font-extrabold mb-16 text-center tracking-tight uppercase border-b-2 border-red-700/50 pb-2 uppercase">
+      {{ $t('lable.director') }}
     </h2>
 
     <div class="max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-12 ml-16">
@@ -32,7 +32,7 @@
       </div>
 
       <div class="space-y-4 text-center md:text-left">
-        <p class="text-xl font-medium text-red-500 uppercase tracking-wider">Основатель клуба</p>
+        <p class="text-xl font-medium text-red-500 uppercase tracking-wider">{{ $t('lable.founderClub') }}</p>
         <h3 class="text-4xl lg:text-5xl font-black leading-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
           Алидар Утемуратов
         </h3>

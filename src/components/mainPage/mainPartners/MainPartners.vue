@@ -22,7 +22,7 @@
     </div>
 
     <div class="relative w-full bg-[#B00D15] min-h-[335px] flex flex-col justify-center items-center gap-8 text-white py-12">
-      <h2 class="text-4xl font-bold">НАШИ ПАРТНЕРЫ</h2>
+      <h2 class="text-4xl font-bold uppercase">{{ $t('lable.ourPartners') }}</h2>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
         <a href="https://kapa.kz/" target="_blank" class="partner-link">

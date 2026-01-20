@@ -8,7 +8,7 @@ import MainBlockNews from '../../newsPage/mainNews/MainBlockNews.vue';
   <div class="flex flex-col h-full w-full">
 
     <div class="h-24 flex items-center justify-center">
-      <h1 class="text-4xl text-white">новости</h1>
+      <h1 class="text-4xl text-white uppercase">{{ $t('menu.news') }}</h1>
     </div>
     <div class="flex-grow w-full">
       <div class="max-w-7xl mx-auto px-6">
@@ -17,7 +17,9 @@ import MainBlockNews from '../../newsPage/mainNews/MainBlockNews.vue';
     </div>
     <div class="flex justify-center mt-4">
       <router-link to="/news" class="btn">
-        ПОСМОТРЕТЬ ВСЕ
+        <p class="uppercase">
+          {{ $t('button.viewAll') }}
+        </p>
       </router-link>
     </div>
 

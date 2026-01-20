@@ -25,16 +25,16 @@ const getTableFan = async () => {
 <template>
   <div>
     <div class="w-full flex py-8">
-      <p class="text-xl md:text-2xl font-bold text-gray-100 tracking-wide">
-        РАСПИСАНИЕ ТРЕНИРОВОК ЛЮБИТЕЛЬСКОЙ ГРУППЫ
+      <p class="text-xl md:text-2xl font-bold text-gray-100 tracking-wide uppercase">
+        {{ $t('lable.trainingScheduleAmateurGroup') }}
       </p>
     </div>
     <div class="overflow-x-auto schedule-table">
       <DataTable :value="schedule" class="min-w-full h-[551px]">
-        <Column field="day" header="Дни" />
-        <Column field="time" header="Время" />
-        <Column field="activity" header="Назначение" />
-        <Column field="coach" header="Тренер" />
+        <Column field="day" :header="$t('lable.day')" />
+        <Column field="time" :header="$t('lable.time')" />
+        <Column field="activity" :header="$t('lable.appointment')" />
+        <Column field="coach" :header="$t('lable.coache')" />
       </DataTable>
     </div>
   </div>

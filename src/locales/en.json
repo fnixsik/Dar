@@ -1,0 +1,69 @@
+{
+  "menu": {
+    "main": "Main",
+    "team": "Team",
+    "news": "News",
+    "branches": "Branches",
+    "outsideTheOctagon": "Outside the octagon",
+    "aboutUs": "about us"
+  },
+  "auth": {
+    "profile": "Profile",
+    "logout": "Exit",
+    "authorization": "Authorization",
+    "username": "Username",
+    "password": "Password",
+    "enter": "Enter",
+    "registration": "Registration",
+    "confirmThePassword": "Confirm the password",
+    "register": "Register"
+  },
+  "button": {
+    "viewAll": "view all",
+    "": "",
+    "": "",
+    "": ""
+  },
+  "lable": {
+    "ourPartners": "Our partners",
+    "ourTeam": "Our team",
+    "darTimOutOctagon": "Dar Tim is outside the octagon",
+    "fighters": "Fighters",
+    "coaches": "Coaches",
+    "coache": "coache",
+    "amateurGroup": "Amateur group",
+    "director": "Director",
+    "founderClub": "The founder of the club",
+    "addressesInAlmaty": "Addresses in the city",
+    "addressesPoint": "Address",
+    "day": "Days",
+    "time": "Time",
+    "appointment": "Appointment",
+    "trainingScheduleAmateurGroup": "The training schedule of the amateur group",
+    "titlesAwards": "Titles and awards",
+    "victoryStatistics": "Victory statistics",
+    "other": "Other",
+    "decision": "Decision",
+    "submissive": "Submissive",
+    "tkd": "TKD",
+    "biography": "Biography",
+    "achievements": "Progress",
+    "born": "Birth day",
+    "weightCategory": "Weight category",
+    "record": "Record",
+    "TypeSport": "Type of sport",
+    "instagram": "Instagram",
+    "": "",
+    "": "",
+    "": ""
+  },
+  "aboutPage": {
+    "history": "The DAR Group of Companies has been developing the sports field since 2014, starting with the support of youth hand-to-hand combat in the regions of Kazakhstan. Later, the DAR Team was created, which trained athletes in hand-to-hand combat, grappling, jek-jek and other types of martial arts. 3,150 athletes from all over the country train in the existing 19 gyms opened by the company over the past 10 years. «We also support sports entrepreneurs from different regions where future champions are growing up. The main thing is to provide all parties involved with stable necessary conditions and opportunities to unleash their talents and potential»",
+    "proTeam": "In 2020, the professional fighting team DAR TEAM PRO was founded, which prepares Kazakhstani fighters for the world stage. It consists of Shavkat Rakhmonov, Asu Almabayev, Fanil Rafikov, Kazbek Sagyn, Hamlet Aslanov Avenue, Yelzhan Aliaskar and other champions.",
+    "coaches": "Thanks to the experience and support of the older generation of coaches, the real coaching staff of the team has also achieved achievements in the training of international-level athletes."
+  },
+  "outsidePage": {
+    "history": "In 2020, the DAR TEAM PRO fighting team was founded to prepare Kazakhstani fighters for the global arena. The team consists of 20 professionals, including Shavkat Rakhmonov, Asu Almabaev, and others.",
+    "proTeam": "Since 2014, DAR Team has been opening sports sections for children from vulnerable social groups across Kazakhstan. In addition to sports skills, children are taught by professionals in logic, critical thinking, foreign languages, and speed reading."
+  }
+}

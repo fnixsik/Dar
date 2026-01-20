@@ -24,7 +24,7 @@
       <div class="flex items-end justify-between">
         <div>
           <div class="text-3xl sm:text-4xl font-extrabold uppercase">{{ name }}</div>
-          <div class="text-3xl text-1xl mt-1">Титулы и награды</div>
+          <div class="text-3xl text-1xl mt-1">{{ $t('lable.titlesAwards') }}</div>
         </div>
       </div>
     </template>
