@@ -74,8 +74,6 @@
             <InputText v-model="fighter.instagram" class="w-full" />
           </div>
           <div class="col-span-2">
-            <label class="block text-sm font-medium mb-1">Фото бойца</label>
-
             <div class="flex items-center gap-4">
               <FileUpload
                 mode="basic"
