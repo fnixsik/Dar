@@ -16,7 +16,7 @@
             <div class="w-full flex">
         <div class="text-2xl sm:text-3xl font-extrabold uppercase p-4">           
           <p>
-            {{ props.userData?.title }}
+            {{ currentTitle }}
           </p>
         </div>
       </div>
@@ -44,7 +44,7 @@
             text-white text-lg md:text-xl font-medium p-6 rounded-lg leading-relaxed text-center"
           >
           <p>
-            {{ props.userData?.content }}
+            {{ currentContent }}
           </p>
         </div>
       </div>
@@ -53,9 +53,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
 import Dialog from 'primevue/dialog'
+import { useI18n } from 'vue-i18n'
 
+const { locale } = useI18n()
 const props = defineProps<{ modelValue: boolean; userData: any }>()
 const emit = defineEmits<{ (e:'update:modelValue', v:boolean): void }>()
 const modelValueLocal = ref(props.modelValue)
@@ -65,4 +67,17 @@ watch(modelValueLocal, v => emit('update:modelValue', v))
 const handleClose = (v: boolean) => {
   emit('update:modelValue', v)
 }
+
+const currentTitle = computed(() => {
+  if (locale.value === 'en') return props.userData?.titleEn || props.userData?.title;
+  if (locale.value === 'kk') return props.userData?.titleKz || props.userData?.title;
+  return props.userData?.title; // по умолчанию RU
+});
+
+const currentContent = computed(() => {
+  if (locale.value === 'en') return props.userData?.contentEn || props.userData?.content;
+  if (locale.value === 'kk') return props.userData?.contentKz || props.userData?.content;
+  return props.userData?.content;
+});
+
 </script>

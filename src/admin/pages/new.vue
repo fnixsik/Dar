@@ -27,11 +27,45 @@
       <form @submit.prevent="saveNews" class="space-y-4">
         <div>
           <label class="block mb-1 font-semibold">Заголовок</label>
-          <InputText v-model="news.title" required class="w-full" />
+          <Tabs value="0">
+            <TabList>
+                <Tab value="0">Русский</Tab>
+                <Tab value="1">English</Tab>
+                <Tab value="2">Қазақша</Tab>
+            </TabList>
+            <TabPanels>
+              <TabPanel value="0">
+                <InputText v-model="news.title" required class="w-full" />
+              </TabPanel>
+              <TabPanel value="1">
+                <InputText v-model="news.titleEn" required class="w-full" />
+              </TabPanel>
+              <TabPanel value="2">
+                <InputText v-model="news.titleKz" required class="w-full" />
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
         </div>
         <div>
           <label class="block mb-1 font-semibold">Содержание</label>
-          <Textarea v-model="news.content" rows="4" class="w-full" />
+          <Tabs value="0">
+            <TabList>
+                <Tab value="0">Русский</Tab>
+                <Tab value="1">English</Tab>
+                <Tab value="2">Қазақша</Tab>
+            </TabList>
+            <TabPanels>
+              <TabPanel value="0">
+                <Textarea v-model="news.content" rows="4" class="w-full" />
+              </TabPanel>
+              <TabPanel value="1">
+                <Textarea v-model="news.contentEn" rows="4" class="w-full" />
+              </TabPanel>
+              <TabPanel value="2">
+                <Textarea v-model="news.contentKz" rows="4" class="w-full" />
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
         </div>
         <div class="col-span-2">
           <label class="block text-sm font-medium mb-1">Фото бойца</label>

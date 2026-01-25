@@ -3,7 +3,7 @@
     <h1 class="text-xl font-semibold mb-4">Меню</h1>
 
     <nav class="space-y-1">
-      <div>
+      <div v-if="canAccess(['ROLE_ADMIN'])">
         <button
           @click="open.team = !open.team"
           class="w-full flex items-center justify-between px-3 py-2 relative font-semibold uppercase tracking-wide
@@ -70,6 +70,7 @@
         </transition>
       </div>
       <router-link
+        v-if="canAccess(['ROLE_ADMIN', 'ROLE_MODERATOR'])"
         to="/admin/news"
         class="block px-3 py-2 relative font-semibold uppercase tracking-wide hover:text-white
                after:absolute after:left-3 after:bottom-0 after:h-[3px] after:w-[calc(100%-1.5rem)] after:bg-red-600
@@ -84,8 +85,17 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive, computed } from 'vue'
+import { useUserStore } from '@/auth/model/authStore'
+
+const userStore = useUserStore()
 const open = reactive({ team: true })
+
+const userRoles = computed(() => userStore.roles[0] as string[] || [])
+
+const canAccess = (allowedRoles: string[]) => {
+  return allowedRoles.some(role => userRoles.value.includes(role))
+}
 </script>
 
 <style>

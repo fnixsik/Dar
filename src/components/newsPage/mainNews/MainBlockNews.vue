@@ -4,7 +4,10 @@ import { getAllNews, getSoloNewsId } from "@/services/news-services"
 import { showError } from '@/shared/lib/toastService'
 import type { News } from "../../../types/news"
 import Dialog from "@/components/AllDialogs/dialogNews/DialogNews.vue";
+import { useI18n } from 'vue-i18n';
 
+
+const { locale } = useI18n();
 const visibleDialog = ref(false)
 const newscard = ref<News[]>([])
 const selectData = ref<News | undefined>()
@@ -51,6 +54,16 @@ const limitedNews = computed(() => {
   return newscard.value
 })
 
+// Универсальная функция для получения локализованного поля
+const getLangField = (item: any, field: string) => {
+  // Определяем суффикс: для 'en' -> titleEn, для 'kk' -> titleKz, для 'ru' -> title
+  const suffix = locale.value === 'ru' ? '' : (locale.value === 'en' ? 'En' : 'Kz');
+  const fieldName = `${field}${suffix}`;
+  
+  // Возвращаем локализованное значение. 
+  // Если оно пустое, возвращаем базовое (русское), чтобы не было пустоты.
+  return item[fieldName] || item[field];
+};
 
 </script>
 
@@ -84,7 +97,7 @@ const limitedNews = computed(() => {
 
       <template #title>
         <h3 class="text-lg font-semibold line-clamp-2">
-          {{ value.title }}
+          {{ getLangField(value, 'title') }}
         </h3>
       </template>
 

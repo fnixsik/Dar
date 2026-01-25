@@ -59,7 +59,7 @@ const handleAuthClick12 = () =>{
 
 watch(
   () => userStore.roles[0],
-  () => {isAdmin.value = userStore.roles[0], console.log('userStore ', userStore.roles[0])}
+  () => {isAdmin.value = userStore.roles[0]}
 )
 
 const logoutElse = (key: string) => {
@@ -68,8 +68,11 @@ const logoutElse = (key: string) => {
       userStore.logout()
       router.push('/')
       break;
-    case 'admin':
+    case 'ROLE_ADMIN':
       router.push('/admin')
+      break;
+    case 'ROLE_MODERATOR':
+      router.push('/admin/news')
       break;
   }
   dropdownVisible.value = false
@@ -151,9 +154,9 @@ const registerACtion = (e: any) => {
             <ul class="flex flex-col text-white text-sm">
               <!-- <li class="px-4 py-2 hover:bg-red-500 cursor-pointer rounded-t-lg text-center">Профиль</li> -->
               <li
-                v-if="isAdmin === 'ROLE_ADMIN'"
+                v-if="isAdmin === 'ROLE_ADMIN', 'ROLE_MODERATOR'"
                 class="px-4 py-2 hover:bg-red-500 cursor-pointer rounded-t-lg text-center"
-                @click="logoutElse('admin')"
+                @click="logoutElse(isAdmin)"
                 >
                 Профиль
               </li>

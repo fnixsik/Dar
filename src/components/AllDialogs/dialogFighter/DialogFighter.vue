@@ -48,7 +48,7 @@
         </div>
 
         <TabView class="mt-6" :pt="{ nav:{ class:'bg-transparent border-b border-zinc-800' } }">
-          <TabPanel header="БИОГРАФИЯ" value="bio">
+          <TabPanel :header="$t('lable.biography')" value="bio">
             <div class="space-y-2 pt-3">
               <p class="text-sm leading-relaxed text-zinc-300">
                 {{ $t('lable.born') }}: <strong>{{ props.userData?.birthplace }}</strong>
@@ -68,7 +68,7 @@
             </div>
           </TabPanel>
 
-          <TabPanel header="ДОСТИЖЕНИЯ" value="achievements">
+          <TabPanel :header="$t('lable.achievements')" value="achievements">
             <ul class="list-disc ml-5 space-y-1 pt-3">
               <li v-for="(a, i) in props.userData?.achievements || []" :key="i" class="text-sm text-zinc-300">
                 {{ a.title }}

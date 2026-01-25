@@ -97,7 +97,7 @@ const routes = [
         },
         {
           path: 'news',
-          meta: { requiresAuth: true, roles: ['ROLE_ADMIN'] },
+          meta: { requiresAuth: true, roles: ['ROLE_ADMIN', 'ROLE_MODERATOR'] },
           // @ts-ignore
           component: () => import('../admin/pages/New.vue')
         },

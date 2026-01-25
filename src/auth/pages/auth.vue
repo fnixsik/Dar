@@ -29,6 +29,7 @@ const authUser = async () => {
     closeDialog(false)
     
     if(userStore.roles[0] === 'ROLE_ADMIN') router.push('/admin')
+    if(userStore.roles[0] === 'ROLE_MODERATOR') router.push('/admin/news')
   } catch (error) {
     showError(error)
   }
