@@ -27,7 +27,7 @@
   "lable": {
     "ourPartners": "Our partners",
     "ourTeam": "Our team",
-    "darTimOutOctagon": "Dar Tim is outside the octagon",
+    "darTimOutOctagon": "DAR TEAM BEYOND THE OCTAGON",
     "fighters": "Fighters",
     "coaches": "Coaches",
     "coache": "coache",
@@ -53,17 +53,17 @@
     "record": "Record",
     "TypeSport": "Type of sport",
     "instagram": "Instagram",
-    "": "",
-    "": "",
+    "founderClubName": "Alidar Utemuratov",
+    "speech": "«We are building more than just a team; we are building a legacy where every fighter is a part of a larger family and history.»",
     "": ""
   },
   "aboutPage": {
-    "history": "The DAR Group of Companies has been developing the sports field since 2014, starting with the support of youth hand-to-hand combat in the regions of Kazakhstan. Later, the DAR Team was created, which trained athletes in hand-to-hand combat, grappling, jek-jek and other types of martial arts. 3,150 athletes from all over the country train in the existing 19 gyms opened by the company over the past 10 years. «We also support sports entrepreneurs from different regions where future champions are growing up. The main thing is to provide all parties involved with stable necessary conditions and opportunities to unleash their talents and potential»",
-    "proTeam": "In 2020, the professional fighting team DAR TEAM PRO was founded, which prepares Kazakhstani fighters for the world stage. It consists of Shavkat Rakhmonov, Asu Almabayev, Fanil Rafikov, Kazbek Sagyn, Hamlet Aslanov Avenue, Yelzhan Aliaskar and other champions.",
+    "history": "The DAR Group of Companies has been developing the sports field since 2014, starting with the support of youth hand-to-hand combat in the regions of Kazakhstan. Later, the DAR Team was created, which trained athletes in hand-to-hand combat, grappling, zhekpe-zhek and other types of martial arts. 3,150 athletes from all over the country train in the existing 19 gyms opened by the company over the past 10 years. «We also support sports entrepreneurs from different regions where future champions are growing up. The main thing is to provide all parties involved with stable necessary conditions and opportunities to unleash their talents and potential»",
+    "proTeam": "In 2020, the professional fighting team DAR TEAM PRO was founded, which prepares Kazakhstani fighters for the world stage. It consists of Shavkat Rakhmonov, Asu Almabayev, Fanil Rafikov, Kazbek Sagyn, Hamlet Aslanov  and other champions.",
     "coaches": "Thanks to the experience and support of the older generation of coaches, the real coaching staff of the team has also achieved achievements in the training of international-level athletes."
   },
   "outsidePage": {
-    "history": "In 2020, the DAR TEAM PRO fighting team was founded to prepare Kazakhstani fighters for the global arena. The team consists of 20 professionals, including Shavkat Rakhmonov, Asu Almabaev, and others.",
-    "proTeam": "Since 2014, DAR Team has been opening sports sections for children from vulnerable social groups across Kazakhstan. In addition to sports skills, children are taught by professionals in logic, critical thinking, foreign languages, and speed reading."
+    "history": "In 2020, the professional fight team DAR TEAM was founded to prepare Kazakhstani athletes for the global stage. The team consists of 20 professionals, including Shavkat Rakhmonov, Asu Almabayev, and others.",
+    "proTeam": "Since 2014, the DAR team has been launching sports programs for children from vulnerable social groups across Kazakhstan. Beyond athletic training, our professionals teach children logic, critical thinking, foreign languages, and speed reading."
   }
 }

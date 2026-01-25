@@ -34,11 +34,11 @@
       <div class="space-y-4 text-center md:text-left">
         <p class="text-xl font-medium text-red-500 uppercase tracking-wider">{{ $t('lable.founderClub') }}</p>
         <h3 class="text-4xl lg:text-5xl font-black leading-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
-          Алидар Утемуратов
+          {{ $t('lable.founderClubName') }}
         </h3>
         
         <p class="text-gray-300 italic pt-4 max-w-md md:max-w-none mx-auto md:mx-0">
-          "Мы строим не просто команду, а наследие, где каждый боец — часть большой семьи и истории."
+          {{ $t('lable.speech') }}
         </p>
         
         </div>
