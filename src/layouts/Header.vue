@@ -63,6 +63,7 @@ watch(
 )
 
 const logoutElse = (key: string) => {
+  console.log(' key ', key)
   switch(key){
     case 'out':
       userStore.logout()

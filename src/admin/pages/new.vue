@@ -242,8 +242,29 @@ onMounted(() => {
   border:#B00D15;
 }
 .p-button-text:not(:disabled):hover {
-    background: #ffe5e5;
-    border-color: transparent;
-    color: #B00D15;
+  background: #ffe5e5;
+  border-color: transparent;
+  color: #B00D15;
+}
+
+/* Настройка фокуса и внутренних переменных PrimeVue для Tabs */
+:deep(.p-tabs) {
+    --p-tabs-tab-active-color: #9B0B12;
+    --p-tabs-tab-active-border-color: #9B0B12;
+    --p-tabs-tab-hover-color: #9B0B12;
+}
+
+:deep(.p-textarea:focus) {
+    border-color: #9B0B12 !important;
+    box-shadow: 0 0 0 0.2rem rgba(155, 11, 18, 0.25) !important;
+}
+
+:deep(.p-inputtext:enabled:focus) {
+    border-color: #9B0B12 !important;
+    box-shadow: 0 0 0 1px #9B0B12 !important;
+}
+
+:deep(.p-tablist-active-bar) {
+  background:#9B0B12;
 }
 </style>

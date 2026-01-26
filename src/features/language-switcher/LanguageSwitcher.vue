@@ -7,9 +7,9 @@ const { locale } = useI18n();
 const scrolled = ref(false);
 
 const languages = [
+  { label: 'KZ', code: 'kk', flag: 'kz' },
   { label: 'RU', code: 'ru', flag: 'ru' },
-  { label: 'EN', code: 'en', flag: 'gb' },
-  { label: 'KZ', code: 'kk', flag: 'kz' }
+  { label: 'EN', code: 'en', flag: 'gb' }
 ];
 
 // Находим объект текущего языка для отображения в селекте
