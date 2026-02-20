@@ -47,45 +47,77 @@
         </div>
       </div>
 
-      <div class="col-span-12 md:col-span-7 flex flex-col **space-y-6**">         
-        <div class="grid grid-cols-[24px_1fr] gap-x-3 items-start">
-          <i class="pi pi-map-marker text-red-500 text-lg leading-6"></i>
-          <div>
-            <div class="text-red-400 font-semibold">{{ $t('lable.addressesPoint') }}</div>
-            <div class="text-zinc-200">
-              <span v-if="cityAddresses.length">{{ current.address }}</span>
-              <span v-else class="text-zinc-500">Адресов пока нет</span>
+      <div class="col-span-12 md:col-span-7 flex flex-col space-y-6">
+        <div class="h-[505px] w-full max-w-[840px] flex flex-col overflow-hidden rounded-2xl border border-zinc-700 bg-zinc-900 shadow-xl">
+          <div class="flex-1 relative min-h-0"> 
+            <template v-if="current.image?.length && current.image[0] !== ''">
+              <Galleria 
+                :value="current.image" 
+                :numVisible="5" 
+                :circular="true" 
+                :autoPlay="true" 
+                :transitionInterval="4000"
+                class="h-full custom-static-galleria"
+              >
+                <template #item="slotProps">
+                  <img 
+                    :src="slotProps.item" 
+                    class="w-full h-[270px] object-cover block" 
+                    alt="Interior" 
+                  />
+                </template>
+                <template #thumbnail="slotProps">
+                  <img 
+                    :src="slotProps.item" 
+                    class="w-full h-[50px] object-cover block" 
+                  />
+                </template>
+              </Galleria>
+            </template>
+
+            <div v-else class="flex flex-col items-center justify-center h-full bg-zinc-800/30 text-zinc-600">
+              <i class="pi pi-images text-5xl mb-2"></i>
+              <p class="text-xs uppercase tracking-widest">Фото отсутствуют</p>
             </div>
           </div>
-        </div>
 
-        <div class="grid grid-cols-[24px_1fr] gap-x-3 items-start">
-          <i class="pi pi-phone text-red-500 text-lg leading-6"></i>
-          <div>
-            <div class="text-red-400 font-semibold">Телефон</div>
-            <div class="text-zinc-200">
-              <template v-if="current.phones?.length">
-                <a
-                  v-for="(p, i) in current.phones"
-                  :key="p"
-                  :href="'tel:'+p.replace(/\\s|\\+/g,'')"
-                  class="hover:underline"
-                >
-                  {{ p }}<span v-if="i < current.phones.length - 1">, </span>
+          <div class="bg-zinc-900/90 border-t border-zinc-800 p-5 grid grid-cols-1 md:grid-cols-2 gap-4">
+            
+            <div class="flex gap-x-3 items-start">
+              <div class="w-8 h-8 shrink-0 rounded-full bg-red-600/10 flex items-center justify-center">
+                <i class="pi pi-map-marker text-red-500 text-sm"></i>
+              </div>
+              <div class="min-w-0">
+                <div class="text-red-400 text-[10px] font-bold uppercase tracking-widest mb-0.5">{{ $t('lable.addressesPoint') }}</div>
+                <div class="text-zinc-200 text-xs leading-tight truncate" :title="current.address">{{ current.address }}</div>
+              </div>
+            </div>
+
+            <div class="flex gap-x-3 items-start">
+              <div class="w-8 h-8 shrink-0 rounded-full bg-red-600/10 flex items-center justify-center">
+                <i class="pi pi-phone text-red-500 text-sm"></i>
+              </div>
+              <div>
+                <div class="text-red-400 text-[10px] font-bold uppercase tracking-widest mb-0.5">{{ $t('lable.Telephone') }}</div>
+                <div class="flex flex-col text-xs text-zinc-200">
+                  <a v-for="p in current.phones" :key="p" :href="'tel:'+p" class="hover:text-red-400 transition-colors">
+                    {{ p }}
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex gap-x-3 items-start md:col-span-2 border-t border-zinc-800/50 pt-3 mt-1">
+              <div class="w-8 h-8 shrink-0 rounded-full bg-red-600/10 flex items-center justify-center">
+                <i class="pi pi-envelope text-red-500 text-sm"></i>
+              </div>
+              <div>
+                <div class="text-red-400 text-[10px] font-bold uppercase tracking-widest mb-0.5">Email</div>
+                <a :href="'mailto:'+current.email" class="text-zinc-200 text-xs hover:underline truncate block">
+                  {{ current.email }}
                 </a>
-              </template>
-              <span v-else class="text-zinc-500">—</span>
-          </div>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-[24px_1fr] gap-x-3 items-start">
-          <i class="pi pi-envelope text-red-500 text-lg leading-6"></i>
-          <div>
-            <div class="text-red-400 font-semibold">Email</div>
-            <a href="mailto:almaty.center@utemuratovfund.org" class="text-zinc-200 hover:underline">
-              darteam@dar.io
-            </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -99,7 +131,7 @@ import { ref, computed } from 'vue'
 import Button from 'primevue/button'
 
 // lat и lon теперь необязательны (что позволяет поддерживать старые записи без координат)
-type Address = { address: string; phones?: string[], lat?: number; lon?: number;}
+type Address = { address: string; phones?: string[], lat?: number; lon?: number; email?: string; image?: string[]}
 type Directory = Record<string, Address[]>
 
 const cities = [
@@ -110,13 +142,17 @@ const directory: Directory = {
  'Алматы': [
  {
   address: 'улица Патшаим Тажибаевой, 155', 
-  phones: ['+7 (727) 321‒04‒63', '+7 (727) 321‒04‒62'], 
+  phones: ['+7 (727) 321‒04‒63', '+7 (727) 321‒04‒62'],
+  email: 'darteam@dar.io',
+  image: ['/src/assets/img/office1.jpg','/src/assets/img/office2.jpg','/src/assets/img/office3.jpg',],
   lat: 43.211185, 
   lon: 76.890700 // Координаты для маркера
  },
  { 
   address: 'Ораза Жандосова улица, 87', 
   phones: ['+7‒708‒205‒06‒16', '+7‒776‒333‒54‒54'],
+  email: 'darteam@dar.io',
+  image: [''],
   lat: 43.206670,
   lon: 76.857041 // Координаты для маркера
  }
@@ -125,6 +161,8 @@ const directory: Directory = {
   { 
     address: '19-й микрорайон, 26', 
     phones: ['+7‒702‒000‒53‒52'],
+    email: '',
+    image: [''],
     lat: 43.678784,
     lon: 51.155507 // Координаты для маркера
   }
@@ -133,6 +171,8 @@ const directory: Directory = {
   { 
     address: 'мкр.Есет батыра, 2-й микрорайон, 28', 
     phones: ['+7‒777‒560‒09‒61'],
+    email: '',
+    image: [''],
     lat: 50.318671,
     lon: 57.338961 // Координаты для маркера
   }
@@ -161,8 +201,6 @@ const mapUrl = computed(() => {
     if (currentAddress.lat && currentAddress.lon) {
         const { lat, lon } = currentAddress;
         
-        // Используем параметры ll (центр карты) и pt (точка маркера)
-        // pm2rdl - это тип маркера: стандартный, красный, с точкой.
         return `https://yandex.ru/map-widget/v1/?ll=${lon},${lat}&z=16&pt=${lon},${lat},pm2rdl`;
     }
 
@@ -186,5 +224,6 @@ const mapUrl = computed(() => {
 }
 :deep(.p-button:hover) {
   background: #27272a;
+  color: #f4f4f5;
 }
 </style>
