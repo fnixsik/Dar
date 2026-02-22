@@ -54,8 +54,10 @@
               <Galleria 
                 :value="current.image" 
                 :numVisible="current.image[0].length" 
-                :circular="true" 
-                :autoPlay="true" 
+                :circular="true"
+                :autoPlay="true"
+                :showItemNavigators="false"
+                :showThumbnailNavigators="false"
                 :transitionInterval="3000"
                 class="h-full custom-static-galleria"
               >
@@ -253,8 +255,7 @@ const directory = computed<Directory>(()=> (
     email: '',
     image: [
       new URL('@/assets/img/Атырау/img1.webp', import.meta.url).href,new URL('@/assets/img/Атырау/img2.webp', import.meta.url).href,new URL('@/assets/img/Атырау/img3.webp', import.meta.url).href,new URL('@/assets/img/Атырау/img4.webp', import.meta.url).href,
-      new URL('@/assets/img/Атырау/img5.webp', import.meta.url).href,new URL('@/assets/img/Атырау/img6.webp', import.meta.url).href,new URL('@/assets/img/Атырау/img7.webp', import.meta.url).href,new URL('@/assets/img/Атырау/img8.webp', import.meta.url).href,
-      new URL('@/assets/img/Атырау/img9.webp', import.meta.url).href,new URL('@/assets/img/Атырау/img10.webp', import.meta.url).href,
+      new URL('@/assets/img/Атырау/img5.webp', import.meta.url).href,new URL('@/assets/img/Атырау/img6.webp', import.meta.url).href,
     ],
     lat: 47.124659,
     lon: 51.941792 // Координаты для маркера
