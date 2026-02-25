@@ -254,8 +254,7 @@ const directory = computed<Directory>(()=> (
     phones: [''],
     email: 'darteam@dar.io',
     image: [
-      new URL('@/assets/img/Атырау/img1.webp', import.meta.url).href,new URL('@/assets/img/Атырау/img2.webp', import.meta.url).href,new URL('@/assets/img/Атырау/img3.webp', import.meta.url).href,new URL('@/assets/img/Атырау/img4.webp', import.meta.url).href,
-      new URL('@/assets/img/Атырау/img5.webp', import.meta.url).href,new URL('@/assets/img/Атырау/img6.webp', import.meta.url).href,
+      new URL('@/assets/img/Атырау/img1.webp', import.meta.url).href,new URL('@/assets/img/Атырау/img2.webp', import.meta.url).href,
     ],
     lat: 47.124659,
     lon: 51.941792 // Координаты для маркера
