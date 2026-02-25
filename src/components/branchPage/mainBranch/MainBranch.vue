@@ -53,7 +53,7 @@
             <template v-if="current.image?.length && current.image[0] !== ''">
               <Galleria 
                 :value="current.image" 
-                :numVisible="current.image[0].length" 
+                :numVisible="current.image[selectedIndex].length" 
                 :circular="true"
                 :autoPlay="true"
                 :showItemNavigators="false"
@@ -166,33 +166,33 @@ const directory = computed<Directory>(()=> (
   { 
     address: t('cities.AktauStr'), 
     phones: ['+7‒702‒000‒53‒52'],
-    email: '',
+    email: 'darteam@dar.io',
     image: [new URL('@/assets/img/Актау/img1.webp', import.meta.url).href,new URL('@/assets/img/Актау/img2.webp', import.meta.url).href,new URL('@/assets/img/Актау/img3.webp', import.meta.url).href,],
     lat: 43.678784,
     lon: 51.155507 // Координаты для маркера
   }
 ],
  'Aktobe': [
-  { 
+  {
     address: t('cities.AktobeStr'), 
     phones: ['+7-777-560-09-61','+7-705-242-56-91'],
-    email: '',
+    email: 'darteam@dar.io',
     image: [new URL('@/assets/img/АктобеНурСити/img1.webp', import.meta.url).href,new URL('@/assets/img/АктобеНурСити/img2.webp', import.meta.url).href,new URL('@/assets/img/АктобеНурСити/img3.webp', import.meta.url).href,],
     lat: 50.318663,
     lon: 57.339019 // Координаты для маркера
   },
-  { 
+  {
     address: t('cities.AktobeStr2'), 
     phones: ['+7-701-558-49-00'],
-    email: '',
+    email: 'darteam@dar.io',
     image: [new URL('@/assets/img/АктобеЕсетБатыра/img1.webp', import.meta.url).href,new URL('@/assets/img/АктобеЕсетБатыра/img2.webp', import.meta.url).href,new URL('@/assets/img/АктобеЕсетБатыра/img3.webp', import.meta.url).href,],
     lat: 50.300477,
     lon: 57.164846 // Координаты для маркера
   },
-  { 
-    address: t('cities.AktobeStr3'), 
+  {
+    address: t('cities.AktobeStr3'),
     phones: ['+7-702-889-99-60'],
-    email: '',
+    email: 'darteam@dar.io',
     image: [new URL('@/assets/img/АктобеМаресьева/img1.webp', import.meta.url).href,new URL('@/assets/img/АктобеМаресьева/img2.webp', import.meta.url).href,new URL('@/assets/img/АктобеМаресьева/img3.webp', import.meta.url).href,new URL('@/assets/img/АктобеМаресьева/img4.webp', import.meta.url).href,
       new URL('@/assets/img/АктобеМаресьева/img5.webp', import.meta.url).href,new URL('@/assets/img/АктобеМаресьева/img6.webp', import.meta.url).href,new URL('@/assets/img/АктобеМаресьева/img7.webp', import.meta.url).href,new URL('@/assets/img/АктобеМаресьева/img8.webp', import.meta.url).href,
     ],
@@ -204,7 +204,7 @@ const directory = computed<Directory>(()=> (
   { 
     address: t('cities.AlmatyRegStr'), 
     phones: ['+7-747-106-54-77'],
-    email: '',
+    email: 'darteam@dar.io',
     image: ['',],
     lat: 43.306347,
     lon: 77.149421 // Координаты для маркера
@@ -214,7 +214,7 @@ const directory = computed<Directory>(()=> (
   { 
     address: t('cities.TurkestanStr'), 
     phones: ['+7-705-270-13-68'],
-    email: '',
+    email: 'darteam@dar.io',
     image: ['',],
     lat: 42.493096,
     lon: 70.310401 // Координаты для маркера
@@ -224,7 +224,7 @@ const directory = computed<Directory>(()=> (
   { 
     address: t('cities.KokshetauStr'), 
     phones: ['+7-702-828-62-94'],
-    email: '',
+    email: 'darteam@dar.io',
     image: [new URL('@/assets/img/КокшетауАуельбекова/img1.webp', import.meta.url).href,new URL('@/assets/img/КокшетауАуельбекова/img2.webp', import.meta.url).href,new URL('@/assets/img/КокшетауАуельбекова/img3.webp', import.meta.url).href,new URL('@/assets/img/КокшетауАуельбекова/img4.webp', import.meta.url).href,],
     lat: 53.282040,
     lon: 69.365425 // Координаты для маркера
@@ -232,7 +232,7 @@ const directory = computed<Directory>(()=> (
   { 
     address: t('cities.KokshetauStr2'), 
     phones: ['+7-701-536-65-55'],
-    email: '',
+    email: 'darteam@dar.io',
     image: [new URL('@/assets/img/КокшетауБайтурсынова/img1.webp', import.meta.url).href,new URL('@/assets/img/КокшетауБайтурсынова/img2.webp', import.meta.url).href,new URL('@/assets/img/КокшетауБайтурсынова/img3.webp', import.meta.url).href,],
     lat: 53.292209,
     lon: 69.390972 // Координаты для маркера
@@ -242,7 +242,7 @@ const directory = computed<Directory>(()=> (
   { 
     address: t('cities.KyzylordaStr'), 
     phones: ['+7-701-112-55-51'],
-    email: '',
+    email: 'darteam@dar.io',
     image: [new URL('@/assets/img/Кызылорда/img1.webp', import.meta.url).href,new URL('@/assets/img/Кызылорда/img2.webp', import.meta.url).href,],
     lat: 44.827906,
     lon: 65.501242 // Координаты для маркера
@@ -252,7 +252,7 @@ const directory = computed<Directory>(()=> (
   { 
     address: t('cities.AtyrauStr'), 
     phones: [''],
-    email: '',
+    email: 'darteam@dar.io',
     image: [
       new URL('@/assets/img/Атырау/img1.webp', import.meta.url).href,new URL('@/assets/img/Атырау/img2.webp', import.meta.url).href,new URL('@/assets/img/Атырау/img3.webp', import.meta.url).href,new URL('@/assets/img/Атырау/img4.webp', import.meta.url).href,
       new URL('@/assets/img/Атырау/img5.webp', import.meta.url).href,new URL('@/assets/img/Атырау/img6.webp', import.meta.url).href,
@@ -265,7 +265,7 @@ const directory = computed<Directory>(()=> (
   { 
     address: t('cities.KonaevStr'), 
     phones: ['+7-707-173-39-83','+7-776-415-20-01','+7-771-402-45-47'],
-    email: '',
+    email: 'darteam@dar.io',
     image: [
       new URL('@/assets/img/Қонаев/img1.webp', import.meta.url).href,new URL('@/assets/img/Қонаев/img2.webp', import.meta.url).href,new URL('@/assets/img/Қонаев/img3.webp', import.meta.url).href,new URL('@/assets/img/Қонаев/img4.webp', import.meta.url).href,
       new URL('@/assets/img/Қонаев/img5.webp', import.meta.url).href,new URL('@/assets/img/Қонаев/img6.webp', import.meta.url).href,new URL('@/assets/img/Қонаев/img7.webp', import.meta.url).href,new URL('@/assets/img/Қонаев/img8.webp', import.meta.url).href,
@@ -280,7 +280,7 @@ const directory = computed<Directory>(()=> (
   { 
     address: t('cities.AstanaStr'), 
     phones: ['+7-702-505-03-52',' +7-701-393-42-70'],
-    email: '',
+    email: 'darteam@dar.io',
     image: [
       new URL('@/assets/img/Astana/Astanaimg1.webp',import.meta.url).href,new URL('@/assets/img/Astana/Astanaimg2.webp',import.meta.url).href,new URL('@/assets/img/Astana/Astanaimg3.webp',import.meta.url).href,new URL('@/assets/img/Astana/Astanaimg4.webp',import.meta.url).href,
       new URL('@/assets/img/Astana/Astanaimg5.webp',import.meta.url).href,new URL('@/assets/img/Astana/Astanaimg6.webp',import.meta.url).href,new URL('@/assets/img/Astana/Astanaimg7.webp',import.meta.url).href,new URL('@/assets/img/Astana/Astanaimg8.webp',import.meta.url).href,
