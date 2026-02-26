@@ -50,8 +50,9 @@
       <div class="col-span-12 md:col-span-7 flex flex-col space-y-6">
         <div class="h-[505px] w-full max-w-[840px] flex flex-col overflow-hidden rounded-2xl border border-zinc-700 bg-zinc-900 shadow-xl">
           <div class="flex-1 relative min-h-0"> 
-            <template v-if="current.image?.length && current.image[0] !== ''">
+            <template v-if="current.image && current.image.length > 0 && current.image[0] !== ''">
               <Galleria 
+                :key="`${selectedCity}-${selectedIndex}`"
                 :value="current.image" 
                 :numVisible="current.image[selectedIndex].length" 
                 :circular="true"
