@@ -101,7 +101,7 @@
                 <i class="pi pi-phone text-red-500 text-sm"></i>
               </div>
               <div>
-                <div class="text-red-400 text-[10px] font-bold uppercase tracking-widest mb-0.5">{{ $t('lable.Telephone') }}</div>
+                <div class="text-red-400 text-[10px] font-bold uppercase tracking-widest mb-0.5">{{ $t('lable.telephone') }}</div>
                 <div class="flex flex-col text-xs text-zinc-200">
                   <a v-for="p in current.phones" :key="p" :href="'tel:'+p" class="hover:text-red-400 transition-colors">
                     {{ p }}

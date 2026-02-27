@@ -4,11 +4,13 @@ import { useRouter } from 'vue-router'
 import { auth } from '@/services/auth-services'
 import { showSuccess, showError } from '@/shared/lib/toastService'
 import { useUserStore } from '@/auth/model/authStore'
+import ResetPassword from '@/auth/pages/ResetPassword.vue'
 
 const username = ref<string>('')
 const password = ref<string>('')
 const router = useRouter()
 const userStore = useUserStore()
+const visableResetDialog = ref<boolean>(false)
 
 const props = defineProps<{
   visableAuthDialog: boolean
@@ -52,9 +54,19 @@ const closeDialog = (v:boolean) => {
 const goRegister = (v:boolean) => {
   emit('update:visableRegisterDialog', v)
 }
+
+const goForgot = () => {
+  emit('update:visableAuthDialog', false)
+  visableResetDialog.value = true
+}
+
+const closeResetDialog = (v: boolean) => {
+  visableResetDialog.value = v
+}
 </script>
 
 <template>
+<ResetPassword :visableResetDialog="visableResetDialog" @update:visableResetDialog="closeResetDialog"/>
 <Dialog
   v-model:visible="props.visableAuthDialog"
   @update:visible="closeDialog"
@@ -121,7 +133,7 @@ const goRegister = (v:boolean) => {
       />
     </div>
     <div class="mt-3 flex items-center justify-between text-sm">
-      <!-- <button class="text-gray-300 hover:text-white" @click="goForgot"></button> -->
+      <button class="text-gray-500 hover:text-white cursor-pointer" @click="goForgot">Забыли пароль ?</button>
       <button class="text-gray-500 hover:text-white cursor-pointer" @click="goRegister(true)">{{ $t('auth.registration') }}</button>
     </div>
   </Dialog>

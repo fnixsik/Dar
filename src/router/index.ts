@@ -18,6 +18,15 @@ const routes = [
       props: { modal: { mode: 'login' } },
     },
     {
+      path: '/forgot-password',
+      name: 'forgotPassword',
+      components: {
+        default: () => import('@/components/mainPage/backWall/BackWall.vue'),
+        modal: () => import('@/auth/pages/ResetPassword.vue'),
+      },
+      props: { modal: { mode: 'login' } },
+    },
+    {
       path: '/register',
       name: 'register',
       components: {

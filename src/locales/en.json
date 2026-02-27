@@ -19,8 +19,8 @@
     "register": "Register"
   },
   "button": {
-    "viewAll": "view all",
-    "": "",
+    "viewAll": "View all",
+    "reset": "Reset",
     "": "",
     "": ""
   },
@@ -55,7 +55,10 @@
     "instagram": "Instagram",
     "founderClubName": "Alidar Utemuratov",
     "speech": "«We are building more than just a team; we are building a legacy where every fighter is a part of a larger family and history.»",
-    "Telephone": "Phone",
+    "telephone": "Phone",
+    "passwordRecovery": "Password recovery",
+    "enterEmail": "Enter your Email address to reset your password",
+    "": "",
     "": ""
   },
   "cities":{
