@@ -16,3 +16,10 @@ export const registerUser = async (name: string, password: string, email: string
   })
   return response.data
 }
+
+export const sendOnEmailResetPasswordUser = async (email: string) => {
+  const response = await BaseApi.post('/auth/forgot-password',{
+    loginOrEmail: email
+  })
+  return response.data
+}

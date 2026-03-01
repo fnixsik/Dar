@@ -1,5 +1,9 @@
 <script setup lang="ts">
+import { sendOnEmailResetPasswordUser } from '@/services/auth-services'
+import { showSuccess, showError } from '@/shared/lib/toastService'
+import { ref } from 'vue'
 
+const email = ref('')
 const props = defineProps<{
   visableResetDialog: boolean
 }>()
@@ -11,6 +15,18 @@ const emit = defineEmits<{
 
 const closeDialog = (v: boolean) => {
   emit('update:visableResetDialog', v)
+}
+
+const SendEmail = async () => {
+  try{
+    let resp = await sendOnEmailResetPasswordUser(email.value)
+    showSuccess(resp.message)
+  }catch(err){
+    showError(err)
+  }finally{
+    email.value = ''
+    emit('update:visableResetDialog', false)
+  }
 }
 </script>
 <template>
@@ -45,22 +61,23 @@ const closeDialog = (v: boolean) => {
     <div class="flex flex-col gap-5">
       <span class="p-input-icon-left w-full">
         <i class="pi pi-user text-gray-400" />
-      <InputText placeholder="Email" class="w-full" />
+      <InputText v-model="email" placeholder="Email" class="w-full" />
       <span class="text-red-500 text-sm"></span>
       </span>
 
 
       <Button
-      unstyled
-      :label="$t('button.reset')"
-      class="
-        w-full
-        bg-gradient-to-r from-red-600 to-red-700
-        hover:from-red-700 hover:to-red-800
-        text-white font-semibold rounded-xl
-        py-3 transition duration-300 shadow-lg
-        cursor-pointer
-      "
+        unstyled
+        :label="$t('button.reset')"
+        @click="SendEmail"
+        class="
+          w-full
+          bg-gradient-to-r from-red-600 to-red-700
+          hover:from-red-700 hover:to-red-800
+          text-white font-semibold rounded-xl
+          py-3 transition duration-300 shadow-lg
+          cursor-pointer
+        "
       />
     </div>
   </Dialog>
