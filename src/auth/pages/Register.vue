@@ -8,7 +8,7 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e:'update:visibleRegisterDialog', v:boolean) : void
+  (e: 'auth'): void
 }>()
 
 // Поля формы
@@ -59,7 +59,7 @@ const handleRegister = async () => {
     const response = await registerUser(username.value, password.value, email.value)
 
     showSuccess(response)
-    goLogin(true)
+    goLogin()
   } catch (err) {
     showError(err)
   }
@@ -71,8 +71,8 @@ const handleRegister = async () => {
 
 
 // Переход на авторизацию
-const goLogin = (v: boolean) => {
-  emit('update:visibleRegisterDialog', v)
+const goLogin = () => {
+  emit('auth')
 }
 </script>
 
@@ -105,7 +105,7 @@ const goLogin = (v: boolean) => {
       <div class="flex items-center justify-between w-full">
         <button
           class="flex items-center text-white transition cursor-pointer hover:text-red-500"
-          @click="goLogin(true)"
+          @click="goLogin()"
         >
           <i class="pi pi-arrow-left mr-2"></i>
         </button>

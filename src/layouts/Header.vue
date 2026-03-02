@@ -107,32 +107,11 @@ const openDialog = (action: string) => {
       visableResetDialog.value = true;
       router.push('/reset-password');
       break;
+    case 'out':
+      router.push('/');
+      break;
   }
 };
-
-const closeResetDialog = (v:boolean, action?:string) => {
-    switch (action) {
-    case 'registerDialog':
-      router.push('/')
-      visableAuthDialog.value = false
-      RegisterDialog.value = true
-      break;
-    case 'forgotDialog':
-      router.push('/')
-      visableForgotDialog.value = v
-      break;
-    case 'resetDialog':
-      router.push('/')
-      visableResetDialog.value = false
-      break;
-    default:
-      RegisterDialog.value = false
-      visableForgotDialog.value = false
-      visableResetDialog.value = false
-      router.push('/')
-      break;
-  }
-}
 
 </script>
 
@@ -143,13 +122,19 @@ const closeResetDialog = (v:boolean, action?:string) => {
     @register="openDialog('register')"
     @forgot="openDialog('forgot')"
     />
-  <Register :visibleRegisterDialog="RegisterDialog" @update:visibleRegisterDialog="handleAuthClick"/>
+  <Register 
+    :visibleRegisterDialog="RegisterDialog" 
+    @auth="openDialog('auth')"
+  />
   <ForgotPassword 
     :visableForgotDialog="visableForgotDialog" 
-    @update:visableForgotDialog="closeResetDialog"
+    @out="openDialog('out')"
     @reset="openDialog('reset')"
   />
-  <ResetPassword :visableResetDialog="visableResetDialog" @update:visableResetDialog="closeResetDialog"/>
+  <ResetPassword 
+    :visableResetDialog="visableResetDialog" 
+    @out="openDialog('out')"
+  />
   <header
     :class="[
       'fixed top-0 left-0 right-0 z-50 transition-all duration-300',

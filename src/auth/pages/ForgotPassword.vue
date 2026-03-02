@@ -3,31 +3,34 @@ import { sendOnEmailForgotPasswordUser } from '@/services/auth-services'
 import { showSuccess, showError } from '@/shared/lib/toastService'
 import { ref } from 'vue'
 
+
 const email = ref('')
 const props = defineProps<{
   visableForgotDialog: boolean
 }>()
+const disableButton = ref<boolean>(false)
 
 const emit = defineEmits<{
-  (e: 'update:visableForgotDialog', v:boolean, action?:string) : void
+  (e: 'out'): void
   (e: 'reset'): void
 }>()
 
 
 const closeDialog = (v: boolean) => {
-  emit('update:visableForgotDialog', false)
+  emit('out')
 }
 
 const SendEmail = async () => {
   try{
-    // let resp = await sendOnEmailForgotPasswordUser(email.value)
-    // showSuccess(resp.message)
+    disableButton.value = true
+    let resp = await sendOnEmailForgotPasswordUser(email.value)
+    showSuccess(resp.message)
     emit('reset')
   }catch(err){
     showError(err)
   }finally{
+    disableButton.value = false
     email.value = ''
-    // emit('update:visableForgotDialog', false, 'forgotDialog')
   }
 }
 </script>
@@ -73,6 +76,7 @@ const SendEmail = async () => {
         unstyled
         :label="$t('button.reset')"
         @click="SendEmail"
+        :disabled="disableButton"
         class="
           w-full
           bg-gradient-to-r from-red-600 to-red-700

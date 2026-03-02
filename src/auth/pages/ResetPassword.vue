@@ -16,6 +16,7 @@ const form = reactive<ResetForm>({
   password: '',
   confirmPassword: ''
 })
+const disableButton = ref<boolean>(false)
 
 const initialFormState: ResetForm = {
   email: '',
@@ -29,7 +30,8 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e:'update:visableResetDialog', v:boolean, action?:string) : void
+  (e: 'out'): void
+  (e: 'register'): void
 }>()
 
 // Ошибки валидации: используем Record для типизации
@@ -71,13 +73,16 @@ const SendResetPassword = async () => {
   if (!validate()) return
 
   try {
+    disableButton.value = true
     // Это покажет текущие данные, а не ссылку на прокси
     const resp = await sendOnEmailResetPasswordUser(JSON.parse(JSON.stringify(form)))
     showSuccess(resp.message)
     resetForm()
-    closeDialog()
+    emit('out')
   } catch (err) {
     showError(err)
+  }finally{
+    disableButton.value = false
   }
 }
 
@@ -87,7 +92,7 @@ const resetForm = () => {
 }
 
 const closeDialog = () => {
-  emit('update:visableResetDialog', false, 'resetDialog')
+  emit('out')
   resetForm();
 }
 </script>
@@ -157,6 +162,7 @@ const closeDialog = () => {
       <Button
         unstyled
         :label="$t('button.reset')"
+        :disabled="disableButton"
         class="
           w-full
           bg-gradient-to-r from-red-600 to-red-700
