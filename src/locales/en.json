@@ -16,7 +16,8 @@
     "enter": "Enter",
     "registration": "Registration",
     "confirmThePassword": "Confirm the password",
-    "register": "Register"
+    "register": "Register",
+    "code":"code"
   },
   "button": {
     "viewAll": "View all",
@@ -58,7 +59,7 @@
     "telephone": "Phone",
     "passwordRecovery": "Password recovery",
     "enterEmail": "Enter your Email address to reset your password",
-    "": "",
+    "resetPassword": "Password Reset",
     "": ""
   },
   "cities":{

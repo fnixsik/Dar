@@ -17,9 +17,18 @@ export const registerUser = async (name: string, password: string, email: string
   return response.data
 }
 
-export const sendOnEmailResetPasswordUser = async (email: string) => {
+export const sendOnEmailForgotPasswordUser = async (email: string) => {
   const response = await BaseApi.post('/auth/forgot-password',{
     loginOrEmail: email
+  })
+  return response.data
+}
+
+export const sendOnEmailResetPasswordUser = async (all: any) => {
+  const response = await BaseApi.post('/auth/reset-password',{
+    email: all.email,
+    code: all.code,
+    newPassword: all.password
   })
   return response.data
 }

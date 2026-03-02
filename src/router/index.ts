@@ -22,6 +22,15 @@ const routes = [
       name: 'forgotPassword',
       components: {
         default: () => import('@/components/mainPage/backWall/BackWall.vue'),
+        modal: () => import('@/auth/pages/ForgotPassword.vue'),
+      },
+      props: { modal: { mode: 'login' } },
+    },
+    {
+      path: '/reset-password',
+      name: 'resetPassword',
+      components: {
+        default: () => import('@/components/mainPage/backWall/BackWall.vue'),
         modal: () => import('@/auth/pages/ResetPassword.vue'),
       },
       props: { modal: { mode: 'login' } },

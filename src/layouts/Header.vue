@@ -5,6 +5,8 @@ import { useUserStore } from '@/auth/model/authStore'
 import Auth from '@/auth/pages/Auth.vue'
 import Register from '@/auth/pages/Register.vue'
 import LanguageSwitcher from '@/features/language-switcher/LanguageSwitcher.vue'
+import ForgotPassword from '@/auth/pages/ForgotPassword.vue'
+import ResetPassword from '@/auth/pages/ResetPassword.vue'
 import 'primeicons/primeicons.css'
 
 const userStore = useUserStore()
@@ -16,6 +18,8 @@ const RegisterDialog = ref<boolean>(false)
 const username = computed(() => userStore.username)
 const dropdownVisible = ref(false)
 const isAdmin = ref()
+const visableForgotDialog = ref<boolean>(false)
+const visableResetDialog = ref<boolean>(false)
 
 // обработчик скролла
 const handleScroll = () => {
@@ -63,7 +67,6 @@ watch(
 )
 
 const logoutElse = (key: string) => {
-  console.log(' key ', key)
   switch(key){
     case 'out':
       userStore.logout()
@@ -80,21 +83,73 @@ const logoutElse = (key: string) => {
 }
 
 const registerACtion = (e: any) => {
-  if(e){
-  router.push('/register')
-  visableAuthDialog.value = false
-  RegisterDialog.value = true
-  }else{
-    RegisterDialog.value = false
-    router.push('/')
+  switch (e) {
+    case 'registerDialog':
+      router.push('/register')
+      visableAuthDialog.value = false
+      RegisterDialog.value = true
+      break;
+    case 'forgotDialog':
+      router.push('/forgot-password')
+      visableAuthDialog.value = false
+      RegisterDialog.value = false
+      visableForgotDialog.value = true
+      break;
+    case 'resetDialog':
+      router.push('/reset-password')
+      visableAuthDialog.value = false
+      RegisterDialog.value = false
+      visableForgotDialog.value = false
+      visableResetDialog.value = true
+      break;
+  
+    default:
+      RegisterDialog.value = false
+      router.push('/')
+      break;
+  }
+}
+
+const closeResetDialog = (v:boolean, action?:string) => {
+    switch (action) {
+    case 'registerDialog':
+      router.push('/')
+      visableAuthDialog.value = false
+      RegisterDialog.value = true
+      break;
+    case 'forgotDialog':
+      router.push('/')
+      visableForgotDialog.value = v
+      break;
+    case 'resetDialog':
+      router.push('/')
+      visableResetDialog.value = false
+      break;
+    default:
+      RegisterDialog.value = false
+      visableForgotDialog.value = false
+      visableResetDialog.value = false
+      router.push('/')
+      break;
   }
 }
 
 </script>
 
 <template>
-  <Auth :visableAuthDialog="visableAuthDialog" @update:visableAuthDialog="handleAuthClick" @update:visableRegisterDialog="registerACtion"/>
+  <Auth 
+    :visableAuthDialog="visableAuthDialog" 
+    @update:visableAuthDialog="handleAuthClick" 
+    @update:visableRegisterDialog="registerACtion"
+    @update:visableForgotDialog="registerACtion"
+    />
   <Register :visibleRegisterDialog="RegisterDialog" @update:visibleRegisterDialog="handleAuthClick"/>
+  <ForgotPassword 
+    :visableForgotDialog="visableForgotDialog" 
+    @update:visableForgotDialog="closeResetDialog"
+    @update:visableResetDialog="registerACtion"
+  />
+  <ResetPassword :visableResetDialog="visableResetDialog" @update:visableResetDialog="closeResetDialog"/>
   <header
     :class="[
       'fixed top-0 left-0 right-0 z-50 transition-all duration-300',

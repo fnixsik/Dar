@@ -4,13 +4,12 @@ import { useRouter } from 'vue-router'
 import { auth } from '@/services/auth-services'
 import { showSuccess, showError } from '@/shared/lib/toastService'
 import { useUserStore } from '@/auth/model/authStore'
-import ResetPassword from '@/auth/pages/ResetPassword.vue'
 
 const username = ref<string>('')
 const password = ref<string>('')
 const router = useRouter()
 const userStore = useUserStore()
-const visableResetDialog = ref<boolean>(false)
+
 
 const props = defineProps<{
   visableAuthDialog: boolean
@@ -18,7 +17,8 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: 'update:visableAuthDialog', v:boolean) : void
-  (e: 'update:visableRegisterDialog', v:boolean) : void
+  (e: 'update:visableRegisterDialog', v:string) : void
+  (e: 'update:visableForgotDialog', v:string) : void
 }>()
 
 const authUser = async () => {
@@ -52,21 +52,15 @@ const closeDialog = (v:boolean) => {
 }
 
 const goRegister = (v:boolean) => {
-  emit('update:visableRegisterDialog', v)
+  emit('update:visableRegisterDialog', 'registerDialog')
 }
 
 const goForgot = () => {
-  emit('update:visableAuthDialog', false)
-  visableResetDialog.value = true
-}
-
-const closeResetDialog = (v: boolean) => {
-  visableResetDialog.value = v
+  emit('update:visableForgotDialog', 'forgotDialog')
 }
 </script>
 
 <template>
-<ResetPassword :visableResetDialog="visableResetDialog" @update:visableResetDialog="closeResetDialog"/>
 <Dialog
   v-model:visible="props.visableAuthDialog"
   @update:visible="closeDialog"
