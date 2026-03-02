@@ -16,7 +16,7 @@ const emit = defineEmits<{
 }>()
 
 
-const closeDialog = (v: boolean) => {
+const closeDialog = () => {
   emit('out')
 }
 
