@@ -17,8 +17,8 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: 'update:visableAuthDialog', v:boolean) : void
-  (e: 'update:visableRegisterDialog', v:string) : void
-  (e: 'update:visableForgotDialog', v:string) : void
+  (e: 'register'): void
+  (e: 'forgot'): void
 }>()
 
 const authUser = async () => {
@@ -51,13 +51,20 @@ const closeDialog = (v:boolean) => {
   emit('update:visableAuthDialog', v)
 }
 
-const goRegister = (v:boolean) => {
-  emit('update:visableRegisterDialog', 'registerDialog')
+const goTo = (v:string) => {
+  switch(v){
+    case 'forgot':
+      emit('forgot')
+      break;
+    case 'register':
+      emit('register')
+      break;
+  }
 }
 
-const goForgot = () => {
-  emit('update:visableForgotDialog', 'forgotDialog')
-}
+// const goForgot = () => {
+//   emit('update:visableForgotDialog', 'forgotDialog')
+// }
 </script>
 
 <template>
@@ -127,8 +134,8 @@ const goForgot = () => {
       />
     </div>
     <div class="mt-3 flex items-center justify-between text-sm">
-      <button class="text-gray-500 hover:text-white cursor-pointer" @click="goForgot">Забыли пароль ?</button>
-      <button class="text-gray-500 hover:text-white cursor-pointer" @click="goRegister(true)">{{ $t('auth.registration') }}</button>
+      <button class="text-gray-500 hover:text-white cursor-pointer" @click="goTo('forgot')">Забыли пароль ?</button>
+      <button class="text-gray-500 hover:text-white cursor-pointer" @click="goTo('register')">{{ $t('auth.registration') }}</button>
     </div>
   </Dialog>
 </template>

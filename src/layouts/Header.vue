@@ -82,33 +82,33 @@ const logoutElse = (key: string) => {
   dropdownVisible.value = false
 }
 
-const registerACtion = (e: any) => {
-  switch (e) {
-    case 'registerDialog':
-      router.push('/register')
-      visableAuthDialog.value = false
-      RegisterDialog.value = true
+const openDialog = (action: string) => {
+  // Сначала закрываем все диалоги
+  visableAuthDialog.value = false;
+  RegisterDialog.value = false;
+  visableForgotDialog.value = false;
+  visableResetDialog.value = false;
+
+  // Открываем нужный
+  switch (action) {
+    case 'auth':
+      visableAuthDialog.value = true;
+      router.push('/login');
       break;
-    case 'forgotDialog':
-      router.push('/forgot-password')
-      visableAuthDialog.value = false
-      RegisterDialog.value = false
-      visableForgotDialog.value = true
+    case 'register':
+      RegisterDialog.value = true;
+      router.push('/register');
       break;
-    case 'resetDialog':
-      router.push('/reset-password')
-      visableAuthDialog.value = false
-      RegisterDialog.value = false
-      visableForgotDialog.value = false
-      visableResetDialog.value = true
+    case 'forgot':
+      visableForgotDialog.value = true;
+      router.push('/forgot-password');
       break;
-  
-    default:
-      RegisterDialog.value = false
-      router.push('/')
+    case 'reset':
+      visableResetDialog.value = true;
+      router.push('/reset-password');
       break;
   }
-}
+};
 
 const closeResetDialog = (v:boolean, action?:string) => {
     switch (action) {
@@ -140,14 +140,14 @@ const closeResetDialog = (v:boolean, action?:string) => {
   <Auth 
     :visableAuthDialog="visableAuthDialog" 
     @update:visableAuthDialog="handleAuthClick" 
-    @update:visableRegisterDialog="registerACtion"
-    @update:visableForgotDialog="registerACtion"
+    @register="openDialog('register')"
+    @forgot="openDialog('forgot')"
     />
   <Register :visibleRegisterDialog="RegisterDialog" @update:visibleRegisterDialog="handleAuthClick"/>
   <ForgotPassword 
     :visableForgotDialog="visableForgotDialog" 
     @update:visableForgotDialog="closeResetDialog"
-    @update:visableResetDialog="registerACtion"
+    @reset="openDialog('reset')"
   />
   <ResetPassword :visableResetDialog="visableResetDialog" @update:visableResetDialog="closeResetDialog"/>
   <header

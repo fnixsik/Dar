@@ -10,7 +10,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: 'update:visableForgotDialog', v:boolean, action?:string) : void
-  (e: 'update:visableResetDialog', v:boolean, action?:string) : void
+  (e: 'reset'): void
 }>()
 
 
@@ -22,7 +22,7 @@ const SendEmail = async () => {
   try{
     // let resp = await sendOnEmailForgotPasswordUser(email.value)
     // showSuccess(resp.message)
-    emit('update:visableResetDialog', false, 'resetDialog')
+    emit('reset')
   }catch(err){
     showError(err)
   }finally{
