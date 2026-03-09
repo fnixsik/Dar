@@ -125,6 +125,7 @@ const openDialog = (action: string) => {
   <Register 
     :visibleRegisterDialog="RegisterDialog" 
     @auth="openDialog('auth')"
+    @out="openDialog('out')"
   />
   <ForgotPassword 
     :visableForgotDialog="visableForgotDialog" 

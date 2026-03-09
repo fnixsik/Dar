@@ -32,3 +32,12 @@ export const sendOnEmailResetPasswordUser = async (all: any) => {
   })
   return response.data
 }
+
+export const getconfirmUser = async (token: any) => {
+  const response = await BaseApi.get('/auth/confirm',{
+    params: {
+      token: token
+    }
+  })
+  return response.data
+}

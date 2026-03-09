@@ -9,7 +9,9 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: 'auth'): void
+  (e: 'out'): void
 }>()
+const disableButton = ref<boolean>(false)
 
 // Поля формы
 const username = ref('')
@@ -56,12 +58,15 @@ const handleRegister = async () => {
   if (!validate()) return
 
   try {
+    disableButton.value = true
     const response = await registerUser(username.value, password.value, email.value)
 
     showSuccess(response)
-    goLogin()
+    emit('out')
   } catch (err) {
     showError(err)
+  }finally{
+    disableButton.value = false
   }
     username.value = ''
     email.value = ''
@@ -155,6 +160,7 @@ const goLogin = () => {
         text-white font-semibold rounded-xl
         py-3 transition duration-300 shadow-lg
       "
+      :disabled="disableButton"
       @click="handleRegister"
       />
     </div>

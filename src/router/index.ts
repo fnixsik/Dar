@@ -45,6 +45,11 @@ const routes = [
       props: { modal: { mode: 'register' } },
     },
     {
+      path: '/confirm-email',
+      name: 'ConfirmEmail',
+      component: () => import('@/auth/pages/ConfirmEmail.vue'),
+    },
+    {
       path: '/teams',
       redirect: '/teams/fighters',
       name: 'Team',
