@@ -63,8 +63,8 @@ const handleRegister = async () => {
 
     showSuccess(response)
     emit('out')
-  } catch (err) {
-    showError(err)
+  } catch (err : any) {
+    showError(err?.response?.data.error)
   }finally{
     disableButton.value = false
   }

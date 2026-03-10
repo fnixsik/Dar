@@ -148,7 +148,7 @@ const directory = computed<Directory>(()=> (
  'Almaty': [
  {
   address: t('cities.AlmatyStr'), 
-  phones: ['+7 (727) 321‒04‒63', '+7 (727) 321‒04‒62'],
+  phones: ['+7 747 243 4438'],
   email: 'darteam@dar.io',
   image: [''],
   lat: 43.211185, 
@@ -216,7 +216,11 @@ const directory = computed<Directory>(()=> (
     address: t('cities.TurkestanStr'), 
     phones: ['+7-705-270-13-68'],
     email: 'darteam@dar.io',
-    image: ['',],
+    image: [new URL('@/assets/img/TurkestanRegion/img1.webp', import.meta.url).href,new URL('@/assets/img/TurkestanRegion/img2.webp', import.meta.url).href,new URL('@/assets/img/TurkestanRegion/img3.webp', import.meta.url).href,
+      new URL('@/assets/img/TurkestanRegion/img4.webp', import.meta.url).href,new URL('@/assets/img/TurkestanRegion/img5.webp', import.meta.url).href,new URL('@/assets/img/TurkestanRegion/img6.webp', import.meta.url).href,
+      new URL('@/assets/img/TurkestanRegion/img7.webp', import.meta.url).href,new URL('@/assets/img/TurkestanRegion/img8.webp', import.meta.url).href,new URL('@/assets/img/TurkestanRegion/img9.webp', import.meta.url).href,
+      new URL('@/assets/img/TurkestanRegion/img10.webp', import.meta.url).href,new URL('@/assets/img/TurkestanRegion/img11.webp', import.meta.url).href,new URL('@/assets/img/TurkestanRegion/img12.webp', import.meta.url).href,
+    ],
     lat: 42.493096,
     lon: 70.310401 // Координаты для маркера
   }
@@ -252,7 +256,7 @@ const directory = computed<Directory>(()=> (
 'Atyrau':[
   { 
     address: t('cities.AtyrauStr'), 
-    phones: [''],
+    phones: ['+7-778-777-34-12'],
     email: 'darteam@dar.io',
     image: [
       new URL('@/assets/img/Атырау/img1.webp', import.meta.url).href,new URL('@/assets/img/Атырау/img2.webp', import.meta.url).href,
