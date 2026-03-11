@@ -1,49 +1,50 @@
 <template>
   <Dialog
-    v-model:visible="modelValueLocal" modal maximizable
+    v-model:visible="modelValueLocal" 
+    modal 
+    maximizable
     @update:visible="handleClose"
     :pt="{ 
-      root: { 
-          class: 'bg-black text-white **!rounded-none**', 
-          style: '**border-radius: 0; overflow: hidden;**'
-      }, 
-      header: { class: 'bg-black text-white border-0 **p-0**' }, 
-      content: { class: 'bg-black text-white **p-0**' } 
-      }"
-    :style="{ width: '95vw'}"
+        root: { 
+            class: 'bg-black text-white !rounded-none border-0', 
+            style: 'max-height: 95vh; display: flex; flex-direction: column;' 
+        }, 
+        header: { class: 'bg-black text-white border-0 p-0 flex-shrink-0' }, 
+        content: { class: 'bg-black text-white p-0 overflow-hidden' } 
+    }"
+    :style="{ width: '95vw', maxWidth: '1200px' }"
   >
     <template #header>
-            <div class="w-full flex">
-        <div class="text-2xl sm:text-3xl font-extrabold uppercase p-4">           
-          <p>
-            {{ currentTitle }}
-          </p>
+      <div class="w-full">
+        <div class="text-xl sm:text-3xl font-extrabold uppercase p-4">          
+          <p class="m-0 leading-tight">{{ currentTitle }}</p>
         </div>
+        <div class="h-[2px] w-full bg-red-600"></div>
       </div>
     </template>
-    <div class="mt-2 h-[2px] w-full bg-red-600 rounded-full"></div>
 
-    <div class="flex justify-center items-center min-h-screen bg-black">
-      <div class="w-[80%] flex flex-col gap-4 items-center">
-
+    <div class="flex flex-col items-center p-4 sm:p-6 h-full max-h-[calc(95vh-80px)]">
+      
+      <div class="w-full md:w-[85%] lg:w-[75%] flex flex-col gap-4 overflow-hidden">
+        
         <div v-if="props.userData?.img" 
-          class="w-full md:w-2/3 max-h-[80vh] flex justify-center items-center"
-        >
+            class="flex-shrink flex justify-center items-center min-h-[150px]">
           <img 
             :src="props.userData?.img"
             alt="Новости"
-            class="max-h-[80vh] max-w-full object-contain rounded-lg"
+            class="max-h-[40vh] md:max-h-[50vh] w-auto object-contain rounded-lg shadow-2xl"
           />
         </div>
 
-        <div v-else class="text-white text-4xl">
+        <div v-else class="text-white text-4xl flex-shrink-0 text-center py-4">
           📸
         </div>
-          <div 
-            class="bg-zinc-700 w-full md:w-2/3 h-auto flex justify-center items-center 
-            text-white text-lg md:text-xl font-medium p-6 rounded-lg leading-relaxed text-center"
-          >
-          <p>
+
+        <div 
+          class="bg-zinc-800 w-full flex-1 overflow-y-auto text-white text-base md:text-lg 
+                font-medium p-4 md:p-6 rounded-lg leading-relaxed shadow-inner border border-zinc-700"
+        >
+          <p class="whitespace-pre-wrap">
             {{ currentContent }}
           </p>
         </div>

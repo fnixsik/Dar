@@ -148,9 +148,15 @@ const directory = computed<Directory>(()=> (
  'Almaty': [
  {
   address: t('cities.AlmatyStr'), 
-  phones: ['+7 747 243 4438'],
+  phones: ['+7-747-243-4438'],
   email: 'darteam@dar.io',
-  image: [''],
+  image: [new URL('@/assets/img/AlmatyStr/img1.webp', import.meta.url).href,new URL('@/assets/img/AlmatyStr/img2.webp', import.meta.url).href,
+    new URL('@/assets/img/AlmatyStr/img3.webp', import.meta.url).href,new URL('@/assets/img/AlmatyStr/img4.webp', import.meta.url).href,
+    new URL('@/assets/img/AlmatyStr/img5.webp', import.meta.url).href,new URL('@/assets/img/AlmatyStr/img6.webp', import.meta.url).href,
+    new URL('@/assets/img/AlmatyStr/img7.webp', import.meta.url).href,new URL('@/assets/img/AlmatyStr/img8.webp', import.meta.url).href,
+    new URL('@/assets/img/AlmatyStr/img9.webp', import.meta.url).href,new URL('@/assets/img/AlmatyStr/img10.webp', import.meta.url).href,
+    new URL('@/assets/img/AlmatyStr/img11.webp', import.meta.url).href,
+  ],
   lat: 43.211185, 
   lon: 76.890700 // Координаты для маркера
  },
@@ -158,7 +164,11 @@ const directory = computed<Directory>(()=> (
   address: t('cities.AlmatyStr2'), 
   phones: ['+7‒708‒205‒06‒16', '+7‒776‒333‒54‒54'],
   email: 'darteam@dar.io',
-  image: [''],
+  image: [new URL('@/assets/img/AlmatyStr2/img1.webp', import.meta.url).href,new URL('@/assets/img/AlmatyStr2/img2.webp', import.meta.url).href,
+    new URL('@/assets/img/AlmatyStr2/img3.webp', import.meta.url).href,new URL('@/assets/img/AlmatyStr2/img4.webp', import.meta.url).href,
+    new URL('@/assets/img/AlmatyStr2/img5.webp', import.meta.url).href,new URL('@/assets/img/AlmatyStr2/img6.webp', import.meta.url).href,
+    new URL('@/assets/img/AlmatyStr2/img7.webp', import.meta.url).href,
+  ],
   lat: 43.206670,
   lon: 76.857041 // Координаты для маркера
  }
