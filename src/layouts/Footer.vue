@@ -10,6 +10,13 @@
       </div>
 
       <div class="flex justify-center mt-6 gap-4">
+        <a href="https://www.youtube.com/@DARTeam-pro" target="_blank" rel="noopener noreferrer">
+          <Button 
+            icon="pi pi-youtube" 
+            class="p-button-rounded p-button-text p-button-plain" 
+          />
+        </a>
+
         <a href="https://www.tiktok.com/@darteam_kazakhstan" target="_blank" rel="noopener noreferrer">
           <Button 
             icon="pi pi-tiktok" 
