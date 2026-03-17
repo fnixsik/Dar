@@ -32,13 +32,15 @@
             class="max-w-[180px] mx-auto"
           />
         </a>
-        <a href="https://anta.kz/" target="_blank" class="partner-link">
-          <img 
-            src="/src/assets/img/Main_img7.svg" 
-            alt="anta.kz Logo" 
-            class="max-w-[180px] mx-auto"
-          />
-        </a>
+        <div class="flex justify-center items-center w-full">
+          <a href="https://buka.uz/" target="_blank" class="partner-link">
+            <img 
+              src="/src/assets/img/Main_img17.png" 
+              alt="anta.kz Logo" 
+              class="max-w-[180px] mx-auto"
+            />
+          </a>
+        </div>
         <a href="https://99round.kz/" target="_blank" class="partner-link">
           <img 
             src="/src/assets/img/Main_img4.png" 
