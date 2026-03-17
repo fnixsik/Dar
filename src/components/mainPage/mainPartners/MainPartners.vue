@@ -35,7 +35,7 @@
         <div class="flex justify-center items-center w-full">
           <a href="https://buka.uz/" target="_blank" class="partner-link">
             <img 
-              src="/src/assets/img/Main_img17.png" 
+              src="/src/assets/img/Main_img7.png" 
               alt="anta.kz Logo" 
               class="max-w-[180px] mx-auto"
             />
