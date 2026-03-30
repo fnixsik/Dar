@@ -14,11 +14,11 @@
         alt="картинка успех приходит к целеустремленным" 
         class="w-full h-full object-cover"
       />
-      <img 
+      <!-- <img 
         src="/src/assets/img/Main_img6.svg" 
         alt="текст успех приходит к целеустремленным" 
         class="absolute inset-0 mx-auto my-auto max-w-full h-auto"
-      />
+      /> -->
     </div>
 
     <div class="relative w-full bg-[#B00D15] min-h-[335px] flex flex-col justify-center items-center gap-8 text-white py-12">
