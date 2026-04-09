@@ -8,6 +8,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    Avatar: typeof import('primevue/avatar')['default']
     BackWall: typeof import('./src/components/mainPage/backWall/BackWall.vue')['default']
     BackWallAbout: typeof import('./src/components/aboutUsPage/backWallAbout/BackWallAbout.vue')['default']
     BackWallBranch: typeof import('./src/components/branchPage/backWallBranch/BackWallBranch.vue')['default']
@@ -53,6 +54,7 @@ declare module 'vue' {
     TabPanel: typeof import('primevue/tabpanel')['default']
     TabPanels: typeof import('primevue/tabpanels')['default']
     Tabs: typeof import('primevue/tabs')['default']
+    Tag: typeof import('primevue/tag')['default']
     Textarea: typeof import('primevue/textarea')['default']
     Toast: typeof import('primevue/toast')['default']
   }

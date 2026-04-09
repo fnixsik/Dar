@@ -126,6 +126,11 @@ const routes = [
         },
       ]
     },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: () => import('../profile/pages/UserProfilePage.vue')
+    },
 ]
 const router = createRouter({
   history: createWebHistory(),
