@@ -4,7 +4,7 @@
 </script>
 
 <template>
-<div class="head flex bg-[#121212]">
+<div class="head bg-[#121212]">
   <aside class="w-64 bg-[#18181B] border-r border-gray-800 p-6 flex flex-col">
     <div class="flex flex-col items-center mb-10">
       <div class="w-20 h-20 bg-gray-800 rounded-full mb-3 flex items-center justify-center border border-gray-700">
@@ -26,9 +26,9 @@
       </a>
     </nav>
 
-    <button class="flex items-center gap-3 p-3 text-red-500 hover:bg-red-500/10 rounded-lg mt-auto">
+    <!-- <button class="flex items-center gap-3 p-3 text-red-500 hover:bg-red-500/10 rounded-lg mt-auto">
       <i class="pi pi-sign-out"></i> <span>Выйти</span>
-    </button>
+    </button> -->
   </aside>
 
   <main class="flex-1 p-10">
@@ -42,7 +42,14 @@
 </template>
 
 <style scoped>
+:global(.app-content) {
+  display: flex;
+  flex-direction: column;
+}
+
 .head {
-  height: 80vh;
+  display: flex;
+  flex: 1; /* Теперь он увидит, что родитель стал флексом, и растянется */
+  min-height: 0;
 }
 </style>
