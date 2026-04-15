@@ -9,34 +9,51 @@ const profile = ref({
   phone: '',
   bio: '',
   birthDate: null,
-  avatarUrl: ''
+  avatarUrl: '',
+  email: '',
+  username: ''
 });
 
 const saveProfile = async () => {
+  const payload = {
+    ...profile.value,
+    birthDate: profile.value.birthDate ? 
+    formatDateLocal(profile.value.birthDate) : null
+  }
   try{
-    let res = await sendDataProfile(profile.value)
-    console.log('resp Save ', res)
+    await sendDataProfile(payload)
+    showSuccess('успешно обновлен')
   }catch(err){
   showError(err)
   }
-  console.log('Данные к отправке:', profile.value);
 };
 
 const getProfile = async () => {
   try{
     let res = await getDataProfile()
-    console.log('resp Get ', res)
     profile.value = {
       firstName: res.data.firstName || '',
       lastName:  res.data.lastName  || '',
       phone:     res.data.phone     || '',
       bio:       res.data.bio       || '',
       birthDate: res.data.birthDate || null,
-      avatarUrl: res.data.avatarUrl || ''
+      avatarUrl: res.data.avatarUrl || '',
+      email: res.data.email || '',
+      username: res.data.username  || ''
     }
   }catch(err){
   showError(err)
   }
+}
+
+const formatDateLocal = (date:any) => {
+  if (typeof date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(date)) {
+    return date
+  }
+  const y = date.getFullYear()
+  const m = String(date.getMonth() + 1).padStart(2, '0')
+  const d = String(date.getDate()).padStart(2, '0')
+  return `${y}-${m}-${d}`
 }
 
 onMounted( async ()=>{
@@ -52,7 +69,7 @@ onMounted( async ()=>{
       <div class="w-20 h-20 bg-gray-800 rounded-full mb-3 flex items-center justify-center border border-gray-700">
         <i class="pi pi-user text-2xl text-gray-400"></i>
       </div>
-      <h2 class="text-white font-bold text-sm">Иван Иванов</h2>
+      <h2 class="text-white font-bold text-sm">{{ profile.username }}</h2>
       <span class="text-xs text-gray-500">Пользователь</span>
     </div>
 

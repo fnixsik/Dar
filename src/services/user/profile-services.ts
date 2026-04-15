@@ -6,6 +6,14 @@ export const getDataProfile = async (): Promise<any> => {
 }
 
 export const sendDataProfile = async (data: any): Promise<any> => {
-  const response = await BaseApi.post('/user/profile');
+  let sendData = {
+    firstName: data.firstName,
+    lastName: data.lastName,
+    phone: data.phone,
+    bio: data.bio,
+    avatarUrl: null,
+    birthDate: data.birthDate
+  }
+  const response = await BaseApi.put('/user/profile', sendData);
   return response;
 }
