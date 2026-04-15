@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import { showError, showSuccess } from '@/shared/lib/toastService';
+import { getDataProfile, sendDataProfile } from '@/services/user/profile-services';
 
 const profile = ref({
   firstName: '',
@@ -11,9 +13,35 @@ const profile = ref({
 });
 
 const saveProfile = async () => {
-  // Тут будет твой axios.post или axios.put на бэкенд
+  try{
+    let res = await sendDataProfile(profile.value)
+    console.log('resp Save ', res)
+  }catch(err){
+  showError(err)
+  }
   console.log('Данные к отправке:', profile.value);
 };
+
+const getProfile = async () => {
+  try{
+    let res = await getDataProfile()
+    console.log('resp Get ', res)
+    profile.value = {
+      firstName: res.data.firstName || '',
+      lastName:  res.data.lastName  || '',
+      phone:     res.data.phone     || '',
+      bio:       res.data.bio       || '',
+      birthDate: res.data.birthDate || null,
+      avatarUrl: res.data.avatarUrl || ''
+    }
+  }catch(err){
+  showError(err)
+  }
+}
+
+onMounted( async ()=>{
+  await getProfile();
+})
 
 </script>
 
@@ -32,12 +60,12 @@ const saveProfile = async () => {
       <a href="#" class="flex items-center gap-3 p-3 rounded-lg bg-emerald-500/10 text-emerald-500">
         <i class="pi pi-home"></i> <span>Профиль</span>
       </a>
-      <a href="#" class="flex items-center gap-3 p-3 rounded-lg text-gray-400 hover:bg-gray-800 transition">
+      <!-- <a href="#" class="flex items-center gap-3 p-3 rounded-lg text-gray-400 hover:bg-gray-800 transition">
         <i class="pi pi-video"></i> <span>Мои видео</span>
       </a>
       <a href="#" class="flex items-center gap-3 p-3 rounded-lg text-gray-400 hover:bg-gray-800 transition">
         <i class="pi pi-credit-card"></i> <span>Подписки</span>
-      </a>
+      </a> -->
     </nav>
 
     <!-- <button class="flex items-center gap-3 p-3 text-red-500 hover:bg-red-500/10 rounded-lg mt-auto">
@@ -76,7 +104,7 @@ const saveProfile = async () => {
           </div>
         </div>
       </div>
-      <Button label="Сохранить" icon="pi pi-check" type="submit" />
+      <Button label="Сохранить" icon="pi pi-check" @click="saveProfile" />
     </div>
   </main>
 </div>
@@ -115,32 +143,45 @@ const saveProfile = async () => {
 }
 
 .p-inputtext {
-    background-color: #161b22 !important;
-    border-color: #374151 !important; /* gray-700 */
-    color: white !important;
+  background-color: #161b22 !important;
+  border-color: #374151 !important; /* gray-700 */
+  color: white !important;
 }
 
 .p-inputtext:focus {
-    border-color: #9B0B12 !important; /* blue-500 */
-    box-shadow: 0 0 0 1px #B00D15 !important;
+  border-color: #9B0B12 !important; /* blue-500 */
+  box-shadow: 0 0 0 1px #B00D15 !important;
 }
 
 :deep(.p-textarea:focus) {
-    border-color: #9B0B12 !important;
-    box-shadow: 0 0 0 0.2rem rgba(155, 11, 18, 0.25) !important;
+  border-color: #9B0B12 !important;
+  box-shadow: 0 0 0 0.2rem rgba(155, 11, 18, 0.25) !important;
 }
 
 :deep(.p-textarea) {
-    height: 150px !important; /* Твоя фиксированная высота */
-    resize: none !important;  /* Запрещает растягивать за угол */
-    background-color: #161b22 !important;
-    border-color: #374151 !important; /* gray-700 */
-    color: white !important;
+  height: 150px !important; /* Твоя фиксированная высота */
+  resize: none !important;  /* Запрещает растягивать за угол */
+  background-color: #161b22 !important;
+  border-color: #374151 !important; /* gray-700 */
+  color: white !important;
 }
 
 :deep(.p-inputtext:enabled:focus) {
-    border-color: #9B0B12 !important;
-    box-shadow: 0 0 0 1px #9B0B12 !important;
+  border-color: #9B0B12 !important;
+  box-shadow: 0 0 0 1px #9B0B12 !important;
+}
+
+
+:deep(.p-datepicker-input) {
+    background-color: #161b22 !important;
+    border-color: #374151 !important; /* Цвет границы gray-700 */
+    color: white !important;
+}
+
+:deep(.p-datepicker-dropdown) {
+    background-color: #161b22 !important;
+    border-color: #374151 !important;
+    color: #94a3b8 !important; /* Цвет иконки (серый) */
 }
 
 </style>
