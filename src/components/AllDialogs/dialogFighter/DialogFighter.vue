@@ -78,6 +78,17 @@
               </li>
             </ul>
           </TabPanel>
+
+          <TabPanel :header="$t('lable.video')" value="achievements">
+            <ul class="list-disc ml-5 space-y-1 pt-3">
+              <li v-for="(a, i) in props.userData?.achievements || []" :key="i" class="text-sm text-zinc-300">
+                {{ a.title }}
+              </li>
+              <li v-if="!props.userData?.achievements?.length" class="text-zinc-500 text-sm">
+                Достижений пока нет.
+              </li>
+            </ul>
+          </TabPanel>
         </TabView>
       </div>
 
