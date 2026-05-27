@@ -37,6 +37,17 @@
             </li>
             <li>
               <router-link 
+                to="/teams/video" 
+                class="
+                text-white hover:text-gray-300 transition-colors 
+                  font-medium pb-2 cursor-pointer uppercase"
+                active-class="text-blue-600 border-b-2 border-red-600"
+              >
+                {{ $t('lable.video') }}
+              </router-link>
+            </li>
+            <li>
+              <router-link 
                 to="/teams/fan" 
                 class="
                 text-white hover:text-gray-300 transition-colors 

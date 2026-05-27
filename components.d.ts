@@ -17,6 +17,7 @@ declare module 'vue' {
     BlockCoaches: typeof import('./src/components/teamPage/mainTeam/BlockCoaches.vue')['default']
     BlockFan: typeof import('./src/components/teamPage/mainTeam/BlockFan.vue')['default']
     BlockFighters: typeof import('./src/components/teamPage/mainTeam/BlockFighters.vue')['default']
+    BlockVideo: typeof import('./src/components/teamPage/mainTeam/BlockVideo.vue')['default']
     Button: typeof import('primevue/button')['default']
     Calendar: typeof import('primevue/calendar')['default']
     Card: typeof import('primevue/card')['default']

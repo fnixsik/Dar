@@ -64,6 +64,10 @@ const routes = [
           component: () => import('../components/teamPage/mainTeam/BlockFighters.vue'),
         },
         {
+          path: 'video',
+          component: () => import('../components/teamPage/mainTeam/BlockVideo.vue'),
+        },
+        {
           path: 'fan',
           component: () => import('../components/teamPage/mainTeam/BlockFan.vue'),
         }
@@ -124,13 +128,29 @@ const routes = [
           // @ts-ignore
           component: () => import('../admin/pages/New.vue')
         },
+        {
+          path: 'video',
+          meta: { requiresAuth: true, roles: ['ROLE_ADMIN', 'ROLE_MODERATOR'] },
+          // @ts-ignore
+          component: () => import('../admin/pages/video.vue')
+        },
       ]
     },
     {
       path: '/profile',
-      name: 'profile',
-      component: () => import('../profile/pages/UserProfilePage.vue')
-    },
+      component: () => import('../profile/pages/BackWall.vue'),
+      redirect: '/profile/info',
+      children: [
+        {
+          path: 'info',
+          component: () => import('../profile/pages/UserProfilePage.vue')
+        },
+        {
+          path: 'videos',
+          component: () => import('../profile/pages/UserVideo.vue')
+        }
+      ]
+    }
 ]
 const router = createRouter({
   history: createWebHistory(),

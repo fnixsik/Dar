@@ -80,6 +80,17 @@
       >
         новости
       </router-link>
+      <router-link
+        v-if="canAccess(['ROLE_ADMIN', 'ROLE_MODERATOR'])"
+        to="/admin/video"
+        class="block px-3 py-2 relative font-semibold uppercase tracking-wide hover:text-white
+               after:absolute after:left-3 after:bottom-0 after:h-[3px] after:w-[calc(100%-1.5rem)] after:bg-red-600
+               after:scale-x-0 after:origin-left after:transition-transform after:duration-200
+               hover:after:scale-x-100"
+        active-class="text-blue-400 after:scale-x-100"
+      >
+        Видео
+      </router-link>
     </nav>
   </aside>
 </template>
