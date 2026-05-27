@@ -21,7 +21,6 @@ const getDataFight = async () => {
 }
 
 const handleBuy = async (id: any) => {
-  console.log('  id  ', id)
   try{
     await addSubscribeIdVideos(id.id, id.youtubeVideoId)
     showSuccess('Успешно добавлен')
