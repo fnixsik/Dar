@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { showError, showSuccess } from '@/shared/lib/toastService';
-import { getDataProfile, sendDataProfile } from '@/services/user/profile-services';
+import { showError } from '@/shared/lib/toastService';
+import { getDataProfile } from '@/services/user/profile-services';
 
 const profile = ref({
   firstName: '',
