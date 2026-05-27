@@ -24,8 +24,8 @@ const handleBuy = async (id: any) => {
   try{
     await addSubscribeIdVideos(id.id, id.youtubeVideoId)
     showSuccess('Успешно добавлен')
-  }catch(err){
-    showError(err)
+  }catch(err:any){
+    showError(err.response?.data)
   }
 }
 
