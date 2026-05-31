@@ -17,7 +17,7 @@ const visableAuthDialog = ref<boolean>(false)
 const RegisterDialog = ref<boolean>(false)
 const username = computed(() => userStore.username)
 const dropdownVisible = ref(false)
-const isAdmin = ref()
+const isAdmin = computed(() => userStore.roles[0])
 const visableForgotDialog = ref<boolean>(false)
 const visableResetDialog = ref<boolean>(false)
 
@@ -61,10 +61,6 @@ const handleAuthClick12 = () =>{
   dropdownVisible.value = !dropdownVisible.value;
 }
 
-watch(
-  () => userStore.roles[0],
-  () => {isAdmin.value = userStore.roles[0]}
-)
 
 const logoutElse = (key: string) => {
   switch(key){

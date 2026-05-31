@@ -140,6 +140,7 @@ const routes = [
       path: '/profile',
       component: () => import('../profile/pages/BackWall.vue'),
       redirect: '/profile/info',
+      meta: { requiresAuth: true },
       children: [
         {
           path: 'info',
