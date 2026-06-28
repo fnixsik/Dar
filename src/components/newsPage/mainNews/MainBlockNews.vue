@@ -2,14 +2,15 @@
 import { onMounted, ref, computed } from "vue";
 import { getAllNews, getSoloNewsId } from "@/services/news-services"
 import { showError } from '@/shared/lib/toastService'
-import type { News } from "../../../types/news"
+import type { News, PageResponse } from "../../../types/news"
 import Dialog from "@/components/AllDialogs/dialogNews/DialogNews.vue";
 import { useI18n } from 'vue-i18n';
+import usePagination from '@/shared/ui/Paginator/usePagination.vue'
 
 
 const { locale } = useI18n();
 const visibleDialog = ref(false)
-const newscard = ref<News[]>([])
+const newscard = ref<PageResponse<News> | null>(null)
 const selectData = ref<News | undefined>()
 
 const props = defineProps({
@@ -17,6 +18,10 @@ const props = defineProps({
     type: Number,
     default: 0,
   },
+  hidePagination: {
+    type: Boolean,
+    default: false,
+  }
 });
 
 
@@ -24,9 +29,9 @@ onMounted(async () => {
   await allNews();
 })
 
-const allNews = async () => {
+const allNews = async (page:number = 0) => {
   try{
-    newscard.value = await getAllNews()
+    newscard.value = await getAllNews(page)
   }catch(err){
     showError(err)
   }
@@ -49,14 +54,13 @@ const getpersonalyDate = async (id: any) => {
 const limitedNews = computed(() => {
   // если newLimit = 0 → показать всё
   if (props.newLimit > 0) {
-    return newscard.value.slice(0, props.newLimit)
+    return newscard.value?.content.slice(0, props.newLimit)
   }
-  return newscard.value
+  return newscard.value?.content
 })
 
 // Универсальная функция для получения локализованного поля
 const getLangField = (item: any, field: string) => {
-  // Определяем суффикс: для 'en' -> titleEn, для 'kk' -> titleKz, для 'ru' -> title
   const suffix = locale.value === 'ru' ? '' : (locale.value === 'en' ? 'En' : 'Kz');
   const fieldName = `${field}${suffix}`;
   
@@ -65,49 +69,58 @@ const getLangField = (item: any, field: string) => {
   return item[fieldName] || item[field];
 };
 
+const handlePageChange = async (event:any) => {
+  await allNews(event.page)
+}
+
 </script>
 
 <template>
   <Dialog :modelValue="visibleDialog" @update:modelValue="openDialog" :userData="selectData"/>
-<div class="container mx-auto main-h-screen px-4 py-8">
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+  <div class="container mx-auto main-h-screen px-4 py-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
-    <Card 
-      v-for="value in limitedNews"
-      :key="value.id"
-      class="dark-card w-full h-full max-w-sm mx-auto flex flex-col cursor-pointer"
-      @click="openDialog(true , value)"
-    >
-      <template #header>
-        <div class="relative w-full h-64 rounded-md overflow-hidden">
+      <Card 
+        v-for="value in limitedNews"
+        :key="value.id"
+        class="dark-card w-full h-full max-w-sm mx-auto flex flex-col cursor-pointer"
+        @click="openDialog(true , value)"
+      >
+        <template #header>
+          <div class="relative w-full h-64 rounded-md overflow-hidden">
 
-          <!-- Размытие фона (подложка) -->
-          <img 
-            :src="value.img"
-            class="absolute inset-0 w-full h-full object-cover blur-xl opacity-30"
-          />
+            <!-- Размытие фона (подложка) -->
+            <img 
+              :src="value.img"
+              class="absolute inset-0 w-full h-full object-cover blur-xl opacity-30"
+            />
 
-          <img 
-            :src="value.img"
-            class="absolute inset-0 m-auto max-h-full max-w-full object-contain"
-          />
+            <img 
+              :src="value.img"
+              class="absolute inset-0 m-auto max-h-full max-w-full object-contain"
+            />
 
-        </div>
-      </template>
+          </div>
+        </template>
 
-      <template #title>
-        <h3 class="text-lg font-semibold line-clamp-2">
-          {{ getLangField(value, 'title') }}
-        </h3>
-      </template>
+        <template #title>
+          <h3 class="text-lg font-semibold line-clamp-2">
+            {{ getLangField(value, 'title') }}
+          </h3>
+        </template>
 
-      <template #subtitle>
-        <p class="text-sm text-gray-500">{{ value.date }}</p>
-      </template>
+        <template #subtitle>
+          <p class="text-sm text-gray-500">{{ value.date }}</p>
+        </template>
 
-    </Card>
+      </Card>
 
+    </div>
   </div>
-</div>
-
+  <usePagination
+    v-if="!hidePagination"
+    :pageSize="newscard?.size" 
+    :totalElements="newscard?.totalElements"
+    @page-change="handlePageChange"
+  />
 </template>

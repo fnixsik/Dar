@@ -5,6 +5,11 @@ export const getAllVideos = async (): Promise<any> => {
   return response;
 }
 
+export const getPublicAllVideos = async (): Promise<any> => {
+  const response = await BaseApi.get('/api/v1/videos');
+  return response;
+}
+
 export const postVideos = async (data:any): Promise<any> => {
   const response = await BaseApi.post('/admin/v1/videos', data);
   return response;

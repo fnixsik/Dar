@@ -12,7 +12,7 @@ import MainBlockNews from '../../newsPage/mainNews/MainBlockNews.vue';
     </div>
     <div class="flex-grow w-full">
       <div class="max-w-7xl mx-auto px-6">
-        <MainBlockNews :newLimit="3" />
+        <MainBlockNews :newLimit="3" hide-pagination/>
       </div>
     </div>
     <div class="flex justify-center mt-4">
