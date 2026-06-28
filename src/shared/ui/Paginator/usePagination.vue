@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
- const props = defineProps<{
+ defineProps<{
   totalElements: number | undefined
   pageSize: number | undefined
  }>()
