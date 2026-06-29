@@ -124,7 +124,7 @@ const currentFighterId = ref(null)
 
 const fetchNews = async () => {
   try {
-    res = await getAllNews()
+    res = await getAllNews(0,25)
     newsList.value = res.content
   } catch (err) {
     showError(err)
