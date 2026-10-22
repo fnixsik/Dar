@@ -1,0 +1,176 @@
+import { createRouter, createWebHistory } from "vue-router";
+import { useUserStore } from "@/auth/model/authStore";
+import { showError } from '@/shared/lib/toastService'
+
+const routes = [
+    {
+      path: '/',
+      name: 'Home',
+      component: () => import('../components/mainPage/backWall/BackWall.vue'),
+    },
+    {
+      path: '/login',
+      name: 'login',
+      components: {
+        default: () => import('@/components/mainPage/backWall/BackWall.vue'),
+        modal: () => import('@/auth/pages/auth.vue'),
+      },
+      props: { modal: { mode: 'login' } },
+    },
+    {
+      path: '/forgot-password',
+      name: 'forgotPassword',
+      components: {
+        default: () => import('@/components/mainPage/backWall/BackWall.vue'),
+        modal: () => import('@/auth/pages/ForgotPassword.vue'),
+      },
+      props: { modal: { mode: 'login' } },
+    },
+    {
+      path: '/reset-password',
+      name: 'resetPassword',
+      components: {
+        default: () => import('@/components/mainPage/backWall/BackWall.vue'),
+        modal: () => import('@/auth/pages/ResetPassword.vue'),
+      },
+      props: { modal: { mode: 'login' } },
+    },
+    {
+      path: '/register',
+      name: 'register',
+      components: {
+        default: () => import('@/components/mainPage/backWall/BackWall.vue'),
+        modal: () => import('@/auth/pages/Register.vue'),
+      },
+      props: { modal: { mode: 'register' } },
+    },
+    {
+      path: '/confirm-email',
+      name: 'ConfirmEmail',
+      component: () => import('@/auth/pages/ConfirmEmail.vue'),
+    },
+    {
+      path: '/teams',
+      redirect: '/teams/fighters',
+      name: 'Team',
+      component: () => import('../components/teamPage/backWallTeam/BackWallTeam.vue'),
+      children: [
+        {
+          path: 'coaches',
+          component: () => import('../components/teamPage/mainTeam/BlockCoaches.vue'),
+        },
+        {
+          path: 'fighters',
+          component: () => import('../components/teamPage/mainTeam/BlockFighters.vue'),
+        },
+        {
+          path: 'video',
+          component: () => import('../components/teamPage/mainTeam/BlockVideo.vue'),
+        }
+      ]
+    },
+    {
+      path: '/news',
+      name: 'News',
+      component: () => import('../components/newsPage/backWallNews/BackWallNews.vue')
+    },
+    {
+      path: '/outside',
+      name: 'Outside',
+      component: () => import('../components/outsideWindowPage/backWallOutsideWindow/BackWallOutsideWindow.vue')
+    },
+    {
+      path: '/branch',
+      name: 'Branch',
+      component: () => import('../components/branchPage/backWallBranch/BackWallBranch.vue')
+    },
+    {
+      path: '/about',
+      name: 'About',
+      component: () => import('../components/aboutUsPage/backWallAbout/BackWallAbout.vue')
+    },
+    {
+      path: '/auth',
+      name: 'auth',
+      component: () => import('../auth/pages/auth.vue')
+    },
+    {
+      path: '/admin',
+      name: 'Wall',
+      component: () => import('../admin/pages/Wall.vue'),
+      redirect: '/admin/fighters',
+      children: [
+        {
+          path: 'fighters',
+          meta: { requiresAuth: true, roles: ['ROLE_ADMIN'] },
+          // @ts-ignore
+          component: () => import('../admin/pages/Fighters.vue'),
+        },
+        {
+          path: 'coache',
+          meta: { requiresAuth: true, roles: ['ROLE_ADMIN'] },
+          // @ts-ignore
+          component: () => import('../admin/pages/Couch.vue'),
+        },
+        {
+          path: 'amateur',
+          meta: { requiresAuth: true, roles: ['ROLE_ADMIN'] },
+          // @ts-ignore
+          component: () => import('../admin/pages/Gtoup.vue'),
+        },
+        {
+          path: 'news',
+          meta: { requiresAuth: true, roles: ['ROLE_ADMIN', 'ROLE_MODERATOR'] },
+          // @ts-ignore
+          component: () => import('../admin/pages/news.vue')
+        },
+        {
+          path: 'video',
+          meta: { requiresAuth: true, roles: ['ROLE_ADMIN', 'ROLE_MODERATOR'] },
+          // @ts-ignore
+          component: () => import('../admin/pages/video.vue')
+        },
+      ]
+    },
+    {
+      path: '/profile',
+      component: () => import('../profile/pages/BackWall.vue'),
+      redirect: '/profile/info',
+      meta: { requiresAuth: true },
+      children: [
+        {
+          path: 'info',
+          component: () => import('../profile/pages/UserProfilePage.vue')
+        },
+        {
+          path: 'videos',
+          component: () => import('../profile/pages/UserVideo.vue')
+        }
+      ]
+    }
+]
+const router = createRouter({
+  history: createWebHistory(),
+  routes,
+})
+
+router.beforeEach((to: any, _from: any, next) => {
+const userStore = useUserStore()
+const isAuthenticated = !!userStore.token
+const userRoles = userStore.roles as string[] || []
+
+if(to.meta.requiresAuth && !isAuthenticated){
+  showError("Для доступа нужно войти в систему")
+  return next("/")
+}
+
+if(to.meta.roles && !to.meta.roles.some((role: any) => userRoles.includes(role))){
+  showError("Недостаточно прав для доступа")
+  return next("/")
+}
+
+next()
+})
+
+export default router
+
